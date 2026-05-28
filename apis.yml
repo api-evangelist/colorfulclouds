@@ -1,0 +1,32 @@
+aid: colorfulclouds
+name: ColorfulClouds
+description: "Weather"
+url: https://open.caiyunapp.com/ColorfulClouds_Weather_API
+specificationVersion: '0.20'
+created: '2026-05-28'
+modified: '2026-05-28'
+x-source: public-apis/public-apis
+x-category: "Weather"
+x-tier: 3
+x-tier-reason: bulk-registered-from-public-apis
+tags:
+  - Weather
+  - Public APIs
+apis:
+  - name: ColorfulClouds
+    description: "Weather"
+    humanURL: https://open.caiyunapp.com/ColorfulClouds_Weather_API
+    baseURL: https://open.caiyunapp.com/ColorfulClouds_Weather_API
+    tags:
+      - Weather
+    properties:
+      - type: Documentation
+        url: https://open.caiyunapp.com/ColorfulClouds_Weather_API
+common:
+  - type: Website
+    url: https://open.caiyunapp.com/ColorfulClouds_Weather_API
+  - type: PublicAPIsListing
+    url: https://github.com/public-apis/public-apis
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
