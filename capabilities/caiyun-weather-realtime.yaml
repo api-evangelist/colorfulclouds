@@ -1,0 +1,103 @@
+naftiko: "1.0.0-alpha2"
+
+info:
+  label: "Caiyun Weather API — Realtime"
+  description: >-
+    Realtime — Caiyun Weather realtime conditions surface. 1 operation.
+    Lead operation: Caiyun Weather Get Realtime Weather. Self-contained
+    Naftiko capability covering one ColorfulClouds business surface.
+  tags:
+    - Caiyun Weather
+    - Weather
+    - Realtime
+  created: "2026-05-30"
+  modified: "2026-05-30"
+
+binds:
+  - namespace: env
+    keys:
+      CAIYUN_WEATHER_API_TOKEN: CAIYUN_WEATHER_API_TOKEN
+
+capability:
+
+  consumes:
+    - type: http
+      namespace: "caiyun-weather-realtime"
+      baseUri: "https://api.caiyunapp.com/v2.6"
+      description: "Caiyun Weather realtime conditions endpoint. Self-contained, no shared references."
+      authentication:
+        type: apikey
+        key: token
+        value: "{{env.CAIYUN_WEATHER_API_TOKEN}}"
+        placement: path
+      resources:
+        - name: "realtime-weather"
+          path: "/{token}/{lnglat}/realtime"
+          operations:
+            - name: "getRealtimeWeather"
+              method: GET
+              description: "Returns current temperature, humidity, wind, sky condition, precipitation, AQI, and life indices."
+              inputParameters:
+                - name: "lnglat"
+                  in: path
+                  type: string
+                  required: true
+                  description: "Longitude,latitude tuple (lng,lat)."
+                - name: "lang"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Response language."
+                - name: "unit"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Unit system (metric, imperial, SI, metric:v2)."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      namespace: "caiyun-weather-realtime-rest"
+      port: 8080
+      description: "REST adapter for Caiyun Weather Realtime."
+      resources:
+        - path: "/v1/realtime-weather/{lnglat}"
+          name: "realtime-weather"
+          description: "REST surface for realtime weather at a location."
+          operations:
+            - method: GET
+              name: "getRealtimeWeather"
+              description: "Get realtime weather for a location."
+              call: "caiyun-weather-realtime.getRealtimeWeather"
+              with:
+                "lnglat": "rest.lnglat"
+                "lang": "rest.lang"
+                "unit": "rest.unit"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      namespace: "caiyun-weather-realtime-mcp"
+      port: 9090
+      transport: http
+      description: "MCP adapter for Caiyun Weather Realtime."
+      tools:
+        - name: "get-realtime-weather"
+          description: "Get current temperature, wind, precipitation, and AQI at a location."
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "caiyun-weather-realtime.getRealtimeWeather"
+          with:
+            "lnglat": "tools.lnglat"
+            "lang": "tools.lang"
+            "unit": "tools.unit"
+          outputParameters:
+            - type: object
+              mapping: "$."

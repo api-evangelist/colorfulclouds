@@ -1,0 +1,244 @@
+naftiko: "1.0.0-alpha2"
+
+info:
+  label: "Caiyun Weather API — Forecast"
+  description: >-
+    Forecast — Caiyun Weather minute-level, hourly, and daily forecast
+    surface. 3 operations. Lead operation: Caiyun Weather Get Hourly
+    Weather Forecast. Self-contained Naftiko capability covering one
+    ColorfulClouds business surface.
+  tags:
+    - Caiyun Weather
+    - Weather
+    - Forecast
+  created: "2026-05-30"
+  modified: "2026-05-30"
+
+binds:
+  - namespace: env
+    keys:
+      CAIYUN_WEATHER_API_TOKEN: CAIYUN_WEATHER_API_TOKEN
+
+capability:
+
+  consumes:
+    - type: http
+      namespace: "caiyun-weather-forecast"
+      baseUri: "https://api.caiyunapp.com/v2.6"
+      description: "Caiyun Weather forecast endpoints (minutely, hourly, daily). Self-contained."
+      authentication:
+        type: apikey
+        key: token
+        value: "{{env.CAIYUN_WEATHER_API_TOKEN}}"
+        placement: path
+      resources:
+        - name: "minutely-precipitation"
+          path: "/{token}/{lnglat}/minutely"
+          operations:
+            - name: "getMinutelyPrecipitation"
+              method: GET
+              description: "120-minute minute-level precipitation nowcast with per-minute probability and a natural-language summary."
+              inputParameters:
+                - name: "lnglat"
+                  in: path
+                  type: string
+                  required: true
+                  description: "Longitude,latitude tuple (lng,lat)."
+                - name: "lang"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Response language."
+                - name: "unit"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Unit system."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "hourly-forecast"
+          path: "/{token}/{lnglat}/hourly"
+          operations:
+            - name: "getHourlyForecast"
+              method: GET
+              description: "Hourly forecast for up to 360 hours covering temperature, skycon, precipitation, wind, and AQI."
+              inputParameters:
+                - name: "lnglat"
+                  in: path
+                  type: string
+                  required: true
+                  description: "Longitude,latitude tuple (lng,lat)."
+                - name: "hourlysteps"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Number of hourly steps (1-360)."
+                - name: "begin"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Optional Unix epoch second to anchor the series."
+                - name: "lang"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Response language."
+                - name: "unit"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Unit system."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "daily-forecast"
+          path: "/{token}/{lnglat}/daily"
+          operations:
+            - name: "getDailyForecast"
+              method: GET
+              description: "Daily forecast for up to 15 days with min/max/avg temp, day/night splits, astronomical times, and life indices."
+              inputParameters:
+                - name: "lnglat"
+                  in: path
+                  type: string
+                  required: true
+                  description: "Longitude,latitude tuple (lng,lat)."
+                - name: "dailysteps"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Number of forecast days (1-15)."
+                - name: "begin"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Optional Unix epoch second to anchor the series."
+                - name: "lang"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Response language."
+                - name: "unit"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Unit system."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      namespace: "caiyun-weather-forecast-rest"
+      port: 8080
+      description: "REST adapter for Caiyun Weather Forecast (minutely, hourly, daily)."
+      resources:
+        - path: "/v1/minutely-precipitation/{lnglat}"
+          name: "minutely-precipitation"
+          description: "REST surface for 2-hour minute-level precipitation nowcast."
+          operations:
+            - method: GET
+              name: "getMinutelyPrecipitation"
+              description: "Get 2-hour precipitation nowcast."
+              call: "caiyun-weather-forecast.getMinutelyPrecipitation"
+              with:
+                "lnglat": "rest.lnglat"
+                "lang": "rest.lang"
+                "unit": "rest.unit"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/hourly-forecast/{lnglat}"
+          name: "hourly-forecast"
+          description: "REST surface for hourly forecast up to 360 hours."
+          operations:
+            - method: GET
+              name: "getHourlyForecast"
+              description: "Get hourly forecast for the requested location."
+              call: "caiyun-weather-forecast.getHourlyForecast"
+              with:
+                "lnglat": "rest.lnglat"
+                "hourlysteps": "rest.hourlysteps"
+                "begin": "rest.begin"
+                "lang": "rest.lang"
+                "unit": "rest.unit"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/daily-forecast/{lnglat}"
+          name: "daily-forecast"
+          description: "REST surface for daily forecast up to 15 days."
+          operations:
+            - method: GET
+              name: "getDailyForecast"
+              description: "Get daily forecast for the requested location."
+              call: "caiyun-weather-forecast.getDailyForecast"
+              with:
+                "lnglat": "rest.lnglat"
+                "dailysteps": "rest.dailysteps"
+                "begin": "rest.begin"
+                "lang": "rest.lang"
+                "unit": "rest.unit"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      namespace: "caiyun-weather-forecast-mcp"
+      port: 9090
+      transport: http
+      description: "MCP adapter for Caiyun Weather Forecast."
+      tools:
+        - name: "get-minutely-precipitation"
+          description: "Get 2-hour minute-level precipitation nowcast."
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "caiyun-weather-forecast.getMinutelyPrecipitation"
+          with:
+            "lnglat": "tools.lnglat"
+            "lang": "tools.lang"
+            "unit": "tools.unit"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-hourly-forecast"
+          description: "Get hourly weather forecast for up to 360 hours."
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "caiyun-weather-forecast.getHourlyForecast"
+          with:
+            "lnglat": "tools.lnglat"
+            "hourlysteps": "tools.hourlysteps"
+            "begin": "tools.begin"
+            "lang": "tools.lang"
+            "unit": "tools.unit"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-daily-forecast"
+          description: "Get daily weather forecast for up to 15 days."
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "caiyun-weather-forecast.getDailyForecast"
+          with:
+            "lnglat": "tools.lnglat"
+            "dailysteps": "tools.dailysteps"
+            "begin": "tools.begin"
+            "lang": "tools.lang"
+            "unit": "tools.unit"
+          outputParameters:
+            - type: object
+              mapping: "$."

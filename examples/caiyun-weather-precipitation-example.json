@@ -1,0 +1,12 @@
+{
+  "local": {
+    "status": "ok",
+    "datasource": "radar",
+    "intensity": 0.0
+  },
+  "nearest": {
+    "status": "ok",
+    "distance": 8.7,
+    "intensity": 0.4
+  }
+}

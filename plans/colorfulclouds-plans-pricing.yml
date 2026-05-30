@@ -1,0 +1,162 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: ColorfulClouds (Caiyun Weather)
+providerId: colorfulclouds
+created: '2026-05-30'
+modified: '2026-05-30'
+reconciled: false
+tags:
+  - Weather
+  - Forecasting
+  - Air Quality
+  - Hyperlocal
+sources:
+  - https://docs.caiyunapp.com/weather-api/
+  - https://platform.caiyunapp.com/
+description: >-
+  Caiyun Weather API uses a tiered + usage-based commercial model administered
+  through the Caiyun Open Platform (platform.caiyunapp.com). A free developer
+  tier permits roughly 400 calls/day and caps daily forecasts at 3 days;
+  paid tiers extend daily forecasts to 15 days, raise hourly steps to 360,
+  unlock the precipitation map raster, and lift the per-token quota in
+  bands negotiated through the platform. Detailed per-tier numbers are
+  published on the operator console and via business contact; pricing
+  marked here is the publicly documented free tier plus the documented
+  enterprise model. Pricing should be reconfirmed with sales before commit.
+plans:
+  - id: colorfulclouds-free
+    name: Free Developer Tier
+    type: freemium
+    description: >-
+      No-cost developer plan provisioned on signup; intended for prototyping
+      and low-volume integrations.
+    entries:
+      - label: Daily request quota
+        name: daily_request_quota
+        type: quota
+        metric: request
+        limit: 400
+        timeFrame: day
+        geo: global
+        unit: '1'
+        price: '0'
+        userMultiplied: false
+      - label: Daily forecast horizon
+        name: daily_forecast_horizon
+        type: quota
+        metric: day
+        limit: 3
+        timeFrame: usage
+        geo: global
+        unit: '1'
+        price: '0'
+        userMultiplied: false
+      - label: Hourly forecast horizon
+        name: hourly_forecast_horizon
+        type: quota
+        metric: hour
+        limit: 48
+        timeFrame: usage
+        geo: global
+        unit: '1'
+        price: '0'
+        userMultiplied: false
+    elements:
+      - name: Realtime weather
+      - name: Minutely precipitation (120 min)
+      - name: Hourly forecast (up to 48 hours)
+      - name: Daily forecast (3 days)
+      - name: Severe-weather alerts
+      - name: Realtime air quality
+      - name: Multi-language (zh_CN, zh_TW, ja, en_GB, en_US)
+  - id: colorfulclouds-standard
+    name: Standard / Paid Tier
+    type: tiered
+    description: >-
+      Paid subscription tier purchased through the Caiyun Open Platform.
+      Extends the forecast horizons, raises the per-token quota, and adds
+      access to the precipitation map raster. Per-tier quota bands and
+      monthly pricing are published in the operator console.
+    entries:
+      - label: Daily request quota
+        name: daily_request_quota
+        type: tiered
+        metric: request
+        limit: -1
+        timeFrame: day
+        geo: global
+        unit: '1'
+        price: 'see operator console / contact sales'
+        userMultiplied: false
+      - label: Daily forecast horizon
+        name: daily_forecast_horizon
+        type: quota
+        metric: day
+        limit: 15
+        timeFrame: usage
+        geo: global
+        unit: '1'
+        price: 'see operator console'
+        userMultiplied: false
+      - label: Hourly forecast horizon
+        name: hourly_forecast_horizon
+        type: quota
+        metric: hour
+        limit: 360
+        timeFrame: usage
+        geo: global
+        unit: '1'
+        price: 'see operator console'
+        userMultiplied: false
+      - label: Precipitation map tile access
+        name: precipitation_map_tiles
+        type: tiered
+        metric: tile-request
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: '1'
+        price: 'see operator console'
+        userMultiplied: false
+    elements:
+      - name: Everything in Free
+      - name: Extended hourly forecast (up to 360 hours)
+      - name: Extended daily forecast (up to 15 days)
+      - name: Precipitation map raster tiles
+      - name: Day/night forecast splits (08h-20h / 20h-32h)
+      - name: Historical data via begin parameter
+  - id: colorfulclouds-enterprise
+    name: Enterprise
+    type: enterprise
+    description: >-
+      Negotiated enterprise contracts for high-volume consumer platforms
+      (Amap, Sina Weather), smart-city deployments, and OEM integrations.
+      Includes custom SLAs, dedicated support, and bespoke quota.
+    entries:
+      - label: Custom request volume
+        name: enterprise_request_volume
+        type: tiered
+        metric: request
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: '1'
+        price: 'contact sales'
+        userMultiplied: false
+      - label: Custom SLA
+        name: enterprise_sla
+        type: subscription
+        metric: month
+        limit: 1
+        timeFrame: month
+        geo: global
+        unit: '1'
+        price: 'contact sales'
+        userMultiplied: false
+    elements:
+      - name: Custom quota and SLA
+      - name: Dedicated support
+      - name: White-label / OEM licensing
+      - name: Direct CMA alert relay
+      - name: Co-located deployment for low latency

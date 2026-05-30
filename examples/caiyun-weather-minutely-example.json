@@ -1,0 +1,19 @@
+{
+  "status": "ok",
+  "datasource": "radar",
+  "precipitation_2h": [
+    19.31,
+    30.68,
+    41.92
+  ],
+  "precipitation": [
+    29.63,
+    17.99,
+    52.57
+  ],
+  "probability": [
+    19.0,
+    33.0
+  ],
+  "description": "clear weather over the next 2 hours"
+}

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/colorfulclouds/refs/heads/main/json-schema/caiyun-weather-daily-astro-time-schema.json",
+  "title": "DailyAstroTime",
+  "description": "DailyAstroTime schema from Caiyun Weather API",
+  "type": "object",
+  "properties": {
+    "time": {
+      "type": "string",
+      "example": "05:48"
+    }
+  },
+  "required": [
+    "time"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/colorfulclouds/refs/heads/main/json-structure/caiyun-weather-aqi-value-dual-structure.json",
+  "name": "AQIValueDual",
+  "description": "AQI numeric value under both Chinese and US standards.",
+  "type": "object",
+  "properties": {
+    "chn": {
+      "type": "float",
+      "example": 78.0
+    },
+    "usa": {
+      "type": "float",
+      "example": 95.0
+    }
+  },
+  "required": [
+    "chn",
+    "usa"
+  ]
+}

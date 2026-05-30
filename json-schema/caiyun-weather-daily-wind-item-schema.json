@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/colorfulclouds/refs/heads/main/json-schema/caiyun-weather-daily-wind-item-schema.json",
+  "title": "DailyWindItem",
+  "description": "DailyWindItem schema from Caiyun Weather API",
+  "type": "object",
+  "properties": {
+    "date": {
+      "type": "string",
+      "format": "date"
+    },
+    "max": {
+      "$ref": "#/components/schemas/DailyWindProperty"
+    },
+    "min": {
+      "$ref": "#/components/schemas/DailyWindProperty"
+    },
+    "avg": {
+      "$ref": "#/components/schemas/DailyWindProperty"
+    }
+  },
+  "required": [
+    "date",
+    "max",
+    "min",
+    "avg"
+  ]
+}

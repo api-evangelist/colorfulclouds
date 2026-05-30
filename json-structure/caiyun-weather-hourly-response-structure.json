@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/colorfulclouds/refs/heads/main/json-structure/caiyun-weather-hourly-response-structure.json",
+  "name": "HourlyResponse",
+  "description": "HourlyResponse schema from Caiyun Weather API",
+  "allOf": [
+    {
+      "$ref": "#/components/schemas/EnvelopeBase"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "object",
+          "properties": {
+            "hourly": {
+              "$ref": "#/components/schemas/Hourly"
+            },
+            "primary": {
+              "type": "int32"
+            }
+          },
+          "required": [
+            "hourly"
+          ]
+        }
+      }
+    }
+  ]
+}

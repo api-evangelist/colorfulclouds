@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/colorfulclouds/refs/heads/main/json-schema/caiyun-weather-precipitation-nearest-schema.json",
+  "title": "PrecipitationNearest",
+  "description": "Nearest precipitation echo to the requested point.",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string",
+      "example": "ok"
+    },
+    "distance": {
+      "type": "number",
+      "format": "float",
+      "description": "Distance to the nearest precipitation echo in km.",
+      "example": 8.7
+    },
+    "intensity": {
+      "type": "number",
+      "format": "float",
+      "example": 0.4
+    }
+  }
+}

@@ -1,0 +1,366 @@
+vocabulary: "1.0.0"
+
+info:
+  provider: "ColorfulClouds (Caiyun Weather)"
+  description: >-
+    Unified taxonomy for the Caiyun Weather API v2.6 — maps the operational
+    HTTP surface (8 GET operations across 6 tags) to the Naftiko capability
+    surface (6 capability files exposing 8 MCP tools and 8 REST resources)
+    used by hyperlocal weather, air-quality, alerting, and precipitation-map
+    workflows.
+  created: "2026-05-30"
+  modified: "2026-05-30"
+
+operational:
+  apis:
+    - name: "Caiyun Weather API"
+      namespace: "caiyun-weather"
+      version: "v2.6"
+      baseUrl: "https://api.caiyunapp.com/v2.6"
+      status: active
+      transport: REST/HTTPS
+      authentication: path-token
+
+  resources:
+    - name: realtime-weather
+      api: caiyun-weather
+      actions: [get]
+      description: "Realtime weather conditions at a point."
+    - name: minutely-precipitation
+      api: caiyun-weather
+      actions: [get]
+      description: "Minute-level precipitation nowcast (120 minutes)."
+    - name: hourly-forecast
+      api: caiyun-weather
+      actions: [get]
+      description: "Hourly forecast series up to 360 hours."
+    - name: daily-forecast
+      api: caiyun-weather
+      actions: [get]
+      description: "Daily forecast series up to 15 days, with day/night splits."
+    - name: weather-combined
+      api: caiyun-weather
+      actions: [get]
+      description: "Combined realtime + minutely + hourly + daily envelope, optionally with alerts."
+    - name: realtime-air-quality
+      api: caiyun-weather
+      actions: [get]
+      description: "Realtime AQI + pollutant readings under CHN and USA standards."
+    - name: weather-alerts
+      api: caiyun-weather
+      actions: [get]
+      description: "Severe-weather alerts from China Meteorological Administration."
+    - name: precipitation-map-tile
+      api: caiyun-weather
+      actions: [get]
+      description: "Web Mercator PNG raster tile of radar + nowcast precipitation."
+
+  actions:
+    - name: get
+      httpMethod: GET
+      pattern: read
+      description: "Read-only retrieval of a weather, forecast, alert, or raster resource."
+
+  schemas:
+    core:
+      - EnvelopeBase
+      - Result
+      - SkyCon
+      - Wind
+      - Precipitation
+      - PrecipitationLocal
+      - PrecipitationNearest
+    weather:
+      - Realtime
+      - Minutely
+      - Hourly
+      - Daily
+      - HourlyPrecipitationItem
+      - HourlyWindItem
+      - HourlySkyconItem
+      - DateTimeValuePair
+      - DailyAstroItem
+      - DailyAstroTime
+      - DailyMinMaxAvgItem
+      - DailyPrecipitationItem
+      - DailyWindItem
+      - DailyWindProperty
+      - DailySkyconItem
+      - DailyLifeIndex
+      - DailyLifeIndexEntry
+    airQuality:
+      - AirQualityRealtime
+      - AQIValueDual
+      - AQIDescDual
+      - HourlyAirQuality
+      - HourlyAQIItem
+      - HourlyPM25Item
+      - DailyAirQuality
+      - DailyAQIItem
+    alerts:
+      - Alert
+      - AlertContentItem
+      - AlertAdcode
+    lifeIndex:
+      - LifeIndexItem
+      - RealtimeLifeIndex
+    responses:
+      - RealtimeResponse
+      - MinutelyResponse
+      - HourlyResponse
+      - DailyResponse
+      - WeatherResponse
+      - AirQualityRealtimeResponse
+      - AlertResponse
+      - ErrorResponse
+
+  parameters:
+    location:
+      - lnglat
+      - token
+    forecastWindow:
+      - dailysteps
+      - hourlysteps
+      - begin
+    presentation:
+      - lang
+      - unit
+    filters:
+      - alert
+      - granu
+    raster:
+      - z
+      - x
+      - y
+      - timestamp
+
+  enums:
+    skyCondition:
+      - CLEAR_DAY
+      - CLEAR_NIGHT
+      - PARTLY_CLOUDY_DAY
+      - PARTLY_CLOUDY_NIGHT
+      - CLOUDY
+      - LIGHT_HAZE
+      - MODERATE_HAZE
+      - HEAVY_HAZE
+      - LIGHT_RAIN
+      - MODERATE_RAIN
+      - HEAVY_RAIN
+      - STORM_RAIN
+      - FOG
+      - LIGHT_SNOW
+      - MODERATE_SNOW
+      - HEAVY_SNOW
+      - STORM_SNOW
+      - DUST
+      - SAND
+      - WIND
+    languages:
+      - zh_CN
+      - zh_TW
+      - ja
+      - en_GB
+      - en_US
+    units:
+      - metric
+      - metric:v1
+      - metric:v2
+      - imperial
+      - SI
+    granularities:
+      - realtime
+      - minutely
+      - hourly
+      - daily
+      - weather
+    aqiStandards:
+      - chn
+      - usa
+
+  authentication:
+    - scheme: "Path-embedded API token"
+      placement: path
+      parameter: token
+      apis: [caiyun-weather]
+      notes: >-
+        Token issued by the Caiyun Open Platform and embedded as a path segment
+        between /v2.6/ and the lng,lat tuple.
+
+capability:
+  workflows:
+    - name: caiyun-weather-realtime
+      file: capabilities/caiyun-weather-realtime.yaml
+      description: "Realtime conditions surface (temperature, wind, AQI, life indices)."
+      apis: [caiyun-weather]
+      tools: 1
+      personas: [consumer-app, smart-home, navigation]
+      domains: [Weather, Realtime]
+    - name: caiyun-weather-forecast
+      file: capabilities/caiyun-weather-forecast.yaml
+      description: "Minutely / hourly / daily forecast surface."
+      apis: [caiyun-weather]
+      tools: 3
+      personas: [consumer-app, logistics, event-planner]
+      domains: [Weather, Forecast]
+    - name: caiyun-weather-weather
+      file: capabilities/caiyun-weather-weather.yaml
+      description: "Combined envelope (realtime + minutely + hourly + daily + alerts)."
+      apis: [caiyun-weather]
+      tools: 1
+      personas: [consumer-app, dashboard-builder]
+      domains: [Weather, Combined]
+    - name: caiyun-weather-air-quality
+      file: capabilities/caiyun-weather-air-quality.yaml
+      description: "Realtime AQI + pollutant readings."
+      apis: [caiyun-weather]
+      tools: 1
+      personas: [health-app, mobility-app]
+      domains: [Air Quality]
+    - name: caiyun-weather-alerts
+      file: capabilities/caiyun-weather-alerts.yaml
+      description: "Severe-weather alerts from CMA."
+      apis: [caiyun-weather]
+      tools: 1
+      personas: [emergency-ops, dispatcher, consumer-app]
+      domains: [Alerts]
+    - name: caiyun-weather-precipitation-map
+      file: capabilities/caiyun-weather-precipitation-map.yaml
+      description: "Precipitation map tile rendering for live overlays."
+      apis: [caiyun-weather]
+      tools: 1
+      personas: [map-app, dashboard-builder]
+      domains: [Geospatial, Precipitation Map]
+
+  personas:
+    - id: consumer-app
+      name: Consumer Weather App Developer
+      description: "Builds mobile/web weather apps with realtime + minutely + alerts."
+      workflows: [caiyun-weather-realtime, caiyun-weather-forecast, caiyun-weather-weather, caiyun-weather-alerts]
+    - id: smart-home
+      name: Smart Home Integrator
+      description: "Drives smart-home automations from realtime conditions and life indices."
+      workflows: [caiyun-weather-realtime]
+    - id: navigation
+      name: Navigation / Mapping Platform
+      description: "Embeds Caiyun forecasts inside navigation apps (Amap-style integration)."
+      workflows: [caiyun-weather-realtime, caiyun-weather-precipitation-map]
+    - id: logistics
+      name: Logistics & Delivery Routing
+      description: "Reroutes couriers and field crews based on hourly forecasts and nowcasts."
+      workflows: [caiyun-weather-forecast, caiyun-weather-alerts]
+    - id: event-planner
+      name: Outdoor Event Planner
+      description: "Plans events 5-15 days out using daily forecasts and life indices."
+      workflows: [caiyun-weather-forecast]
+    - id: health-app
+      name: Health / Air-Quality App
+      description: "Surfaces PM2.5 and AQI exposure to end users."
+      workflows: [caiyun-weather-air-quality]
+    - id: mobility-app
+      name: Mobility / Cycling / Running App
+      description: "Recommends healthier routes and times based on AQI."
+      workflows: [caiyun-weather-air-quality]
+    - id: emergency-ops
+      name: Emergency Operations Center
+      description: "Monitors CMA-issued severe-weather alerts for incident response."
+      workflows: [caiyun-weather-alerts]
+    - id: dispatcher
+      name: Field Dispatcher
+      description: "Reassigns crews when typhoon/blizzard alerts fire."
+      workflows: [caiyun-weather-alerts]
+    - id: dashboard-builder
+      name: Operations Dashboard Builder
+      description: "Assembles weather dashboards combining envelope data and precipitation tiles."
+      workflows: [caiyun-weather-weather, caiyun-weather-precipitation-map]
+    - id: map-app
+      name: Mapping / Geospatial App Developer
+      description: "Renders live precipitation overlays on top of base maps."
+      workflows: [caiyun-weather-precipitation-map]
+
+  domains:
+    - name: Weather
+      description: "Core weather conditions and forecasts."
+      resources: [realtime-weather, hourly-forecast, daily-forecast, minutely-precipitation, weather-combined]
+    - name: Realtime
+      description: "Live observations at a point."
+      resources: [realtime-weather]
+    - name: Forecast
+      description: "Predictive series across minute, hour, day horizons."
+      resources: [minutely-precipitation, hourly-forecast, daily-forecast]
+    - name: Combined
+      description: "Single-call envelope spanning all granularities."
+      resources: [weather-combined]
+    - name: Air Quality
+      description: "Pollutants and AQI under CHN and USA standards."
+      resources: [realtime-air-quality]
+    - name: Alerts
+      description: "Severe-weather alerts published by the China Meteorological Administration."
+      resources: [weather-alerts]
+    - name: Geospatial
+      description: "Tile-based geospatial overlays."
+      resources: [precipitation-map-tile]
+    - name: Precipitation Map
+      description: "Radar + nowcast precipitation tiles."
+      resources: [precipitation-map-tile]
+
+  namespaces:
+    consumed:
+      - caiyun-weather-realtime
+      - caiyun-weather-forecast
+      - caiyun-weather-weather
+      - caiyun-weather-air-quality
+      - caiyun-weather-alerts
+      - caiyun-weather-precipitation-map
+    rest:
+      - { name: caiyun-weather-realtime-rest, port: 8080 }
+      - { name: caiyun-weather-forecast-rest, port: 8080 }
+      - { name: caiyun-weather-weather-rest, port: 8080 }
+      - { name: caiyun-weather-air-quality-rest, port: 8080 }
+      - { name: caiyun-weather-alerts-rest, port: 8080 }
+      - { name: caiyun-weather-precipitation-map-rest, port: 8080 }
+    mcp:
+      - { name: caiyun-weather-realtime-mcp, port: 9090 }
+      - { name: caiyun-weather-forecast-mcp, port: 9090 }
+      - { name: caiyun-weather-weather-mcp, port: 9090 }
+      - { name: caiyun-weather-air-quality-mcp, port: 9090 }
+      - { name: caiyun-weather-alerts-mcp, port: 9090 }
+      - { name: caiyun-weather-precipitation-map-mcp, port: 9090 }
+
+  binds:
+    - env: CAIYUN_WEATHER_API_TOKEN
+      workflows: [caiyun-weather-realtime, caiyun-weather-forecast, caiyun-weather-weather, caiyun-weather-air-quality, caiyun-weather-alerts, caiyun-weather-precipitation-map]
+
+crossReference:
+  - resource: realtime-weather
+    operations: [getRealtimeWeather]
+    workflows: [caiyun-weather-realtime, caiyun-weather-weather]
+    personas: [consumer-app, smart-home, navigation, dashboard-builder]
+  - resource: minutely-precipitation
+    operations: [getMinutelyPrecipitation]
+    workflows: [caiyun-weather-forecast, caiyun-weather-weather]
+    personas: [consumer-app, logistics, navigation]
+  - resource: hourly-forecast
+    operations: [getHourlyForecast]
+    workflows: [caiyun-weather-forecast, caiyun-weather-weather]
+    personas: [consumer-app, logistics, event-planner]
+  - resource: daily-forecast
+    operations: [getDailyForecast]
+    workflows: [caiyun-weather-forecast, caiyun-weather-weather]
+    personas: [event-planner, consumer-app]
+  - resource: weather-combined
+    operations: [getWeatherCombined]
+    workflows: [caiyun-weather-weather]
+    personas: [consumer-app, dashboard-builder]
+  - resource: realtime-air-quality
+    operations: [getRealtimeAirQuality]
+    workflows: [caiyun-weather-air-quality]
+    personas: [health-app, mobility-app]
+  - resource: weather-alerts
+    operations: [getWeatherAlerts]
+    workflows: [caiyun-weather-alerts, caiyun-weather-weather]
+    personas: [emergency-ops, dispatcher, consumer-app, logistics]
+  - resource: precipitation-map-tile
+    operations: [getPrecipitationMapTile]
+    workflows: [caiyun-weather-precipitation-map]
+    personas: [map-app, dashboard-builder, navigation]

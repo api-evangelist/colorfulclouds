@@ -1,0 +1,130 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/colorfulclouds/refs/heads/main/json-structure/caiyun-weather-daily-structure.json",
+  "name": "Daily",
+  "description": "Daily forecast series block.",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string",
+      "example": "ok"
+    },
+    "astro": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/DailyAstroItem"
+      }
+    },
+    "precipitation": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/DailyPrecipitationItem"
+      }
+    },
+    "precipitation_08h_20h": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/DailyPrecipitationItem"
+      }
+    },
+    "precipitation_20h_32h": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/DailyPrecipitationItem"
+      }
+    },
+    "temperature": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/DailyMinMaxAvgItem"
+      }
+    },
+    "temperature_08h_20h": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/DailyMinMaxAvgItem"
+      }
+    },
+    "temperature_20h_32h": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/DailyMinMaxAvgItem"
+      }
+    },
+    "humidity": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/DailyMinMaxAvgItem"
+      }
+    },
+    "cloudrate": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/DailyMinMaxAvgItem"
+      }
+    },
+    "pressure": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/DailyMinMaxAvgItem"
+      }
+    },
+    "visibility": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/DailyMinMaxAvgItem"
+      }
+    },
+    "dswrf": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/DailyMinMaxAvgItem"
+      }
+    },
+    "wind": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/DailyWindItem"
+      }
+    },
+    "wind_08h_20h": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/DailyWindItem"
+      }
+    },
+    "wind_20h_32h": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/DailyWindItem"
+      }
+    },
+    "skycon": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/DailySkyconItem"
+      }
+    },
+    "skycon_08h_20h": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/DailySkyconItem"
+      }
+    },
+    "skycon_20h_32h": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/DailySkyconItem"
+      }
+    },
+    "life_index": {
+      "$ref": "#/components/schemas/DailyLifeIndex"
+    },
+    "air_quality": {
+      "$ref": "#/components/schemas/DailyAirQuality"
+    }
+  },
+  "required": [
+    "status"
+  ]
+}

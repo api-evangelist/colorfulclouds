@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/colorfulclouds/refs/heads/main/json-schema/caiyun-weather-wind-schema.json",
+  "title": "Wind",
+  "description": "Wind speed and direction.",
+  "type": "object",
+  "properties": {
+    "speed": {
+      "type": "number",
+      "format": "float",
+      "description": "Wind speed in the active unit system (km/h for metric:v2).",
+      "example": 12.4
+    },
+    "direction": {
+      "type": "number",
+      "format": "float",
+      "description": "Wind direction in degrees from north, clockwise.",
+      "example": 215.0
+    }
+  }
+}

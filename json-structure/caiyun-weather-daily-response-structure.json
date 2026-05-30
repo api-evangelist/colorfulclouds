@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/colorfulclouds/refs/heads/main/json-structure/caiyun-weather-daily-response-structure.json",
+  "name": "DailyResponse",
+  "description": "DailyResponse schema from Caiyun Weather API",
+  "allOf": [
+    {
+      "$ref": "#/components/schemas/EnvelopeBase"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "object",
+          "properties": {
+            "daily": {
+              "$ref": "#/components/schemas/Daily"
+            },
+            "primary": {
+              "type": "int32"
+            }
+          },
+          "required": [
+            "daily"
+          ]
+        }
+      }
+    }
+  ]
+}

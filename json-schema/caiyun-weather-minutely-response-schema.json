@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/colorfulclouds/refs/heads/main/json-schema/caiyun-weather-minutely-response-schema.json",
+  "title": "MinutelyResponse",
+  "description": "MinutelyResponse schema from Caiyun Weather API",
+  "allOf": [
+    {
+      "$ref": "#/components/schemas/EnvelopeBase"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "object",
+          "properties": {
+            "minutely": {
+              "$ref": "#/components/schemas/Minutely"
+            },
+            "primary": {
+              "type": "integer"
+            },
+            "forecast_keypoint": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "minutely"
+          ]
+        }
+      }
+    }
+  ]
+}

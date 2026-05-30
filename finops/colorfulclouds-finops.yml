@@ -1,0 +1,108 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: ColorfulClouds (Caiyun Weather)
+providerId: colorfulclouds
+created: '2026-05-30'
+modified: '2026-05-30'
+reconciled: false
+tags:
+  - FinOps
+  - FOCUS
+  - Weather
+  - Forecasting
+  - Air Quality
+sources:
+  - https://docs.caiyunapp.com/weather-api/
+  - https://platform.caiyunapp.com/
+  - https://focus.finops.org/focus-specification/v1-3/
+description: >-
+  FOCUS-aligned FinOps view of the Caiyun Weather API — tiered subscription
+  plans with per-token API-call quotas, optional precipitation-map tile
+  metering, and enterprise contracts for OEM/consumer-platform integrations.
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Beijing ColorfulClouds Technology Co., Ltd.
+serviceCategory: Weather & Geospatial Data
+billingModel:
+  pricingCategory: Tiered Subscription + Usage-Based
+  billingFrequency: Monthly
+  billingCurrency: CNY (USD invoicing on enterprise contracts)
+  chargeCategories:
+    - Usage
+    - Purchase
+    - Adjustment
+    - Refund
+focusColumns:
+  ServiceName: Caiyun Weather API
+  ServiceCategory: Weather & Geospatial Data
+  ServiceSubcategory: Hyperlocal Weather Forecasting
+  ProviderName: ColorfulClouds Tech (彩云科技)
+  PublisherName: Beijing ColorfulClouds Technology Co., Ltd.
+  InvoiceIssuerName: Beijing ColorfulClouds Technology Co., Ltd.
+  BillingCurrency: CNY
+  ChargeCategory: Usage
+  RegionId: CN
+meters:
+  - name: api_requests
+    unit: request
+    aggregation: sum
+    dimensions:
+      - endpoint
+      - token_id
+      - tier
+      - geo
+  - name: precipitation_map_tiles
+    unit: tile-request
+    aggregation: sum
+    dimensions:
+      - zoom_level
+      - token_id
+      - tier
+  - name: forecast_horizon_overage
+    unit: forecast-day
+    aggregation: max
+    dimensions:
+      - token_id
+      - tier
+  - name: monthly_subscription
+    unit: month
+    aggregation: count
+    dimensions:
+      - tier
+      - token_id
+  - name: enterprise_commit
+    unit: month
+    aggregation: count
+    dimensions:
+      - contract_id
+      - sla_tier
+principles:
+  - name: Visibility
+    description: >-
+      Consumption is visible via the Caiyun Open Platform console
+      (platform.caiyunapp.com) — per-token usage curves, daily quota
+      consumption, and tier remaining headroom. There is no public usage
+      API; export usage from the console for FinOps tooling.
+  - name: Allocation
+    description: >-
+      Allocate spend by token: provision a distinct API token per product /
+      team / billing owner and tag downstream calls with the token_id
+      dimension. Map App Keys (v3) to internal cost centers in your billing
+      pipeline.
+  - name: Optimization
+    description: >-
+      Cache realtime responses for 30-60s per quantized lng,lat grid cell;
+      use the combined /weather endpoint instead of separate realtime +
+      minutely + hourly + daily calls; quantize coordinates to ~1km grid to
+      maximize cross-user cache hits; pre-fetch high-traffic locations.
+  - name: Accountability
+    description: >-
+      Assign a token + tier to each consuming team. Configure console alerts
+      for quota approaching 80% / 100% and review the monthly invoice
+      breakdown for unexpected map-tile or forecast-horizon overage on the
+      Standard tier.

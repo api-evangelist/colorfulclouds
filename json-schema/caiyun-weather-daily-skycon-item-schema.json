@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/colorfulclouds/refs/heads/main/json-schema/caiyun-weather-daily-skycon-item-schema.json",
+  "title": "DailySkyconItem",
+  "description": "DailySkyconItem schema from Caiyun Weather API",
+  "type": "object",
+  "properties": {
+    "date": {
+      "type": "string",
+      "format": "date"
+    },
+    "value": {
+      "$ref": "#/components/schemas/SkyCon"
+    }
+  },
+  "required": [
+    "date",
+    "value"
+  ]
+}

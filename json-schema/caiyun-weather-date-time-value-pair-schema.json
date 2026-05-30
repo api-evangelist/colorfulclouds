@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/colorfulclouds/refs/heads/main/json-schema/caiyun-weather-date-time-value-pair-schema.json",
+  "title": "DateTimeValuePair",
+  "description": "DateTimeValuePair schema from Caiyun Weather API",
+  "type": "object",
+  "properties": {
+    "datetime": {
+      "type": "string",
+      "format": "date-time",
+      "example": "2026-05-30T15:00:00+08:00"
+    },
+    "value": {
+      "type": "number",
+      "format": "float",
+      "example": 23.1
+    }
+  },
+  "required": [
+    "datetime",
+    "value"
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/colorfulclouds/refs/heads/main/json-structure/caiyun-weather-realtime-response-structure.json",
+  "name": "RealtimeResponse",
+  "description": "RealtimeResponse schema from Caiyun Weather API",
+  "allOf": [
+    {
+      "$ref": "#/components/schemas/EnvelopeBase"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "object",
+          "properties": {
+            "realtime": {
+              "$ref": "#/components/schemas/Realtime"
+            },
+            "primary": {
+              "type": "int32"
+            }
+          },
+          "required": [
+            "realtime"
+          ]
+        }
+      },
+      "required": [
+        "result"
+      ]
+    }
+  ]
+}

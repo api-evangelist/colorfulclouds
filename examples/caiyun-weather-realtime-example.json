@@ -1,0 +1,53 @@
+{
+  "status": "ok",
+  "temperature": 22.4,
+  "humidity": 0.58,
+  "cloudrate": 0.32,
+  "skycon": "PARTLY_CLOUDY_DAY",
+  "visibility": 14.2,
+  "dswrf": 412.0,
+  "wind": {
+    "speed": 12.4,
+    "direction": 215.0
+  },
+  "pressure": 100240.0,
+  "apparent_temperature": 21.8,
+  "precipitation": {
+    "local": {
+      "status": {},
+      "datasource": {},
+      "intensity": {}
+    },
+    "nearest": {
+      "status": {},
+      "distance": {},
+      "intensity": {}
+    }
+  },
+  "air_quality": {
+    "aqi": {
+      "chn": {},
+      "usa": {}
+    },
+    "description": {
+      "chn": {},
+      "usa": {}
+    },
+    "pm25": 32.0,
+    "pm10": 48.0,
+    "o3": 96.0,
+    "so2": 4.0,
+    "no2": 21.0,
+    "co": 0.6
+  },
+  "life_index": {
+    "ultraviolet": {
+      "index": {},
+      "desc": {}
+    },
+    "comfort": {
+      "index": {},
+      "desc": {}
+    }
+  }
+}

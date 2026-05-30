@@ -1,0 +1,88 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: ColorfulClouds (Caiyun Weather)
+providerId: colorfulclouds
+created: '2026-05-30'
+modified: '2026-05-30'
+reconciled: false
+tags:
+  - Rate Limiting
+  - Weather
+  - Quota
+sources:
+  - https://docs.caiyunapp.com/weather-api/
+  - https://docs.caiyunapp.com/weather-api/auth.html
+  - https://platform.caiyunapp.com/
+description: >-
+  Caiyun Weather API rate limits are scoped per API token (or per App Key on
+  v3). The free developer tier is documented at approximately 400 requests
+  per day; paid tiers raise the daily quota in published bands purchased on
+  the Open Platform. Per-second / per-minute throttling beyond the daily
+  quota is enforced by the gateway but the precise burst rate is not
+  publicly documented and varies by tier. Token rotation, App Key + App
+  Secret signing (v3), and exponential backoff on 429/503 are the recommended
+  consumer-side policies.
+headers:
+  retryAfter: Retry-After
+  requestId: X-Request-Id
+responseCodes:
+  unauthorized: 401
+  throttled: 429
+  quotaExceeded: 429
+  serverError: 500
+  unavailable: 503
+limits:
+  - name: Free tier daily quota
+    scope: token
+    metric: requests_per_day
+    limit: 400
+    timeFrame: day
+    notes: >-
+      Documented free-tier ceiling per API token. Counted across all v2.6
+      endpoints (realtime, minutely, hourly, daily, weather, air-quality,
+      alert) under the token.
+  - name: Paid tier daily quota
+    scope: token
+    metric: requests_per_day
+    limit: 'see operator console / tier-specific'
+    notes: >-
+      Tier-specific daily quotas (10k, 100k, 1M bands) are sold through the
+      Open Platform; exact band sizes and per-tier pricing are visible only
+      to authenticated tenants.
+  - name: Gateway burst throttling
+    scope: token
+    metric: requests_per_second
+    limit: 'see tier-specific QPS'
+    notes: >-
+      Per-second / per-minute burst throttling is enforced server-side but
+      not publicly documented. Plan for token-bucket backoff on 429.
+  - name: Precipitation map tile fetches
+    scope: token
+    metric: tile_requests_per_month
+    limit: 'tier-specific'
+    notes: >-
+      Map raster tile requests are usually metered separately from JSON
+      endpoint requests on paid tiers.
+policies:
+  - name: Exponential backoff on 429
+    description: >-
+      Retry on 429 with exponential backoff (start 1s, double up to 30s
+      ceiling) and a jittered delay. Respect Retry-After when present.
+  - name: Token rotation and App Key signing
+    description: >-
+      For v3 deployments, use App Key + App Secret signing instead of bare
+      tokens to limit leakage risk. Rotate tokens periodically via the Open
+      Platform console.
+  - name: Per-token scoping
+    description: >-
+      Quotas are scoped to the token (or App Key); split traffic across
+      tokens for high-volume consumer apps with distinct billing owners.
+  - name: Cache realtime + minutely responses
+    description: >-
+      Realtime is meaningful only at sub-minute resolution; cache responses
+      for 30-60s per coordinate to absorb burst load and stay within quota.
+  - name: Coordinate quantization
+    description: >-
+      Quantize lng,lat to ~1km grid before requesting to maximize cache hits
+      across users in the same area without losing meaningful precision.

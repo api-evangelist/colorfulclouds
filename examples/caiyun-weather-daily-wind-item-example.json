@@ -1,0 +1,15 @@
+{
+  "date": "2026-05-30",
+  "max": {
+    "speed": 18.7,
+    "direction": 337.0
+  },
+  "min": {
+    "speed": 8.5,
+    "direction": 205.0
+  },
+  "avg": {
+    "speed": 24.7,
+    "direction": 253.0
+  }
+}

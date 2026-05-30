@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/colorfulclouds/refs/heads/main/json-schema/caiyun-weather-alert-response-schema.json",
+  "title": "AlertResponse",
+  "description": "AlertResponse schema from Caiyun Weather API",
+  "allOf": [
+    {
+      "$ref": "#/components/schemas/EnvelopeBase"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "object",
+          "properties": {
+            "alert": {
+              "$ref": "#/components/schemas/Alert"
+            }
+          },
+          "required": [
+            "alert"
+          ]
+        }
+      }
+    }
+  ]
+}

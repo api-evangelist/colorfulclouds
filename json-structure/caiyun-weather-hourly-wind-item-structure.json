@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/colorfulclouds/refs/heads/main/json-structure/caiyun-weather-hourly-wind-item-structure.json",
+  "name": "HourlyWindItem",
+  "description": "HourlyWindItem schema from Caiyun Weather API",
+  "type": "object",
+  "properties": {
+    "datetime": {
+      "type": "datetime"
+    },
+    "speed": {
+      "type": "float"
+    },
+    "direction": {
+      "type": "float"
+    }
+  },
+  "required": [
+    "datetime",
+    "speed",
+    "direction"
+  ]
+}

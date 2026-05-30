@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/colorfulclouds/refs/heads/main/json-schema/caiyun-weather-alert-content-item-schema.json",
+  "title": "AlertContentItem",
+  "description": "AlertContentItem schema from Caiyun Weather API",
+  "type": "object",
+  "properties": {
+    "province": {
+      "type": "string",
+      "example": "Beijing"
+    },
+    "status": {
+      "type": "string",
+      "example": "active"
+    },
+    "code": {
+      "type": "string",
+      "description": "Alert code per China Meteorological Administration scheme.",
+      "example": "0902"
+    },
+    "description": {
+      "type": "string"
+    },
+    "pubtimestamp": {
+      "type": "number",
+      "format": "double",
+      "description": "Publication time as Unix epoch seconds."
+    },
+    "city": {
+      "type": "string"
+    },
+    "adcode": {
+      "type": "string"
+    },
+    "regionId": {
+      "type": "string"
+    },
+    "latlon": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "format": "float"
+      },
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "county": {
+      "type": "string"
+    },
+    "alertId": {
+      "type": "string"
+    },
+    "request_status": {
+      "type": "string"
+    },
+    "source": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "location": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "code",
+    "description",
+    "title",
+    "status"
+  ]
+}

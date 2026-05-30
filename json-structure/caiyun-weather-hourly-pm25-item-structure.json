@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/colorfulclouds/refs/heads/main/json-structure/caiyun-weather-hourly-pm25-item-structure.json",
+  "name": "HourlyPM25Item",
+  "description": "HourlyPM25Item schema from Caiyun Weather API",
+  "type": "object",
+  "properties": {
+    "datetime": {
+      "type": "datetime"
+    },
+    "value": {
+      "type": "float"
+    }
+  },
+  "required": [
+    "datetime",
+    "value"
+  ]
+}

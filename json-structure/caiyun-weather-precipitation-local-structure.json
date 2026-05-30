@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/colorfulclouds/refs/heads/main/json-structure/caiyun-weather-precipitation-local-structure.json",
+  "name": "PrecipitationLocal",
+  "description": "Realtime local precipitation reading at the requested point.",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string",
+      "description": "Local precipitation reading status (ok / error).",
+      "example": "ok"
+    },
+    "datasource": {
+      "type": "string",
+      "description": "Origin of the precipitation reading (radar, satellite, observation).",
+      "example": "radar"
+    },
+    "intensity": {
+      "type": "float",
+      "description": "Precipitation intensity in mm/hr at the point.",
+      "example": 0.0
+    }
+  },
+  "required": [
+    "status",
+    "datasource",
+    "intensity"
+  ]
+}

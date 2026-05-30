@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/colorfulclouds/refs/heads/main/json-structure/caiyun-weather-hourly-precipitation-item-structure.json",
+  "name": "HourlyPrecipitationItem",
+  "description": "HourlyPrecipitationItem schema from Caiyun Weather API",
+  "type": "object",
+  "properties": {
+    "datetime": {
+      "type": "datetime"
+    },
+    "value": {
+      "type": "float",
+      "description": "Precipitation intensity in mm/hr."
+    },
+    "probability": {
+      "type": "float",
+      "description": "Per-hour precipitation probability (0-100)."
+    }
+  },
+  "required": [
+    "datetime",
+    "value",
+    "probability"
+  ]
+}

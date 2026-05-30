@@ -1,0 +1,104 @@
+{
+  "status": "ok",
+  "description": "clear weather over the next 24 hours",
+  "precipitation": [
+    {
+      "datetime": "2026-05-30T14:30:00+08:00",
+      "value": 86.87,
+      "probability": 4.0
+    }
+  ],
+  "temperature": [
+    {
+      "datetime": "2026-05-30T15:00:00+08:00",
+      "value": 23.1
+    }
+  ],
+  "apparent_temperature": [
+    {
+      "datetime": "2026-05-30T15:00:00+08:00",
+      "value": 23.1
+    }
+  ],
+  "humidity": [
+    {
+      "datetime": "2026-05-30T15:00:00+08:00",
+      "value": 23.1
+    },
+    {
+      "datetime": "2026-05-30T15:00:00+08:00",
+      "value": 23.1
+    },
+    {
+      "datetime": "2026-05-30T15:00:00+08:00",
+      "value": 23.1
+    }
+  ],
+  "cloudrate": [
+    {
+      "datetime": "2026-05-30T15:00:00+08:00",
+      "value": 23.1
+    }
+  ],
+  "skycon": [
+    {
+      "datetime": "2026-05-30T14:30:00+08:00",
+      "value": {}
+    }
+  ],
+  "pressure": [
+    {
+      "datetime": "2026-05-30T15:00:00+08:00",
+      "value": 23.1
+    }
+  ],
+  "visibility": [
+    {
+      "datetime": "2026-05-30T15:00:00+08:00",
+      "value": 23.1
+    },
+    {
+      "datetime": "2026-05-30T15:00:00+08:00",
+      "value": 23.1
+    }
+  ],
+  "dswrf": [
+    {
+      "datetime": "2026-05-30T15:00:00+08:00",
+      "value": 23.1
+    },
+    {
+      "datetime": "2026-05-30T15:00:00+08:00",
+      "value": 23.1
+    }
+  ],
+  "wind": [
+    {
+      "datetime": "2026-05-30T14:30:00+08:00",
+      "speed": 14.2,
+      "direction": 241.0
+    },
+    {
+      "datetime": "2026-05-30T14:30:00+08:00",
+      "speed": 12.6,
+      "direction": 304.0
+    },
+    {
+      "datetime": "2026-05-30T14:30:00+08:00",
+      "speed": 28.7,
+      "direction": 32.0
+    }
+  ],
+  "air_quality": {
+    "aqi": [
+      {},
+      {},
+      {}
+    ],
+    "pm25": [
+      {},
+      {},
+      {}
+    ]
+  }
+}

@@ -1,0 +1,377 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "cy": "https://docs.caiyunapp.com/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "AQIDescDual": "cy:AQIDescDual",
+    "AQIValueDual": "cy:AQIValueDual",
+    "AirQualityRealtime": "cy:AirQualityRealtime",
+    "Alert": "cy:Alert",
+    "AlertAdcode": "cy:AlertAdcode",
+    "AlertContentItem": "cy:AlertContentItem",
+    "Daily": "cy:Daily",
+    "DailyAQIItem": "cy:DailyAQIItem",
+    "DailyAirQuality": "cy:DailyAirQuality",
+    "DailyAstroItem": "cy:DailyAstroItem",
+    "DailyAstroTime": "cy:DailyAstroTime",
+    "DailyLifeIndex": "cy:DailyLifeIndex",
+    "DailyLifeIndexEntry": "cy:DailyLifeIndexEntry",
+    "DailyMinMaxAvgItem": "cy:DailyMinMaxAvgItem",
+    "DailyPrecipitationItem": "cy:DailyPrecipitationItem",
+    "DailySkyconItem": "cy:DailySkyconItem",
+    "DailyWindItem": "cy:DailyWindItem",
+    "DailyWindProperty": "cy:DailyWindProperty",
+    "DateTimeValuePair": "cy:DateTimeValuePair",
+    "EnvelopeBase": "cy:EnvelopeBase",
+    "Hourly": "cy:Hourly",
+    "HourlyAQIItem": "cy:HourlyAQIItem",
+    "HourlyAirQuality": "cy:HourlyAirQuality",
+    "HourlyPM25Item": "cy:HourlyPM25Item",
+    "HourlyPrecipitationItem": "cy:HourlyPrecipitationItem",
+    "HourlySkyconItem": "cy:HourlySkyconItem",
+    "HourlyWindItem": "cy:HourlyWindItem",
+    "LifeIndexItem": "cy:LifeIndexItem",
+    "Minutely": "cy:Minutely",
+    "Precipitation": "cy:Precipitation",
+    "PrecipitationLocal": "cy:PrecipitationLocal",
+    "PrecipitationNearest": "cy:PrecipitationNearest",
+    "Realtime": "cy:Realtime",
+    "RealtimeLifeIndex": "cy:RealtimeLifeIndex",
+    "Result": "cy:Result",
+    "Wind": "cy:Wind",
+    "adcode": {
+      "@id": "cy:adcode",
+      "@type": "xsd:integer"
+    },
+    "adcodes": {
+      "@id": "cy:adcodes",
+      "@container": "@set"
+    },
+    "airQuality": {
+      "@id": "cy:air_quality"
+    },
+    "alert": {
+      "@id": "cy:alert"
+    },
+    "alertId": {
+      "@id": "cy:alertId",
+      "@type": "xsd:string"
+    },
+    "apiStatus": {
+      "@id": "cy:api_status",
+      "@type": "xsd:string"
+    },
+    "apiVersion": {
+      "@id": "cy:api_version",
+      "@type": "xsd:string"
+    },
+    "apparentTemperature": {
+      "@id": "cy:apparent_temperature",
+      "@container": "@set"
+    },
+    "aqi": {
+      "@id": "cy:aqi"
+    },
+    "astro": {
+      "@id": "cy:astro",
+      "@container": "@set"
+    },
+    "avg": {
+      "@id": "cy:avg"
+    },
+    "carWashing": {
+      "@id": "cy:carWashing",
+      "@container": "@set"
+    },
+    "chn": {
+      "@id": "cy:chn",
+      "@type": "xsd:string"
+    },
+    "city": {
+      "@id": "cy:city",
+      "@type": "xsd:string"
+    },
+    "cloudrate": {
+      "@id": "cy:cloudrate",
+      "@container": "@set"
+    },
+    "co": {
+      "@id": "cy:co",
+      "@type": "xsd:float"
+    },
+    "code": {
+      "@id": "cy:code",
+      "@type": "xsd:string"
+    },
+    "coldRisk": {
+      "@id": "cy:coldRisk",
+      "@container": "@set"
+    },
+    "comfort": {
+      "@id": "cy:comfort",
+      "@container": "@set"
+    },
+    "content": {
+      "@id": "cy:content",
+      "@container": "@set"
+    },
+    "county": {
+      "@id": "cy:county",
+      "@type": "xsd:string"
+    },
+    "daily": {
+      "@id": "cy:daily"
+    },
+    "datasource": {
+      "@id": "cy:datasource",
+      "@type": "xsd:string"
+    },
+    "date": {
+      "@id": "cy:date",
+      "@type": "xsd:date"
+    },
+    "datetime": {
+      "@id": "cy:datetime",
+      "@type": "xsd:dateTime"
+    },
+    "desc": {
+      "@id": "cy:desc",
+      "@type": "xsd:string"
+    },
+    "description": {
+      "@id": "schema:description"
+    },
+    "direction": {
+      "@id": "cy:direction",
+      "@type": "xsd:float"
+    },
+    "distance": {
+      "@id": "cy:distance",
+      "@type": "xsd:float"
+    },
+    "dressing": {
+      "@id": "cy:dressing",
+      "@container": "@set"
+    },
+    "dswrf": {
+      "@id": "cy:dswrf",
+      "@container": "@set"
+    },
+    "forecastKeypoint": {
+      "@id": "cy:forecast_keypoint",
+      "@type": "xsd:string"
+    },
+    "hourly": {
+      "@id": "cy:hourly"
+    },
+    "humidity": {
+      "@id": "cy:humidity",
+      "@container": "@set"
+    },
+    "index": {
+      "@id": "cy:index"
+    },
+    "intensity": {
+      "@id": "cy:intensity",
+      "@type": "xsd:float"
+    },
+    "lang": {
+      "@id": "cy:lang",
+      "@type": "xsd:string"
+    },
+    "latlon": {
+      "@id": "cy:latlon",
+      "@container": "@set",
+      "@type": "xsd:float"
+    },
+    "lifeIndex": {
+      "@id": "cy:life_index"
+    },
+    "local": {
+      "@id": "cy:local"
+    },
+    "location": {
+      "@id": "cy:location",
+      "@type": "xsd:string"
+    },
+    "max": {
+      "@id": "cy:max"
+    },
+    "min": {
+      "@id": "cy:min"
+    },
+    "minutely": {
+      "@id": "cy:minutely"
+    },
+    "name": {
+      "@id": "schema:name",
+      "@type": "xsd:string"
+    },
+    "nearest": {
+      "@id": "cy:nearest"
+    },
+    "no2": {
+      "@id": "cy:no2",
+      "@type": "xsd:float"
+    },
+    "o3": {
+      "@id": "cy:o3",
+      "@type": "xsd:float"
+    },
+    "pm10": {
+      "@id": "cy:pm10",
+      "@type": "xsd:float"
+    },
+    "pm25": {
+      "@id": "cy:pm25",
+      "@type": "xsd:float"
+    },
+    "precipitation": {
+      "@id": "cy:precipitation",
+      "@container": "@set"
+    },
+    "precipitation08H20H": {
+      "@id": "cy:precipitation_08h_20h",
+      "@container": "@set"
+    },
+    "precipitation20H32H": {
+      "@id": "cy:precipitation_20h_32h",
+      "@container": "@set"
+    },
+    "precipitation2H": {
+      "@id": "cy:precipitation_2h",
+      "@container": "@set",
+      "@type": "xsd:float"
+    },
+    "pressure": {
+      "@id": "cy:pressure",
+      "@container": "@set"
+    },
+    "primary": {
+      "@id": "cy:primary",
+      "@type": "xsd:integer"
+    },
+    "probability": {
+      "@id": "cy:probability",
+      "@type": "xsd:float"
+    },
+    "province": {
+      "@id": "cy:province",
+      "@type": "xsd:string"
+    },
+    "pubtimestamp": {
+      "@id": "cy:pubtimestamp",
+      "@type": "xsd:double"
+    },
+    "realtime": {
+      "@id": "cy:realtime"
+    },
+    "regionId": {
+      "@id": "cy:regionId",
+      "@type": "xsd:string"
+    },
+    "requestStatus": {
+      "@id": "cy:request_status",
+      "@type": "xsd:string"
+    },
+    "serverTime": {
+      "@id": "cy:server_time",
+      "@type": "xsd:integer"
+    },
+    "skycon": {
+      "@id": "cy:skycon",
+      "@container": "@set"
+    },
+    "skycon08H20H": {
+      "@id": "cy:skycon_08h_20h",
+      "@container": "@set"
+    },
+    "skycon20H32H": {
+      "@id": "cy:skycon_20h_32h",
+      "@container": "@set"
+    },
+    "so2": {
+      "@id": "cy:so2",
+      "@type": "xsd:float"
+    },
+    "source": {
+      "@id": "cy:source",
+      "@type": "xsd:string"
+    },
+    "speed": {
+      "@id": "cy:speed",
+      "@type": "xsd:float"
+    },
+    "status": {
+      "@id": "cy:status",
+      "@type": "xsd:string"
+    },
+    "sunrise": {
+      "@id": "cy:sunrise"
+    },
+    "sunset": {
+      "@id": "cy:sunset"
+    },
+    "temperature": {
+      "@id": "cy:temperature",
+      "@container": "@set"
+    },
+    "temperature08H20H": {
+      "@id": "cy:temperature_08h_20h",
+      "@container": "@set"
+    },
+    "temperature20H32H": {
+      "@id": "cy:temperature_20h_32h",
+      "@container": "@set"
+    },
+    "time": {
+      "@id": "cy:time",
+      "@type": "xsd:string"
+    },
+    "timezone": {
+      "@id": "cy:timezone",
+      "@type": "xsd:string"
+    },
+    "title": {
+      "@id": "cy:title",
+      "@type": "xsd:string"
+    },
+    "tzshift": {
+      "@id": "cy:tzshift",
+      "@type": "xsd:integer"
+    },
+    "ultraviolet": {
+      "@id": "cy:ultraviolet",
+      "@container": "@set"
+    },
+    "unit": {
+      "@id": "cy:unit",
+      "@type": "xsd:string"
+    },
+    "usa": {
+      "@id": "cy:usa",
+      "@type": "xsd:string"
+    },
+    "value": {
+      "@id": "cy:value"
+    },
+    "visibility": {
+      "@id": "cy:visibility",
+      "@container": "@set"
+    },
+    "wind": {
+      "@id": "cy:wind",
+      "@container": "@set"
+    },
+    "wind08H20H": {
+      "@id": "cy:wind_08h_20h",
+      "@container": "@set"
+    },
+    "wind20H32H": {
+      "@id": "cy:wind_20h_32h",
+      "@container": "@set"
+    }
+  }
+}

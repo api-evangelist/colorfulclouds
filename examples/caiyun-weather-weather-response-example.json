@@ -1,0 +1,23 @@
+{
+  "status": "ok",
+  "api_version": "v2.6",
+  "api_status": "active",
+  "lang": "en_US",
+  "unit": "metric:v2",
+  "tzshift": 28800,
+  "timezone": "Asia/Shanghai",
+  "server_time": 1748563200,
+  "location": [
+    97.79,
+    24.68
+  ],
+  "result": {
+    "primary": 0,
+    "forecast_keypoint": "clear weather, overcast after 20 o'clock",
+    "realtime": {},
+    "minutely": {},
+    "hourly": {},
+    "daily": {},
+    "alert": {}
+  }
+}

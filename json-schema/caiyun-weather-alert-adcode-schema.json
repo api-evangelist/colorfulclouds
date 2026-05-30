@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/colorfulclouds/refs/heads/main/json-schema/caiyun-weather-alert-adcode-schema.json",
+  "title": "AlertAdcode",
+  "description": "AlertAdcode schema from Caiyun Weather API",
+  "type": "object",
+  "properties": {
+    "adcode": {
+      "type": "integer",
+      "example": 110108
+    },
+    "name": {
+      "type": "string",
+      "example": "Haidian"
+    }
+  },
+  "required": [
+    "adcode",
+    "name"
+  ]
+}

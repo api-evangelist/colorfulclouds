@@ -1,0 +1,391 @@
+# Caiyun Weather API (ColorfulClouds) — Spectral Ruleset
+#
+# Opinionated ruleset enforcing the conventions observed across the
+# Caiyun Weather v2.6 OpenAPI spec. Path-embedded token, lng,lat tuple
+# in path, snake_case JSON properties, camelCase operationIds, and
+# Title Case tags prefixed with "Caiyun Weather".
+
+rules:
+
+  # ── INFO / METADATA ──────────────────────────────────────────────
+  info-title-required:
+    description: API title must be present and start with the provider prefix.
+    severity: error
+    given: $.info
+    then:
+      - field: title
+        function: truthy
+      - field: title
+        function: pattern
+        functionOptions:
+          match: '^Caiyun Weather'
+
+  info-description-min-length:
+    description: API description must be present and detailed (>= 80 chars).
+    severity: warn
+    given: $.info
+    then:
+      - field: description
+        function: truthy
+      - field: description
+        function: length
+        functionOptions:
+          min: 80
+
+  info-version-required:
+    description: API version must be present.
+    severity: error
+    given: $.info
+    then:
+      - field: version
+        function: truthy
+
+  info-contact-required:
+    description: Contact object must be present with a URL.
+    severity: warn
+    given: $.info.contact
+    then:
+      - field: url
+        function: truthy
+
+  # ── OPENAPI VERSION ──────────────────────────────────────────────
+  openapi-version-3:
+    description: Spec must target OpenAPI 3.x.
+    severity: error
+    given: $.openapi
+    then:
+      function: pattern
+      functionOptions:
+        match: '^3\.'
+
+  # ── SERVERS ──────────────────────────────────────────────────────
+  servers-required:
+    description: Servers array must be defined.
+    severity: error
+    given: $
+    then:
+      field: servers
+      function: truthy
+
+  servers-https-only:
+    description: All server URLs must use HTTPS.
+    severity: error
+    given: $.servers[*]
+    then:
+      field: url
+      function: pattern
+      functionOptions:
+        match: '^https://'
+
+  servers-canonical-host:
+    description: Servers should target api.caiyunapp.com.
+    severity: warn
+    given: $.servers[*]
+    then:
+      field: url
+      function: pattern
+      functionOptions:
+        match: 'api\.caiyunapp\.com'
+
+  # ── PATHS ────────────────────────────────────────────────────────
+  paths-no-trailing-slash:
+    description: Paths must not end with a trailing slash.
+    severity: error
+    given: $.paths
+    then:
+      field: '@key'
+      function: pattern
+      functionOptions:
+        notMatch: '.+/$'
+
+  paths-lowercase:
+    description: Path segments must be lowercase (kebab-case allowed).
+    severity: warn
+    given: $.paths
+    then:
+      field: '@key'
+      function: pattern
+      functionOptions:
+        match: '^[/{}a-z0-9._\-,]+$'
+
+  paths-token-in-path:
+    description: >-
+      Caiyun encodes the API token as a path segment. Forecast paths must
+      include the {token} parameter immediately after the version prefix.
+    severity: warn
+    given: $.paths
+    then:
+      field: '@key'
+      function: pattern
+      functionOptions:
+        match: '^/(\{token\}/|precipitation/)'
+
+  # ── OPERATIONS ───────────────────────────────────────────────────
+  operation-operationId-required:
+    description: Every operation must have an operationId.
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: operationId
+      function: truthy
+
+  operation-operationId-camel:
+    description: operationId must be camelCase.
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: operationId
+      function: pattern
+      functionOptions:
+        match: '^[a-z][a-zA-Z0-9]+$'
+
+  operation-summary-required:
+    description: Every operation must have a summary.
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: summary
+      function: truthy
+
+  operation-summary-prefix:
+    description: Summaries must begin with "Caiyun Weather".
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: summary
+      function: pattern
+      functionOptions:
+        match: '^Caiyun Weather '
+
+  operation-description-required:
+    description: Every operation must have a description.
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: description
+      function: truthy
+
+  operation-tags-required:
+    description: Every operation must declare at least one tag.
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: tags
+      function: truthy
+
+  operation-microcks-extension:
+    description: Each operation should declare x-microcks-operation for mock parity.
+    severity: info
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: x-microcks-operation
+      function: truthy
+
+  # ── TAGS ─────────────────────────────────────────────────────────
+  tags-global-defined:
+    description: Global tags array must be defined with descriptions.
+    severity: warn
+    given: $
+    then:
+      field: tags
+      function: truthy
+
+  tags-title-case:
+    description: Global tag names must use Title Case (no kebab, no snake).
+    severity: warn
+    given: $.tags[*]
+    then:
+      field: name
+      function: pattern
+      functionOptions:
+        match: '^[A-Z][A-Za-z0-9]*( [A-Z][A-Za-z0-9]*)*$'
+
+  tags-description-required:
+    description: Global tags must have descriptions.
+    severity: info
+    given: $.tags[*]
+    then:
+      field: description
+      function: truthy
+
+  # ── PARAMETERS ───────────────────────────────────────────────────
+  parameter-description-required:
+    description: Every parameter must have a description.
+    severity: warn
+    given: $..parameters[*]
+    then:
+      field: description
+      function: truthy
+
+  parameter-snake-case:
+    description: Query and path parameters must use snake_case (lng, lat, dailysteps, hourlysteps, alert, begin, granu).
+    severity: warn
+    given: $..parameters[?(@.in == 'query')]
+    then:
+      field: name
+      function: pattern
+      functionOptions:
+        match: '^[a-z][a-z0-9_]*$'
+
+  parameter-schema-required:
+    description: Every parameter must declare a schema with a type.
+    severity: error
+    given: $..parameters[*]
+    then:
+      - field: schema
+        function: truthy
+
+  # ── RESPONSES ────────────────────────────────────────────────────
+  response-2xx-required:
+    description: Each operation must declare at least one 2xx response.
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete].responses
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          anyOf:
+            - required: ['200']
+            - required: ['201']
+            - required: ['202']
+            - required: ['204']
+
+  response-401-on-token-paths:
+    description: Token-bearing endpoints should document 401 Unauthorized responses.
+    severity: warn
+    given: $.paths[?(@property.match(/\{token\}/))][get].responses
+    then:
+      field: '401'
+      function: truthy
+
+  response-429-on-token-paths:
+    description: Token-bearing endpoints should document 429 Too Many Requests responses.
+    severity: warn
+    given: $.paths[?(@property.match(/\{token\}/))][get].responses
+    then:
+      field: '429'
+      function: truthy
+
+  response-description-required:
+    description: Every response object must have a description.
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].responses[*]
+    then:
+      field: description
+      function: truthy
+
+  response-json-content:
+    description: Successful responses should be application/json (except precipitation map tiles).
+    severity: info
+    given: $.paths[?(!@property.match(/precipitation/))][get].responses.200.content
+    then:
+      field: application/json
+      function: truthy
+
+  # ── SCHEMAS ──────────────────────────────────────────────────────
+  schema-property-snake-case:
+    description: >-
+      Schema property names must use snake_case to match Caiyun's JSON wire
+      format (precipitation_2h, apparent_temperature, life_index, air_quality,
+      cloudrate, dswrf, etc.). Exemptions are made for life-index sub-keys
+      that ship in camelCase from the upstream API (carWashing, coldRisk).
+    severity: warn
+    given: $.components.schemas[*].properties
+    then:
+      field: '@key'
+      function: pattern
+      functionOptions:
+        match: '^([a-z][a-z0-9_]*|carWashing|coldRisk)$'
+
+  schema-type-required:
+    description: Top-level schemas must declare a type.
+    severity: warn
+    given: $.components.schemas[*]
+    then:
+      field: type
+      function: truthy
+
+  schema-description-required:
+    description: Top-level schemas should carry a description.
+    severity: info
+    given: $.components.schemas[*]
+    then:
+      field: description
+      function: truthy
+
+  schema-skycon-enum:
+    description: SkyCon enum must include the canonical Caiyun phenomena.
+    severity: warn
+    given: $.components.schemas.SkyCon
+    then:
+      field: enum
+      function: schema
+      functionOptions:
+        schema:
+          type: array
+          contains:
+            enum:
+              - CLEAR_DAY
+              - CLEAR_NIGHT
+              - PARTLY_CLOUDY_DAY
+              - PARTLY_CLOUDY_NIGHT
+              - CLOUDY
+              - LIGHT_RAIN
+              - HEAVY_RAIN
+
+  # ── SECURITY ─────────────────────────────────────────────────────
+  security-defined:
+    description: Global security must be declared.
+    severity: warn
+    given: $
+    then:
+      field: security
+      function: truthy
+
+  security-schemes-defined:
+    description: Security schemes must be defined.
+    severity: error
+    given: $.components.securitySchemes
+    then:
+      function: truthy
+
+  # ── HTTP METHOD CONVENTIONS ─────────────────────────────────────
+  get-no-request-body:
+    description: GET operations must not declare a request body.
+    severity: error
+    given: $.paths[*].get
+    then:
+      field: requestBody
+      function: falsy
+
+  caiyun-get-only-api:
+    description: >-
+      The Caiyun Weather API is read-only — operations should use GET.
+    severity: warn
+    given: $.paths[*]
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          not:
+            anyOf:
+              - required: [post]
+              - required: [put]
+              - required: [patch]
+              - required: [delete]
+
+  # ── GENERAL QUALITY ─────────────────────────────────────────────
+  no-empty-descriptions:
+    description: Descriptions must not be empty strings.
+    severity: warn
+    given: $..description
+    then:
+      function: truthy
+
+  examples-on-parameters:
+    description: Parameters should carry an example value.
+    severity: info
+    given: $..parameters[*]
+    then:
+      field: example
+      function: truthy

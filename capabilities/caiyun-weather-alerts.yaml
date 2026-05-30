@@ -1,0 +1,97 @@
+naftiko: "1.0.0-alpha2"
+
+info:
+  label: "Caiyun Weather API — Alerts"
+  description: >-
+    Alerts — Caiyun severe-weather alert surface sourced from the China
+    Meteorological Administration. 1 operation. Lead operation: Caiyun
+    Weather Get Severe Weather Alerts. Self-contained Naftiko capability
+    covering one ColorfulClouds business surface.
+  tags:
+    - Caiyun Weather
+    - Alerts
+    - Severe Weather
+  created: "2026-05-30"
+  modified: "2026-05-30"
+
+binds:
+  - namespace: env
+    keys:
+      CAIYUN_WEATHER_API_TOKEN: CAIYUN_WEATHER_API_TOKEN
+
+capability:
+
+  consumes:
+    - type: http
+      namespace: "caiyun-weather-alerts"
+      baseUri: "https://api.caiyunapp.com/v2.6"
+      description: "Caiyun severe-weather alerts endpoint. Self-contained."
+      authentication:
+        type: apikey
+        key: token
+        value: "{{env.CAIYUN_WEATHER_API_TOKEN}}"
+        placement: path
+      resources:
+        - name: "alerts"
+          path: "/{token}/{lnglat}/alert"
+          operations:
+            - name: "getWeatherAlerts"
+              method: GET
+              description: "Returns active severe-weather alerts published by the China Meteorological Administration for the requested location."
+              inputParameters:
+                - name: "lnglat"
+                  in: path
+                  type: string
+                  required: true
+                  description: "Longitude,latitude tuple (lng,lat)."
+                - name: "lang"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Response language."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      namespace: "caiyun-weather-alerts-rest"
+      port: 8080
+      description: "REST adapter for Caiyun Weather Alerts."
+      resources:
+        - path: "/v1/alerts/{lnglat}"
+          name: "alerts"
+          description: "REST surface for severe-weather alerts."
+          operations:
+            - method: GET
+              name: "getWeatherAlerts"
+              description: "Get active severe-weather alerts."
+              call: "caiyun-weather-alerts.getWeatherAlerts"
+              with:
+                "lnglat": "rest.lnglat"
+                "lang": "rest.lang"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      namespace: "caiyun-weather-alerts-mcp"
+      port: 9090
+      transport: http
+      description: "MCP adapter for Caiyun Weather Alerts."
+      tools:
+        - name: "get-weather-alerts"
+          description: "Get active severe-weather alerts (typhoon, rainstorm, blizzard, etc.) for a location."
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "caiyun-weather-alerts.getWeatherAlerts"
+          with:
+            "lnglat": "tools.lnglat"
+            "lang": "tools.lang"
+          outputParameters:
+            - type: object
+              mapping: "$."

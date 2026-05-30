@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/colorfulclouds/refs/heads/main/json-schema/caiyun-weather-result-schema.json",
+  "title": "Result",
+  "description": "Unified result envelope for the combined /weather endpoint.",
+  "type": "object",
+  "properties": {
+    "primary": {
+      "type": "integer",
+      "description": "Primary block index in the envelope.",
+      "example": 0
+    },
+    "forecast_keypoint": {
+      "type": "string",
+      "example": "clear weather, overcast after 20 o'clock"
+    },
+    "realtime": {
+      "$ref": "#/components/schemas/Realtime"
+    },
+    "minutely": {
+      "$ref": "#/components/schemas/Minutely"
+    },
+    "hourly": {
+      "$ref": "#/components/schemas/Hourly"
+    },
+    "daily": {
+      "$ref": "#/components/schemas/Daily"
+    },
+    "alert": {
+      "$ref": "#/components/schemas/Alert"
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "province": "Beijing",
+  "status": "active",
+  "code": "0902",
+  "description": "Heavy rain expected in the next 6 hours.",
+  "pubtimestamp": 1748563200,
+  "city": "Beijing",
+  "adcode": "110108",
+  "regionId": "110108",
+  "latlon": [
+    39.9042,
+    39.9042
+  ],
+  "county": "Haidian",
+  "alertId": "CMA-2026-001",
+  "request_status": "ok",
+  "source": "China Meteorological Administration",
+  "title": "Beijing Yellow Rainstorm Warning",
+  "location": "Beijing Haidian District"
+}

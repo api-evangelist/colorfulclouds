@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/colorfulclouds/refs/heads/main/json-structure/caiyun-weather-air-quality-realtime-structure.json",
+  "name": "AirQualityRealtime",
+  "description": "Realtime pollutant concentrations and AQI.",
+  "type": "object",
+  "properties": {
+    "aqi": {
+      "$ref": "#/components/schemas/AQIValueDual"
+    },
+    "description": {
+      "$ref": "#/components/schemas/AQIDescDual"
+    },
+    "pm25": {
+      "type": "float",
+      "description": "PM2.5 concentration in \u00b5g/m\u00b3.",
+      "example": 32.0
+    },
+    "pm10": {
+      "type": "float",
+      "example": 48.0
+    },
+    "o3": {
+      "type": "float",
+      "example": 96.0
+    },
+    "so2": {
+      "type": "float",
+      "example": 4.0
+    },
+    "no2": {
+      "type": "float",
+      "example": 21.0
+    },
+    "co": {
+      "type": "float",
+      "description": "CO concentration in mg/m\u00b3.",
+      "example": 0.6
+    }
+  },
+  "required": [
+    "aqi",
+    "description"
+  ]
+}

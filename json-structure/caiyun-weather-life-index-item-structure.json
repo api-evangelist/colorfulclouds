@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/colorfulclouds/refs/heads/main/json-structure/caiyun-weather-life-index-item-structure.json",
+  "name": "LifeIndexItem",
+  "description": "LifeIndexItem schema from Caiyun Weather API",
+  "type": "object",
+  "properties": {
+    "index": {
+      "oneOf": [
+        {
+          "type": "double"
+        },
+        {
+          "type": "string"
+        }
+      ],
+      "description": "Index numeric value (0-5) or string code.",
+      "example": 3
+    },
+    "desc": {
+      "type": "string",
+      "description": "Localized description of the index level.",
+      "example": "Moderate"
+    }
+  },
+  "required": [
+    "index",
+    "desc"
+  ]
+}

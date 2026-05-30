@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/colorfulclouds/refs/heads/main/json-structure/caiyun-weather-wind-structure.json",
+  "name": "Wind",
+  "description": "Wind speed and direction.",
+  "type": "object",
+  "properties": {
+    "speed": {
+      "type": "float",
+      "description": "Wind speed in the active unit system (km/h for metric:v2).",
+      "example": 12.4
+    },
+    "direction": {
+      "type": "float",
+      "description": "Wind direction in degrees from north, clockwise.",
+      "example": 215.0
+    }
+  }
+}

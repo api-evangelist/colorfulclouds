@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/colorfulclouds/refs/heads/main/json-schema/caiyun-weather-daily-life-index-entry-schema.json",
+  "title": "DailyLifeIndexEntry",
+  "description": "DailyLifeIndexEntry schema from Caiyun Weather API",
+  "type": "object",
+  "properties": {
+    "date": {
+      "type": "string",
+      "format": "date"
+    },
+    "index": {
+      "oneOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "desc": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "date",
+    "index",
+    "desc"
+  ]
+}

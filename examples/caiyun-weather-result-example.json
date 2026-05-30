@@ -1,0 +1,202 @@
+{
+  "primary": 0,
+  "forecast_keypoint": "clear weather, overcast after 20 o'clock",
+  "realtime": {
+    "status": "ok",
+    "temperature": 22.4,
+    "humidity": 0.58,
+    "cloudrate": 0.32,
+    "skycon": "PARTLY_CLOUDY_DAY",
+    "visibility": 14.2,
+    "dswrf": 412.0,
+    "wind": {
+      "speed": {},
+      "direction": {}
+    },
+    "pressure": 100240.0,
+    "apparent_temperature": 21.8,
+    "precipitation": {
+      "local": {},
+      "nearest": {}
+    },
+    "air_quality": {
+      "aqi": {},
+      "description": {},
+      "pm25": {},
+      "pm10": {},
+      "o3": {},
+      "so2": {},
+      "no2": {},
+      "co": {}
+    },
+    "life_index": {
+      "ultraviolet": {},
+      "comfort": {}
+    }
+  },
+  "minutely": {
+    "status": "ok",
+    "datasource": "radar",
+    "precipitation_2h": [
+      64.19,
+      1.86,
+      42.9
+    ],
+    "precipitation": [
+      89.89,
+      26.12,
+      73.33
+    ],
+    "probability": [
+      34.0,
+      11.0,
+      38.0
+    ],
+    "description": "clear weather over the next 2 hours"
+  },
+  "hourly": {
+    "status": "ok",
+    "description": "clear weather over the next 24 hours",
+    "precipitation": [
+      {}
+    ],
+    "temperature": [
+      {},
+      {}
+    ],
+    "apparent_temperature": [
+      {},
+      {},
+      {}
+    ],
+    "humidity": [
+      {}
+    ],
+    "cloudrate": [
+      {},
+      {},
+      {}
+    ],
+    "skycon": [
+      {}
+    ],
+    "pressure": [
+      {}
+    ],
+    "visibility": [
+      {}
+    ],
+    "dswrf": [
+      {},
+      {}
+    ],
+    "wind": [
+      {},
+      {},
+      {}
+    ],
+    "air_quality": {
+      "aqi": {},
+      "pm25": {}
+    }
+  },
+  "daily": {
+    "status": "ok",
+    "astro": [
+      {},
+      {}
+    ],
+    "precipitation": [
+      {},
+      {},
+      {}
+    ],
+    "precipitation_08h_20h": [
+      {},
+      {},
+      {}
+    ],
+    "precipitation_20h_32h": [
+      {},
+      {}
+    ],
+    "temperature": [
+      {},
+      {},
+      {}
+    ],
+    "temperature_08h_20h": [
+      {}
+    ],
+    "temperature_20h_32h": [
+      {},
+      {}
+    ],
+    "humidity": [
+      {},
+      {},
+      {}
+    ],
+    "cloudrate": [
+      {},
+      {},
+      {}
+    ],
+    "pressure": [
+      {},
+      {},
+      {}
+    ],
+    "visibility": [
+      {}
+    ],
+    "dswrf": [
+      {}
+    ],
+    "wind": [
+      {}
+    ],
+    "wind_08h_20h": [
+      {},
+      {}
+    ],
+    "wind_20h_32h": [
+      {},
+      {}
+    ],
+    "skycon": [
+      {},
+      {}
+    ],
+    "skycon_08h_20h": [
+      {},
+      {}
+    ],
+    "skycon_20h_32h": [
+      {}
+    ],
+    "life_index": {
+      "ultraviolet": {},
+      "carWashing": {},
+      "dressing": {},
+      "comfort": {},
+      "coldRisk": {}
+    },
+    "air_quality": {
+      "aqi": {},
+      "pm25": {}
+    }
+  },
+  "alert": {
+    "status": "ok",
+    "content": [
+      {},
+      {},
+      {}
+    ],
+    "adcodes": [
+      {},
+      {}
+    ]
+  }
+}

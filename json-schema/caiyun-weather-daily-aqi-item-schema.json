@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/colorfulclouds/refs/heads/main/json-schema/caiyun-weather-daily-aqi-item-schema.json",
+  "title": "DailyAQIItem",
+  "description": "DailyAQIItem schema from Caiyun Weather API",
+  "type": "object",
+  "properties": {
+    "date": {
+      "type": "string",
+      "format": "date"
+    },
+    "max": {
+      "$ref": "#/components/schemas/AQIValueDual"
+    },
+    "min": {
+      "$ref": "#/components/schemas/AQIValueDual"
+    },
+    "avg": {
+      "$ref": "#/components/schemas/AQIValueDual"
+    }
+  },
+  "required": [
+    "date",
+    "max",
+    "min",
+    "avg"
+  ]
+}

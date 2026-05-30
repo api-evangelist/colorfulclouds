@@ -1,0 +1,139 @@
+naftiko: "1.0.0-alpha2"
+
+info:
+  label: "Caiyun Weather API — Weather Combined"
+  description: >-
+    Weather — Caiyun combined weather envelope returning realtime, minutely,
+    hourly, daily, and alerts in a single call. 1 operation. Lead operation:
+    Caiyun Weather Get Combined Weather Envelope. Self-contained Naftiko
+    capability covering one ColorfulClouds business surface.
+  tags:
+    - Caiyun Weather
+    - Weather
+    - Combined
+  created: "2026-05-30"
+  modified: "2026-05-30"
+
+binds:
+  - namespace: env
+    keys:
+      CAIYUN_WEATHER_API_TOKEN: CAIYUN_WEATHER_API_TOKEN
+
+capability:
+
+  consumes:
+    - type: http
+      namespace: "caiyun-weather-weather"
+      baseUri: "https://api.caiyunapp.com/v2.6"
+      description: "Caiyun Weather combined envelope endpoint. Self-contained, no shared references."
+      authentication:
+        type: apikey
+        key: token
+        value: "{{env.CAIYUN_WEATHER_API_TOKEN}}"
+        placement: path
+      resources:
+        - name: "weather-combined"
+          path: "/{token}/{lnglat}/weather"
+          operations:
+            - name: "getWeatherCombined"
+              method: GET
+              description: "Returns realtime, minutely, hourly, and daily blocks in one envelope, optionally with severe-weather alerts."
+              inputParameters:
+                - name: "lnglat"
+                  in: path
+                  type: string
+                  required: true
+                  description: "Longitude,latitude tuple (lng,lat)."
+                - name: "dailysteps"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Number of daily steps (1-15)."
+                - name: "hourlysteps"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Number of hourly steps (1-360)."
+                - name: "alert"
+                  in: query
+                  type: boolean
+                  required: false
+                  description: "Include severe-weather alerts."
+                - name: "begin"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Optional Unix epoch second to anchor the series."
+                - name: "granu"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Restrict response to a single granularity (realtime, minutely, hourly, daily)."
+                - name: "lang"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Response language."
+                - name: "unit"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Unit system."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      namespace: "caiyun-weather-weather-rest"
+      port: 8080
+      description: "REST adapter for Caiyun Weather Combined Envelope."
+      resources:
+        - path: "/v1/weather/{lnglat}"
+          name: "weather"
+          description: "REST surface for the combined weather envelope."
+          operations:
+            - method: GET
+              name: "getWeatherCombined"
+              description: "Get combined realtime + minutely + hourly + daily (+alerts) envelope."
+              call: "caiyun-weather-weather.getWeatherCombined"
+              with:
+                "lnglat": "rest.lnglat"
+                "dailysteps": "rest.dailysteps"
+                "hourlysteps": "rest.hourlysteps"
+                "alert": "rest.alert"
+                "begin": "rest.begin"
+                "granu": "rest.granu"
+                "lang": "rest.lang"
+                "unit": "rest.unit"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      namespace: "caiyun-weather-weather-mcp"
+      port: 9090
+      transport: http
+      description: "MCP adapter for Caiyun Weather Combined Envelope."
+      tools:
+        - name: "get-weather-combined"
+          description: "Get realtime + minutely + hourly + daily forecast in a single combined call."
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "caiyun-weather-weather.getWeatherCombined"
+          with:
+            "lnglat": "tools.lnglat"
+            "dailysteps": "tools.dailysteps"
+            "hourlysteps": "tools.hourlysteps"
+            "alert": "tools.alert"
+            "begin": "tools.begin"
+            "granu": "tools.granu"
+            "lang": "tools.lang"
+            "unit": "tools.unit"
+          outputParameters:
+            - type: object
+              mapping: "$."

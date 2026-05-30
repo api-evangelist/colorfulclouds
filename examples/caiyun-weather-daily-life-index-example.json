@@ -1,0 +1,62 @@
+{
+  "ultraviolet": [
+    {
+      "date": "2026-05-30",
+      "index": {},
+      "desc": "Moderate"
+    }
+  ],
+  "carWashing": [
+    {
+      "date": "2026-05-30",
+      "index": {},
+      "desc": "Moderate"
+    },
+    {
+      "date": "2026-05-30",
+      "index": {},
+      "desc": "Moderate"
+    }
+  ],
+  "dressing": [
+    {
+      "date": "2026-05-30",
+      "index": {},
+      "desc": "Moderate"
+    },
+    {
+      "date": "2026-05-30",
+      "index": {},
+      "desc": "Moderate"
+    },
+    {
+      "date": "2026-05-30",
+      "index": {},
+      "desc": "Moderate"
+    }
+  ],
+  "comfort": [
+    {
+      "date": "2026-05-30",
+      "index": {},
+      "desc": "Moderate"
+    },
+    {
+      "date": "2026-05-30",
+      "index": {},
+      "desc": "Moderate"
+    }
+  ],
+  "coldRisk": [
+    {
+      "date": "2026-05-30",
+      "index": {},
+      "desc": "Moderate"
+    },
+    {
+      "date": "2026-05-30",
+      "index": {},
+      "desc": "Moderate"
+    }
+  ]
+}

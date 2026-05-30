@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/colorfulclouds/refs/heads/main/json-schema/caiyun-weather-hourly-pm25-item-schema.json",
+  "title": "HourlyPM25Item",
+  "description": "HourlyPM25Item schema from Caiyun Weather API",
+  "type": "object",
+  "properties": {
+    "datetime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "value": {
+      "type": "number",
+      "format": "float"
+    }
+  },
+  "required": [
+    "datetime",
+    "value"
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/colorfulclouds/refs/heads/main/json-schema/caiyun-weather-air-quality-realtime-response-schema.json",
+  "title": "AirQualityRealtimeResponse",
+  "description": "AirQualityRealtimeResponse schema from Caiyun Weather API",
+  "allOf": [
+    {
+      "$ref": "#/components/schemas/EnvelopeBase"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "object",
+          "properties": {
+            "realtime": {
+              "type": "object",
+              "properties": {
+                "air_quality": {
+                  "$ref": "#/components/schemas/AirQualityRealtime"
+                }
+              },
+              "required": [
+                "air_quality"
+              ]
+            }
+          },
+          "required": [
+            "realtime"
+          ]
+        }
+      }
+    }
+  ]
+}

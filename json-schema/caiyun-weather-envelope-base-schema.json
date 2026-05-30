@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/colorfulclouds/refs/heads/main/json-schema/caiyun-weather-envelope-base-schema.json",
+  "title": "EnvelopeBase",
+  "description": "Common envelope fields returned by every Caiyun Weather endpoint.",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string",
+      "example": "ok"
+    },
+    "api_version": {
+      "type": "string",
+      "example": "v2.6"
+    },
+    "api_status": {
+      "type": "string",
+      "example": "active"
+    },
+    "lang": {
+      "type": "string",
+      "example": "en_US"
+    },
+    "unit": {
+      "type": "string",
+      "example": "metric:v2"
+    },
+    "tzshift": {
+      "type": "integer",
+      "description": "Time zone shift in seconds from UTC.",
+      "example": 28800
+    },
+    "timezone": {
+      "type": "string",
+      "example": "Asia/Shanghai"
+    },
+    "server_time": {
+      "type": "integer",
+      "description": "Server time as Unix epoch seconds.",
+      "example": 1748563200
+    },
+    "location": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "format": "float"
+      },
+      "minItems": 2,
+      "maxItems": 2,
+      "description": "Resolved (lat,lng) the response was generated for."
+    }
+  },
+  "required": [
+    "status",
+    "api_version",
+    "api_status"
+  ]
+}

@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/colorfulclouds/refs/heads/main/json-structure/caiyun-weather-hourly-structure.json",
+  "name": "Hourly",
+  "description": "Hourly forecast series block.",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string",
+      "example": "ok"
+    },
+    "description": {
+      "type": "string",
+      "example": "clear weather over the next 24 hours"
+    },
+    "precipitation": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/HourlyPrecipitationItem"
+      }
+    },
+    "temperature": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/DateTimeValuePair"
+      }
+    },
+    "apparent_temperature": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/DateTimeValuePair"
+      }
+    },
+    "humidity": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/DateTimeValuePair"
+      }
+    },
+    "cloudrate": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/DateTimeValuePair"
+      }
+    },
+    "skycon": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/HourlySkyconItem"
+      }
+    },
+    "pressure": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/DateTimeValuePair"
+      }
+    },
+    "visibility": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/DateTimeValuePair"
+      }
+    },
+    "dswrf": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/DateTimeValuePair"
+      }
+    },
+    "wind": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/HourlyWindItem"
+      }
+    },
+    "air_quality": {
+      "$ref": "#/components/schemas/HourlyAirQuality"
+    }
+  },
+  "required": [
+    "status",
+    "description"
+  ]
+}

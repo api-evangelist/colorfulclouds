@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "api_version": "v2.6",
+  "api_status": "active",
+  "lang": "en_US",
+  "unit": "metric:v2",
+  "tzshift": 28800,
+  "timezone": "Asia/Shanghai",
+  "server_time": 1748563200,
+  "location": [
+    78.26,
+    48.66
+  ],
+  "result": {
+    "daily": {
+      "status": {},
+      "astro": {},
+      "precipitation": {},
+      "precipitation_08h_20h": {},
+      "precipitation_20h_32h": {},
+      "temperature": {},
+      "temperature_08h_20h": {},
+      "temperature_20h_32h": {},
+      "humidity": {},
+      "cloudrate": {},
+      "pressure": {},
+      "visibility": {},
+      "dswrf": {},
+      "wind": {},
+      "wind_08h_20h": {},
+      "wind_20h_32h": {},
+      "skycon": {},
+      "skycon_08h_20h": {},
+      "skycon_20h_32h": {},
+      "life_index": {},
+      "air_quality": {}
+    },
+    "primary": 0
+  }
+}

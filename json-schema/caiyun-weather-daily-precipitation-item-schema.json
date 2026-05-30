@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/colorfulclouds/refs/heads/main/json-schema/caiyun-weather-daily-precipitation-item-schema.json",
+  "title": "DailyPrecipitationItem",
+  "description": "DailyPrecipitationItem schema from Caiyun Weather API",
+  "type": "object",
+  "properties": {
+    "date": {
+      "type": "string",
+      "format": "date"
+    },
+    "max": {
+      "type": "number",
+      "format": "float"
+    },
+    "min": {
+      "type": "number",
+      "format": "float"
+    },
+    "avg": {
+      "type": "number",
+      "format": "float"
+    },
+    "probability": {
+      "type": "number",
+      "format": "float"
+    }
+  },
+  "required": [
+    "date",
+    "max",
+    "min",
+    "avg",
+    "probability"
+  ]
+}

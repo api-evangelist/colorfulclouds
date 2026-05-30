@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/colorfulclouds/refs/heads/main/json-structure/caiyun-weather-daily-astro-item-structure.json",
+  "name": "DailyAstroItem",
+  "description": "DailyAstroItem schema from Caiyun Weather API",
+  "type": "object",
+  "properties": {
+    "date": {
+      "type": "date"
+    },
+    "sunrise": {
+      "$ref": "#/components/schemas/DailyAstroTime"
+    },
+    "sunset": {
+      "$ref": "#/components/schemas/DailyAstroTime"
+    }
+  },
+  "required": [
+    "date",
+    "sunrise",
+    "sunset"
+  ]
+}

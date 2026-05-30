@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/colorfulclouds/refs/heads/main/json-schema/caiyun-weather-aqi-desc-dual-schema.json",
+  "title": "AQIDescDual",
+  "description": "AQI category description under both standards.",
+  "type": "object",
+  "properties": {
+    "chn": {
+      "type": "string",
+      "example": "Good"
+    },
+    "usa": {
+      "type": "string",
+      "example": "Moderate"
+    }
+  },
+  "required": [
+    "chn",
+    "usa"
+  ]
+}

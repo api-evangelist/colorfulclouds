@@ -1,0 +1,19 @@
+{
+  "status": "ok",
+  "api_version": "v2.6",
+  "api_status": "active",
+  "lang": "en_US",
+  "unit": "metric:v2",
+  "tzshift": 28800,
+  "timezone": "Asia/Shanghai",
+  "server_time": 1748563200,
+  "location": [
+    30.19,
+    37.26
+  ],
+  "result": {
+    "realtime": {
+      "air_quality": {}
+    }
+  }
+}

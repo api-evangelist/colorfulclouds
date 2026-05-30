@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/colorfulclouds/refs/heads/main/json-structure/caiyun-weather-minutely-structure.json",
+  "name": "Minutely",
+  "description": "Minute-level precipitation nowcast block (next 120 minutes).",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string",
+      "example": "ok"
+    },
+    "datasource": {
+      "type": "string",
+      "example": "radar"
+    },
+    "precipitation_2h": {
+      "type": "array",
+      "items": {
+        "type": "float"
+      },
+      "minItems": 120,
+      "maxItems": 120,
+      "description": "120 minutes of precipitation intensity in mm/hr."
+    },
+    "precipitation": {
+      "type": "array",
+      "items": {
+        "type": "float"
+      },
+      "minItems": 60,
+      "maxItems": 60,
+      "description": "60 minutes of precipitation intensity in mm/hr."
+    },
+    "probability": {
+      "type": "array",
+      "items": {
+        "type": "float"
+      },
+      "description": "Per-segment precipitation probability (0-1)."
+    },
+    "description": {
+      "type": "string",
+      "description": "Natural-language summary of the precipitation pattern.",
+      "example": "clear weather over the next 2 hours"
+    }
+  },
+  "required": [
+    "status",
+    "description"
+  ]
+}

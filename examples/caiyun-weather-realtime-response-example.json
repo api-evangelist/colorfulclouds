@@ -1,0 +1,32 @@
+{
+  "status": "ok",
+  "api_version": "v2.6",
+  "api_status": "active",
+  "lang": "en_US",
+  "unit": "metric:v2",
+  "tzshift": 28800,
+  "timezone": "Asia/Shanghai",
+  "server_time": 1748563200,
+  "location": [
+    93.91,
+    16.13
+  ],
+  "result": {
+    "realtime": {
+      "status": {},
+      "temperature": {},
+      "humidity": {},
+      "cloudrate": {},
+      "skycon": {},
+      "visibility": {},
+      "dswrf": {},
+      "wind": {},
+      "pressure": {},
+      "apparent_temperature": {},
+      "precipitation": {},
+      "air_quality": {},
+      "life_index": {}
+    },
+    "primary": 0
+  }
+}

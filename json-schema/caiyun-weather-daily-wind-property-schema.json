@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/colorfulclouds/refs/heads/main/json-schema/caiyun-weather-daily-wind-property-schema.json",
+  "title": "DailyWindProperty",
+  "description": "DailyWindProperty schema from Caiyun Weather API",
+  "type": "object",
+  "properties": {
+    "speed": {
+      "type": "number",
+      "format": "float"
+    },
+    "direction": {
+      "type": "number",
+      "format": "float"
+    }
+  },
+  "required": [
+    "speed",
+    "direction"
+  ]
+}

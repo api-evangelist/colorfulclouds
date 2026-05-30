@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/colorfulclouds/refs/heads/main/json-schema/caiyun-weather-daily-min-max-avg-item-schema.json",
+  "title": "DailyMinMaxAvgItem",
+  "description": "DailyMinMaxAvgItem schema from Caiyun Weather API",
+  "type": "object",
+  "properties": {
+    "date": {
+      "type": "string",
+      "format": "date"
+    },
+    "max": {
+      "type": "number",
+      "format": "float"
+    },
+    "min": {
+      "type": "number",
+      "format": "float"
+    },
+    "avg": {
+      "type": "number",
+      "format": "float"
+    }
+  },
+  "required": [
+    "date",
+    "max",
+    "min",
+    "avg"
+  ]
+}

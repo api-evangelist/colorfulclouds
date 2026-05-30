@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/colorfulclouds/refs/heads/main/json-schema/caiyun-weather-hourly-wind-item-schema.json",
+  "title": "HourlyWindItem",
+  "description": "HourlyWindItem schema from Caiyun Weather API",
+  "type": "object",
+  "properties": {
+    "datetime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "speed": {
+      "type": "number",
+      "format": "float"
+    },
+    "direction": {
+      "type": "number",
+      "format": "float"
+    }
+  },
+  "required": [
+    "datetime",
+    "speed",
+    "direction"
+  ]
+}

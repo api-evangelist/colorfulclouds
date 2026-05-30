@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/colorfulclouds/refs/heads/main/json-structure/caiyun-weather-realtime-structure.json",
+  "name": "Realtime",
+  "description": "Realtime weather block.",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string",
+      "example": "ok"
+    },
+    "temperature": {
+      "type": "float",
+      "example": 22.4
+    },
+    "humidity": {
+      "type": "float",
+      "description": "Relative humidity, 0-1 ratio.",
+      "example": 0.58
+    },
+    "cloudrate": {
+      "type": "float",
+      "description": "Cloud cover ratio, 0-1.",
+      "example": 0.32
+    },
+    "skycon": {
+      "$ref": "#/components/schemas/SkyCon"
+    },
+    "visibility": {
+      "type": "float",
+      "description": "Visibility in km.",
+      "example": 14.2
+    },
+    "dswrf": {
+      "type": "float",
+      "description": "Downward shortwave radiation flux in W/m\u00b2.",
+      "example": 412.0
+    },
+    "wind": {
+      "$ref": "#/components/schemas/Wind"
+    },
+    "pressure": {
+      "type": "float",
+      "description": "Surface pressure in Pa.",
+      "example": 100240.0
+    },
+    "apparent_temperature": {
+      "type": "float",
+      "example": 21.8
+    },
+    "precipitation": {
+      "$ref": "#/components/schemas/Precipitation"
+    },
+    "air_quality": {
+      "$ref": "#/components/schemas/AirQualityRealtime"
+    },
+    "life_index": {
+      "$ref": "#/components/schemas/RealtimeLifeIndex"
+    }
+  },
+  "required": [
+    "status",
+    "temperature",
+    "humidity",
+    "cloudrate",
+    "skycon",
+    "wind"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/colorfulclouds/refs/heads/main/json-structure/caiyun-weather-hourly-air-quality-structure.json",
+  "name": "HourlyAirQuality",
+  "description": "HourlyAirQuality schema from Caiyun Weather API",
+  "type": "object",
+  "properties": {
+    "aqi": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/HourlyAQIItem"
+      }
+    },
+    "pm25": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/HourlyPM25Item"
+      }
+    }
+  }
+}
