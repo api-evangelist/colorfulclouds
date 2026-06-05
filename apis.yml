@@ -1,13 +1,11 @@
 aid: colorfulclouds
 name: ColorfulClouds
 description: >-
-  ColorfulClouds Tech (彩云科技, Beijing-based) operates the Caiyun Weather API
-  (api.caiyunapp.com), a hyperlocal weather + air quality forecasting service
-  with minute-level precipitation, hourly forecasts up to 360 hours, daily
-  forecasts up to 15 days, real-time AQI/pollutant readings, severe-weather
-  alerts, and a precipitation map raster. The v2.6 platform powers consumer
-  apps (Amap, Sina Weather) and enterprise weather integrations across China
-  and globally, billed via tiered token plans on the Open Platform.
+  ColorfulClouds Tech (彩云科技, Beijing-based) operates the Caiyun Weather API (api.caiyunapp.com), a hyperlocal weather +
+  air quality forecasting service with minute-level precipitation, hourly forecasts up to 360 hours, daily forecasts up
+  to 15 days, real-time AQI/pollutant readings, severe-weather alerts, and a precipitation map raster. The v2.6 platform
+  powers consumer apps (Amap, Sina Weather) and enterprise weather integrations across China and globally, billed via
+  tiered token plans on the Open Platform.
 url: https://docs.caiyunapp.com/weather-api/
 image: https://caiyunapp.com/static/img/logo.png
 humanURL: https://caiyunapp.com/
@@ -29,12 +27,10 @@ tags:
 apis:
   - name: Caiyun Weather API
     description: >-
-      Caiyun Weather API v2.6 — hyperlocal weather, minute-level precipitation,
-      hourly/daily forecasts, air quality, life indices, severe-weather alerts,
-      and a precipitation map raster. Single base URL with token in path and
-      lng,lat in path, returning a unified JSON envelope with status, location,
-      timezone, and a result block that contains realtime/minutely/hourly/daily/
-      alert sub-objects depending on the endpoint or granu parameter.
+      Caiyun Weather API v2.6 — hyperlocal weather, minute-level precipitation, hourly/daily forecasts, air quality,
+      life indices, severe-weather alerts, and a precipitation map raster. Single base URL with token in path and
+      lng,lat in path, returning a unified JSON envelope with status, location, timezone, and a result block that
+      contains realtime/minutely/hourly/daily/ alert sub-objects depending on the endpoint or granu parameter.
     humanURL: https://docs.caiyunapp.com/weather-api/
     baseURL: https://api.caiyunapp.com/v2.6
     image: https://caiyunapp.com/static/img/logo.png
@@ -57,18 +53,6 @@ apis:
       - type: CodeExamples
         title: Python SDK Source
         url: https://github.com/caiyunapp/caiyun-weather-api-python-sdk
-      - type: NaftikoCapability
-        url: capabilities/caiyun-weather-weather.yaml
-      - type: NaftikoCapability
-        url: capabilities/caiyun-weather-realtime.yaml
-      - type: NaftikoCapability
-        url: capabilities/caiyun-weather-forecast.yaml
-      - type: NaftikoCapability
-        url: capabilities/caiyun-weather-air-quality.yaml
-      - type: NaftikoCapability
-        url: capabilities/caiyun-weather-alerts.yaml
-      - type: NaftikoCapability
-        url: capabilities/caiyun-weather-precipitation-map.yaml
 common:
   - type: Website
     url: https://caiyunapp.com/
@@ -107,105 +91,85 @@ common:
 features:
   - name: Minute-Level Precipitation
     description: >-
-      120-minute precipitation nowcasting with 1-minute resolution and
-      1-kilometer geographic precision based on radar + AI nowcasting models.
+      120-minute precipitation nowcasting with 1-minute resolution and 1-kilometer geographic precision based on radar +
+      AI nowcasting models.
   - name: Hourly Forecast
     description: >-
-      Hourly weather forecast for up to 360 hours covering temperature,
-      humidity, cloud cover, weather phenomenon (skycon), precipitation,
-      wind, pressure, visibility, downward shortwave radiation, and AQI.
+      Hourly weather forecast for up to 360 hours covering temperature, humidity, cloud cover, weather phenomenon
+      (skycon), precipitation, wind, pressure, visibility, downward shortwave radiation, and AQI.
   - name: Daily Forecast
     description: >-
-      Daily forecast for up to 15 days with min/max/avg temperature, humidity,
-      cloud cover, pressure, visibility, wind, plus daytime (08h-20h) and
-      nighttime (20h-32h) splits for skycon, precipitation, and wind.
+      Daily forecast for up to 15 days with min/max/avg temperature, humidity, cloud cover, pressure, visibility, wind,
+      plus daytime (08h-20h) and nighttime (20h-32h) splits for skycon, precipitation, and wind.
   - name: Real-Time Air Quality
     description: >-
-      PM2.5, PM10, O3, SO2, NO2, CO concentrations and AQI calculated under
-      both Chinese (HJ 633-2012) and US EPA standards with category descriptors.
+      PM2.5, PM10, O3, SO2, NO2, CO concentrations and AQI calculated under both Chinese (HJ 633-2012) and US EPA
+      standards with category descriptors.
   - name: Severe Weather Alerts
     description: >-
-      Official Chinese Meteorological Administration alerts (typhoon, rainstorm,
-      blizzard, etc.) with title, code, status, description, region, adcode, and
-      publication timestamp.
+      Official Chinese Meteorological Administration alerts (typhoon, rainstorm, blizzard, etc.) with title, code,
+      status, description, region, adcode, and publication timestamp.
   - name: Life Indices
     description: >-
-      Daily and real-time life indices including ultraviolet, comfort, cold
-      risk, dressing, and car-washing recommendations.
+      Daily and real-time life indices including ultraviolet, comfort, cold risk, dressing, and car-washing
+      recommendations.
   - name: Precipitation Map Raster
     description: >-
-      Radar + nowcast precipitation map tiles for embedding live precipitation
-      animations into consumer and operational dashboards.
+      Radar + nowcast precipitation map tiles for embedding live precipitation animations into consumer and operational
+      dashboards.
   - name: Sky Condition (Skycon) Enum
     description: >-
-      Normalized weather phenomenon enum (CLEAR_DAY, PARTLY_CLOUDY_DAY, CLOUDY,
-      LIGHT_HAZE, HEAVY_RAIN, STORM_SNOW, DUST, SAND, WIND, etc.) suitable for
-      icon-driven UIs.
+      Normalized weather phenomenon enum (CLEAR_DAY, PARTLY_CLOUDY_DAY, CLOUDY, LIGHT_HAZE, HEAVY_RAIN, STORM_SNOW,
+      DUST, SAND, WIND, etc.) suitable for icon-driven UIs.
   - name: Multi-Language Output
-    description: >-
-      Localized descriptions in zh_CN, zh_TW, ja, en_GB, and en_US selectable
-      via the lang query parameter.
+    description: Localized descriptions in zh_CN, zh_TW, ja, en_GB, and en_US selectable via the lang query parameter.
   - name: Unit System Selection
-    description: >-
-      Switch between metric, metric:v1, metric:v2, imperial, and SI unit
-      systems via the unit query parameter.
+    description: Switch between metric, metric:v1, metric:v2, imperial, and SI unit systems via the unit query parameter.
 useCases:
   - name: Mobile Weather Apps
     description: >-
-      Power consumer weather apps with realtime conditions, minute-level rain
-      forecasts, and severe-weather alerts in a single combined call.
+      Power consumer weather apps with realtime conditions, minute-level rain forecasts, and severe-weather alerts in a
+      single combined call.
   - name: Smart Home / IoT Integration
     description: >-
-      Drive smart-home automations (close windows on rain, dim lights at
-      sunset, adjust HVAC) using realtime + minutely + daily astronomical data.
+      Drive smart-home automations (close windows on rain, dim lights at sunset, adjust HVAC) using realtime + minutely
+      + daily astronomical data.
   - name: Logistics and Delivery Routing
     description: >-
-      Use hourly forecasts and precipitation nowcasts to reroute couriers,
-      delay flights, and pre-position field crews before rain or snow events.
+      Use hourly forecasts and precipitation nowcasts to reroute couriers, delay flights, and pre-position field crews
+      before rain or snow events.
   - name: Outdoor Event Planning
     description: >-
-      Combine daily forecasts, life indices, and alerts to plan outdoor events,
-      sports, construction, and agricultural operations 5-15 days ahead.
+      Combine daily forecasts, life indices, and alerts to plan outdoor events, sports, construction, and agricultural
+      operations 5-15 days ahead.
   - name: Air-Quality-Aware Mobility
-    description: >-
-      Cycling, running, and route-planning apps surface PM2.5/AQI to recommend
-      healthier routes and times.
+    description: Cycling, running, and route-planning apps surface PM2.5/AQI to recommend healthier routes and times.
 integrations:
   - name: Claude / Anthropic Agents
     description: >-
-      First-party MCP server (caiyunapp/mcp-caiyun-weather) and Claude Code
-      skills (caiyunapp/skills) expose realtime, hourly, daily, historical, and
-      alert lookups as agent tools.
+      First-party MCP server (caiyunapp/mcp-caiyun-weather) and Claude Code skills (caiyunapp/skills) expose realtime,
+      hourly, daily, historical, and alert lookups as agent tools.
   - name: Home Assistant
-    description: >-
-      Community Home Assistant component (Yonsm/ZhiCaiYun) wraps the Caiyun
-      API for smart-home automations.
+    description: Community Home Assistant component (Yonsm/ZhiCaiYun) wraps the Caiyun API for smart-home automations.
   - name: Amap (Gaode Maps)
-    description: >-
-      Caiyun forecasts are surfaced inside Amap navigation and weather widgets
-      as a partner data source.
+    description: Caiyun forecasts are surfaced inside Amap navigation and weather widgets as a partner data source.
   - name: Sina Weather
-    description: >-
-      Sina Weather embeds Caiyun nowcasts and 5-day forecasts in its consumer
-      products.
+    description: Sina Weather embeds Caiyun nowcasts and 5-day forecasts in its consumer products.
   - name: Wego CLI
-    description: >-
-      Community fork of the wego terminal weather app (caiyunapp/wego) supports
-      Caiyun as a backend.
+    description: Community fork of the wego terminal weather app (caiyunapp/wego) supports Caiyun as a backend.
 solutions:
   - name: Hyperlocal Weather Platform
     description: >-
-      Pair the combined /weather endpoint with the precipitation map raster to
-      ship a complete hyperlocal weather product covering realtime, minutely,
-      hourly, daily, alerts, and map overlays.
+      Pair the combined /weather endpoint with the precipitation map raster to ship a complete hyperlocal weather
+      product covering realtime, minutely, hourly, daily, alerts, and map overlays.
   - name: Agent-Ready Weather Intelligence
     description: >-
-      Run the official MCP server alongside the installable Claude Code skills
-      to give LLM agents tool-grounded access to Caiyun forecasts and alerts.
+      Run the official MCP server alongside the installable Claude Code skills to give LLM agents tool-grounded access
+      to Caiyun forecasts and alerts.
   - name: Air Quality Surveillance
     description: >-
-      Combine /realtime air quality, /hourly AQI series, and the open-source
-      aqi-hub library to publish dashboards, alerts, and exposure analytics.
+      Combine /realtime air quality, /hourly AQI series, and the open-source aqi-hub library to publish dashboards,
+      alerts, and exposure analytics.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
