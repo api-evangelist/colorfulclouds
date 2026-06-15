@@ -1,0 +1,2783 @@
+{
+  "item": [
+    {
+      "id": "9ed4b89c-8d54-49c6-a39e-3f3f341e5eac",
+      "name": "Realtime",
+      "description": {
+        "content": "Real-time weather conditions at the requested location.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a91916f7-1258-4e0e-a3a2-fa604921b01e",
+          "name": "Caiyun Weather Get Realtime Weather",
+          "request": {
+            "name": "Caiyun Weather Get Realtime Weather",
+            "description": {
+              "content": "Returns the current weather conditions at the requested location — temperature, humidity, wind, cloud cover, sky condition (skycon), visibility, downward shortwave radiation, pressure, apparent temperature, precipitation, air quality, and life indices.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":token",
+                ":lnglat",
+                "realtime"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "lang",
+                  "value": "en_US",
+                  "description": "Response language for description fields."
+                },
+                {
+                  "disabled": false,
+                  "key": "unit",
+                  "value": "metric",
+                  "description": "Unit system for numeric values (temperature, wind, precipitation, pressure)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "token",
+                  "description": "(Required) Caiyun Weather API token issued by the Open Platform (platform.caiyunapp.com). Embedded in the path rather than a header."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "lnglat",
+                  "description": "(Required) Longitude,latitude tuple as `lng,lat` (note the order — longitude first). Use WGS84 decimal degrees."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "75ac9694-f4fd-4724-b08f-cc8ec017de5b",
+              "name": "Realtime weather payload",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":token",
+                    ":lnglat",
+                    "realtime"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lang",
+                      "value": "en_US"
+                    },
+                    {
+                      "key": "unit",
+                      "value": "metric:v2"
+                    },
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "token",
+                      "description": "(Required) Caiyun Weather API token issued by the Open Platform (platform.caiyunapp.com). Embedded in the path rather than a header."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lnglat",
+                      "description": "(Required) Longitude,latitude tuple as `lng,lat` (note the order — longitude first). Use WGS84 decimal degrees."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"api_status\": \"active\",\n  \"api_version\": \"v2.6\",\n  \"result\": {\n    \"realtime\": {\n      \"status\": \"ok\",\n      \"temperature\": 22.4,\n      \"humidity\": 0.58,\n      \"cloudrate\": 0.32,\n      \"skycon\": \"PARTLY_CLOUDY_DAY\",\n      \"wind\": {\n        \"speed\": 12.4,\n        \"direction\": 215\n      },\n      \"visibility\": 14.2,\n      \"dswrf\": 412,\n      \"pressure\": 100240,\n      \"apparent_temperature\": 21.8,\n      \"precipitation\": {\n        \"local\": {\n          \"status\": \"ok\",\n          \"datasource\": \"radar\",\n          \"intensity\": 0\n        },\n        \"nearest\": {\n          \"status\": \"ok\",\n          \"distance\": 8.7,\n          \"intensity\": 0.4\n        }\n      },\n      \"air_quality\": {\n        \"aqi\": {\n          \"chn\": 78,\n          \"usa\": 95\n        },\n        \"description\": {\n          \"chn\": \"Good\",\n          \"usa\": \"Moderate\"\n        },\n        \"pm25\": 32,\n        \"pm10\": 48,\n        \"o3\": 96,\n        \"so2\": 4,\n        \"no2\": 21,\n        \"co\": 0.6\n      },\n      \"life_index\": {\n        \"ultraviolet\": {\n          \"index\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"desc\": \"Moderate\"\n        },\n        \"comfort\": {\n          \"index\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"desc\": \"Moderate\"\n        }\n      }\n    },\n    \"primary\": 4076\n  },\n  \"status\": \"ok\",\n  \"lang\": \"en_US\",\n  \"unit\": \"metric:v2\",\n  \"tzshift\": 28800,\n  \"timezone\": \"Asia/Shanghai\",\n  \"server_time\": 1748563200,\n  \"location\": [\n    884.1080823134639,\n    6449.428562906242\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "67bf3d80-7162-4481-b641-1a8e26ada413",
+              "name": "Malformed request (invalid coordinates, parameter out of range)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":token",
+                    ":lnglat",
+                    "realtime"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lang",
+                      "value": "en_US"
+                    },
+                    {
+                      "key": "unit",
+                      "value": "metric:v2"
+                    },
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "token",
+                      "description": "(Required) Caiyun Weather API token issued by the Open Platform (platform.caiyunapp.com). Embedded in the path rather than a header."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lnglat",
+                      "description": "(Required) Longitude,latitude tuple as `lng,lat` (note the order — longitude first). Use WGS84 decimal degrees."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"error\": \"Invalid token\",\n  \"api_status\": \"deactive\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "618ab0f5-bf1f-4be7-a6af-c1831229bd2d",
+              "name": "Invalid or missing API token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":token",
+                    ":lnglat",
+                    "realtime"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lang",
+                      "value": "en_US"
+                    },
+                    {
+                      "key": "unit",
+                      "value": "metric:v2"
+                    },
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "token",
+                      "description": "(Required) Caiyun Weather API token issued by the Open Platform (platform.caiyunapp.com). Embedded in the path rather than a header."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lnglat",
+                      "description": "(Required) Longitude,latitude tuple as `lng,lat` (note the order — longitude first). Use WGS84 decimal degrees."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"error\": \"Invalid token\",\n  \"api_status\": \"deactive\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "554da521-092f-4b73-812d-e9b49374b709",
+              "name": "Per-token quota exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":token",
+                    ":lnglat",
+                    "realtime"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lang",
+                      "value": "en_US"
+                    },
+                    {
+                      "key": "unit",
+                      "value": "metric:v2"
+                    },
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "token",
+                      "description": "(Required) Caiyun Weather API token issued by the Open Platform (platform.caiyunapp.com). Embedded in the path rather than a header."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lnglat",
+                      "description": "(Required) Longitude,latitude tuple as `lng,lat` (note the order — longitude first). Use WGS84 decimal degrees."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"error\": \"Invalid token\",\n  \"api_status\": \"deactive\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "3f696a3a-03d6-4a9b-92b5-7fc370070829",
+      "name": "Forecast",
+      "description": {
+        "content": "Minute-level, hourly, and daily forecast endpoints.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1400f544-0fd5-4b6d-ad5f-9c85494d2b2c",
+          "name": "Caiyun Weather Get Minutely Precipitation Forecast",
+          "request": {
+            "name": "Caiyun Weather Get Minutely Precipitation Forecast",
+            "description": {
+              "content": "Returns 120-minute minute-level precipitation nowcast (mm/hr) and per-minute probability series for the requested location, plus a natural-language summary of the precipitation pattern.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":token",
+                ":lnglat",
+                "minutely"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "lang",
+                  "value": "en_US",
+                  "description": "Response language for description fields."
+                },
+                {
+                  "disabled": false,
+                  "key": "unit",
+                  "value": "metric",
+                  "description": "Unit system for numeric values (temperature, wind, precipitation, pressure)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "token",
+                  "description": "(Required) Caiyun Weather API token issued by the Open Platform (platform.caiyunapp.com). Embedded in the path rather than a header."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "lnglat",
+                  "description": "(Required) Longitude,latitude tuple as `lng,lat` (note the order — longitude first). Use WGS84 decimal degrees."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0d645614-fafc-4f13-872b-11a9a7048d5e",
+              "name": "Minutely precipitation payload",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":token",
+                    ":lnglat",
+                    "minutely"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lang",
+                      "value": "en_US"
+                    },
+                    {
+                      "key": "unit",
+                      "value": "metric:v2"
+                    },
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "token",
+                      "description": "(Required) Caiyun Weather API token issued by the Open Platform (platform.caiyunapp.com). Embedded in the path rather than a header."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lnglat",
+                      "description": "(Required) Longitude,latitude tuple as `lng,lat` (note the order — longitude first). Use WGS84 decimal degrees."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"ok\",\n  \"api_version\": \"v2.6\",\n  \"api_status\": \"active\",\n  \"lang\": \"en_US\",\n  \"unit\": \"metric:v2\",\n  \"tzshift\": 28800,\n  \"timezone\": \"Asia/Shanghai\",\n  \"server_time\": 1748563200,\n  \"location\": [\n    9871.383661933043,\n    8203.346812898037\n  ],\n  \"result\": {\n    \"minutely\": {\n      \"status\": \"ok\",\n      \"description\": \"clear weather over the next 2 hours\",\n      \"datasource\": \"radar\",\n      \"precipitation_2h\": [\n        7385.806716090423,\n        6059.9726851736705,\n        2675.421791195568,\n        7951.256454617167,\n        1470.1231859185204,\n        2907.6703062903853,\n        604.1723241408281,\n        9744.53079878633,\n        4472.139824851196,\n        6298.39040392275,\n        449.99540941584206,\n        881.7398636859342,\n        845.1187809867289,\n        4347.348864878364,\n        6435.940571708238,\n        1870.99818351812,\n        7087.402311576365,\n        4829.404478104454,\n        1233.2975383678925,\n        1774.3256045569378\n      ],\n      \"precipitation\": [\n        9004.631123087025,\n        2392.4534804999607,\n        1470.6185891870116,\n        5674.524708357083,\n        3225.5947767870452,\n        9715.616473362545,\n        6483.108452939159,\n        6279.806104018605,\n        1257.34277683783,\n        425.54864548062676,\n        116.01189434098048,\n        3353.734172999807,\n        3531.932541348223,\n        5052.080021438883,\n        5076.837152506928,\n        1351.1779616082576,\n        1677.1576232731068,\n        3425.932076093322,\n        8534.82974728794,\n        7177.252053757041\n      ],\n      \"probability\": [\n        7304.191238334384,\n        7969.3732640617745\n      ]\n    },\n    \"primary\": 7591,\n    \"forecast_keypoint\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4a37df1e-21af-4385-9a5e-73a785727757",
+              "name": "Malformed request (invalid coordinates, parameter out of range)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":token",
+                    ":lnglat",
+                    "minutely"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lang",
+                      "value": "en_US"
+                    },
+                    {
+                      "key": "unit",
+                      "value": "metric:v2"
+                    },
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "token",
+                      "description": "(Required) Caiyun Weather API token issued by the Open Platform (platform.caiyunapp.com). Embedded in the path rather than a header."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lnglat",
+                      "description": "(Required) Longitude,latitude tuple as `lng,lat` (note the order — longitude first). Use WGS84 decimal degrees."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"error\": \"Invalid token\",\n  \"api_status\": \"deactive\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0714dbc6-5985-485b-ab1e-bbc26cf9d4e8",
+              "name": "Invalid or missing API token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":token",
+                    ":lnglat",
+                    "minutely"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lang",
+                      "value": "en_US"
+                    },
+                    {
+                      "key": "unit",
+                      "value": "metric:v2"
+                    },
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "token",
+                      "description": "(Required) Caiyun Weather API token issued by the Open Platform (platform.caiyunapp.com). Embedded in the path rather than a header."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lnglat",
+                      "description": "(Required) Longitude,latitude tuple as `lng,lat` (note the order — longitude first). Use WGS84 decimal degrees."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"error\": \"Invalid token\",\n  \"api_status\": \"deactive\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c8b016d2-31cc-49c7-9cf0-db5270564472",
+              "name": "Per-token quota exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":token",
+                    ":lnglat",
+                    "minutely"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lang",
+                      "value": "en_US"
+                    },
+                    {
+                      "key": "unit",
+                      "value": "metric:v2"
+                    },
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "token",
+                      "description": "(Required) Caiyun Weather API token issued by the Open Platform (platform.caiyunapp.com). Embedded in the path rather than a header."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lnglat",
+                      "description": "(Required) Longitude,latitude tuple as `lng,lat` (note the order — longitude first). Use WGS84 decimal degrees."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"error\": \"Invalid token\",\n  \"api_status\": \"deactive\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c4ebb0f0-ba09-489a-b4e4-60fc2deea0c4",
+          "name": "Caiyun Weather Get Hourly Weather Forecast",
+          "request": {
+            "name": "Caiyun Weather Get Hourly Weather Forecast",
+            "description": {
+              "content": "Returns hourly forecast series for up to 360 hours covering temperature, apparent temperature, humidity, cloud cover, sky condition, precipitation (value + probability), pressure, visibility, downward shortwave radiation, wind, and air quality (AQI + PM2.5). When the begin parameter is supplied the series is anchored at that Unix epoch second instead of \"now\".",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":token",
+                ":lnglat",
+                "hourly"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "lang",
+                  "value": "en_US",
+                  "description": "Response language for description fields."
+                },
+                {
+                  "disabled": false,
+                  "key": "unit",
+                  "value": "metric",
+                  "description": "Unit system for numeric values (temperature, wind, precipitation, pressure)."
+                },
+                {
+                  "disabled": false,
+                  "key": "hourlysteps",
+                  "value": "48",
+                  "description": "Number of hourly forecast steps to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "begin",
+                  "value": "<integer>",
+                  "description": "Anchor the forecast or historical series at a specific Unix epoch second instead of \"now\". Used to fetch past 24h (historical) or shift the start of the forecast window."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "token",
+                  "description": "(Required) Caiyun Weather API token issued by the Open Platform (platform.caiyunapp.com). Embedded in the path rather than a header."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "lnglat",
+                  "description": "(Required) Longitude,latitude tuple as `lng,lat` (note the order — longitude first). Use WGS84 decimal degrees."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "31e646e9-214b-480a-9dbc-d3208ccd1c95",
+              "name": "Hourly forecast payload",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":token",
+                    ":lnglat",
+                    "hourly"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lang",
+                      "value": "en_US"
+                    },
+                    {
+                      "key": "unit",
+                      "value": "metric:v2"
+                    },
+                    {
+                      "key": "hourlysteps",
+                      "value": "72"
+                    },
+                    {
+                      "key": "begin",
+                      "value": "1748563200"
+                    },
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "token",
+                      "description": "(Required) Caiyun Weather API token issued by the Open Platform (platform.caiyunapp.com). Embedded in the path rather than a header."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lnglat",
+                      "description": "(Required) Longitude,latitude tuple as `lng,lat` (note the order — longitude first). Use WGS84 decimal degrees."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"ok\",\n  \"api_version\": \"v2.6\",\n  \"api_status\": \"active\",\n  \"lang\": \"en_US\",\n  \"unit\": \"metric:v2\",\n  \"tzshift\": 28800,\n  \"timezone\": \"Asia/Shanghai\",\n  \"server_time\": 1748563200,\n  \"location\": [\n    1681.9885643140065,\n    7414.878441168769\n  ],\n  \"result\": {\n    \"hourly\": {\n      \"status\": \"ok\",\n      \"description\": \"clear weather over the next 24 hours\",\n      \"precipitation\": [\n        {\n          \"datetime\": \"2016-04-11T20:23:33.228Z\",\n          \"value\": 2797.9860247516876,\n          \"probability\": 4795.963324598182\n        },\n        {\n          \"datetime\": \"1976-04-26T04:55:55.591Z\",\n          \"value\": 1355.0131502799445,\n          \"probability\": 6403.545633399498\n        }\n      ],\n      \"temperature\": [\n        {\n          \"datetime\": \"2026-05-30T15:00:00+08:00\",\n          \"value\": 23.1\n        },\n        {\n          \"datetime\": \"2026-05-30T15:00:00+08:00\",\n          \"value\": 23.1\n        }\n      ],\n      \"apparent_temperature\": [\n        {\n          \"datetime\": \"2026-05-30T15:00:00+08:00\",\n          \"value\": 23.1\n        },\n        {\n          \"datetime\": \"2026-05-30T15:00:00+08:00\",\n          \"value\": 23.1\n        }\n      ],\n      \"humidity\": [\n        {\n          \"datetime\": \"2026-05-30T15:00:00+08:00\",\n          \"value\": 23.1\n        },\n        {\n          \"datetime\": \"2026-05-30T15:00:00+08:00\",\n          \"value\": 23.1\n        }\n      ],\n      \"cloudrate\": [\n        {\n          \"datetime\": \"2026-05-30T15:00:00+08:00\",\n          \"value\": 23.1\n        },\n        {\n          \"datetime\": \"2026-05-30T15:00:00+08:00\",\n          \"value\": 23.1\n        }\n      ],\n      \"skycon\": [\n        {\n          \"datetime\": \"2017-07-13T21:36:00.680Z\",\n          \"value\": \"PARTLY_CLOUDY_DAY\"\n        },\n        {\n          \"datetime\": \"1954-11-22T07:45:45.162Z\",\n          \"value\": \"PARTLY_CLOUDY_DAY\"\n        }\n      ],\n      \"pressure\": [\n        {\n          \"datetime\": \"2026-05-30T15:00:00+08:00\",\n          \"value\": 23.1\n        },\n        {\n          \"datetime\": \"2026-05-30T15:00:00+08:00\",\n          \"value\": 23.1\n        }\n      ],\n      \"visibility\": [\n        {\n          \"datetime\": \"2026-05-30T15:00:00+08:00\",\n          \"value\": 23.1\n        },\n        {\n          \"datetime\": \"2026-05-30T15:00:00+08:00\",\n          \"value\": 23.1\n        }\n      ],\n      \"dswrf\": [\n        {\n          \"datetime\": \"2026-05-30T15:00:00+08:00\",\n          \"value\": 23.1\n        },\n        {\n          \"datetime\": \"2026-05-30T15:00:00+08:00\",\n          \"value\": 23.1\n        }\n      ],\n      \"wind\": [\n        {\n          \"datetime\": \"1974-10-14T14:00:17.827Z\",\n          \"speed\": 8669.678414681413,\n          \"direction\": 7386.825912112294\n        },\n        {\n          \"datetime\": \"1998-03-09T03:51:34.186Z\",\n          \"speed\": 3352.770224260676,\n          \"direction\": 110.46313861146074\n        }\n      ],\n      \"air_quality\": {\n        \"aqi\": [\n          {\n            \"datetime\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"datetime\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"pm25\": [\n          {\n            \"datetime\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"datetime\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      }\n    },\n    \"primary\": 2503\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4af92f3d-951b-4fc6-b986-cc805a6cc931",
+              "name": "Malformed request (invalid coordinates, parameter out of range)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":token",
+                    ":lnglat",
+                    "hourly"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lang",
+                      "value": "en_US"
+                    },
+                    {
+                      "key": "unit",
+                      "value": "metric:v2"
+                    },
+                    {
+                      "key": "hourlysteps",
+                      "value": "72"
+                    },
+                    {
+                      "key": "begin",
+                      "value": "1748563200"
+                    },
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "token",
+                      "description": "(Required) Caiyun Weather API token issued by the Open Platform (platform.caiyunapp.com). Embedded in the path rather than a header."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lnglat",
+                      "description": "(Required) Longitude,latitude tuple as `lng,lat` (note the order — longitude first). Use WGS84 decimal degrees."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"error\": \"Invalid token\",\n  \"api_status\": \"deactive\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "97dd8380-cadd-41ca-9c36-eb6901ae68dd",
+              "name": "Invalid or missing API token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":token",
+                    ":lnglat",
+                    "hourly"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lang",
+                      "value": "en_US"
+                    },
+                    {
+                      "key": "unit",
+                      "value": "metric:v2"
+                    },
+                    {
+                      "key": "hourlysteps",
+                      "value": "72"
+                    },
+                    {
+                      "key": "begin",
+                      "value": "1748563200"
+                    },
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "token",
+                      "description": "(Required) Caiyun Weather API token issued by the Open Platform (platform.caiyunapp.com). Embedded in the path rather than a header."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lnglat",
+                      "description": "(Required) Longitude,latitude tuple as `lng,lat` (note the order — longitude first). Use WGS84 decimal degrees."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"error\": \"Invalid token\",\n  \"api_status\": \"deactive\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "77bfbb66-7b93-4447-8d0a-a843ce03e1cc",
+              "name": "Per-token quota exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":token",
+                    ":lnglat",
+                    "hourly"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lang",
+                      "value": "en_US"
+                    },
+                    {
+                      "key": "unit",
+                      "value": "metric:v2"
+                    },
+                    {
+                      "key": "hourlysteps",
+                      "value": "72"
+                    },
+                    {
+                      "key": "begin",
+                      "value": "1748563200"
+                    },
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "token",
+                      "description": "(Required) Caiyun Weather API token issued by the Open Platform (platform.caiyunapp.com). Embedded in the path rather than a header."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lnglat",
+                      "description": "(Required) Longitude,latitude tuple as `lng,lat` (note the order — longitude first). Use WGS84 decimal degrees."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"error\": \"Invalid token\",\n  \"api_status\": \"deactive\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a9402e4c-92bb-4b9a-8751-db9729a1392e",
+          "name": "Caiyun Weather Get Daily Weather Forecast",
+          "request": {
+            "name": "Caiyun Weather Get Daily Weather Forecast",
+            "description": {
+              "content": "Returns daily forecast series for up to 15 days covering astronomical sunrise/sunset, precipitation, temperature, humidity, cloud cover, pressure, visibility, downward shortwave radiation, wind, sky condition, air quality, and life indices. Includes daytime (08h-20h) and nighttime (20h-32h) splits for skycon, precipitation, temperature, and wind. Free tier returns 3 days; paid tiers extend to 15.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":token",
+                ":lnglat",
+                "daily"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "lang",
+                  "value": "en_US",
+                  "description": "Response language for description fields."
+                },
+                {
+                  "disabled": false,
+                  "key": "unit",
+                  "value": "metric",
+                  "description": "Unit system for numeric values (temperature, wind, precipitation, pressure)."
+                },
+                {
+                  "disabled": false,
+                  "key": "dailysteps",
+                  "value": "5",
+                  "description": "Number of daily forecast days to return. Free tier caps at 3."
+                },
+                {
+                  "disabled": false,
+                  "key": "begin",
+                  "value": "<integer>",
+                  "description": "Anchor the forecast or historical series at a specific Unix epoch second instead of \"now\". Used to fetch past 24h (historical) or shift the start of the forecast window."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "token",
+                  "description": "(Required) Caiyun Weather API token issued by the Open Platform (platform.caiyunapp.com). Embedded in the path rather than a header."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "lnglat",
+                  "description": "(Required) Longitude,latitude tuple as `lng,lat` (note the order — longitude first). Use WGS84 decimal degrees."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8396c53b-ba0a-46e7-92e2-36f366973d9a",
+              "name": "Daily forecast payload",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":token",
+                    ":lnglat",
+                    "daily"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lang",
+                      "value": "en_US"
+                    },
+                    {
+                      "key": "unit",
+                      "value": "metric:v2"
+                    },
+                    {
+                      "key": "dailysteps",
+                      "value": "7"
+                    },
+                    {
+                      "key": "begin",
+                      "value": "1748563200"
+                    },
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "token",
+                      "description": "(Required) Caiyun Weather API token issued by the Open Platform (platform.caiyunapp.com). Embedded in the path rather than a header."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lnglat",
+                      "description": "(Required) Longitude,latitude tuple as `lng,lat` (note the order — longitude first). Use WGS84 decimal degrees."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"ok\",\n  \"api_version\": \"v2.6\",\n  \"api_status\": \"active\",\n  \"lang\": \"en_US\",\n  \"unit\": \"metric:v2\",\n  \"tzshift\": 28800,\n  \"timezone\": \"Asia/Shanghai\",\n  \"server_time\": 1748563200,\n  \"location\": [\n    9044.529767928998,\n    3983.389426570303\n  ],\n  \"result\": {\n    \"daily\": {\n      \"status\": \"ok\",\n      \"astro\": [\n        {\n          \"date\": \"2018-12-01\",\n          \"sunrise\": {\n            \"time\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"sunset\": {\n            \"time\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"date\": \"2005-01-21\",\n          \"sunrise\": {\n            \"time\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"sunset\": {\n            \"time\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ],\n      \"precipitation\": [\n        {\n          \"date\": \"1953-07-19\",\n          \"max\": 5012.172078479765,\n          \"min\": 820.6425266425465,\n          \"avg\": 8388.558099474516,\n          \"probability\": 5176.303392575112\n        },\n        {\n          \"date\": \"1947-01-21\",\n          \"max\": 5478.249310077486,\n          \"min\": 6747.847026212711,\n          \"avg\": 1771.2728331246374,\n          \"probability\": 7732.558973593326\n        }\n      ],\n      \"precipitation_08h_20h\": [\n        {\n          \"date\": \"2008-11-21\",\n          \"max\": 2729.741375642396,\n          \"min\": 649.93534634886,\n          \"avg\": 6484.402195027382,\n          \"probability\": 2185.0200923660914\n        },\n        {\n          \"date\": \"2011-06-20\",\n          \"max\": 8362.412579339885,\n          \"min\": 2789.723662574469,\n          \"avg\": 3461.016841090323,\n          \"probability\": 2183.402171666321\n        }\n      ],\n      \"precipitation_20h_32h\": [\n        {\n          \"date\": \"1960-02-04\",\n          \"max\": 9662.940340643938,\n          \"min\": 8108.505524945516,\n          \"avg\": 5763.731345147557,\n          \"probability\": 7938.469537425343\n        },\n        {\n          \"date\": \"1972-01-23\",\n          \"max\": 8313.884335167213,\n          \"min\": 3685.8074855820455,\n          \"avg\": 9949.563266317176,\n          \"probability\": 5137.169922574557\n        }\n      ],\n      \"temperature\": [\n        {\n          \"date\": \"2012-10-30\",\n          \"max\": 5615.545216859543,\n          \"min\": 3509.6610006778883,\n          \"avg\": 2858.198077574773\n        },\n        {\n          \"date\": \"1985-07-25\",\n          \"max\": 5772.035412473365,\n          \"min\": 3631.216340448836,\n          \"avg\": 8911.389799512472\n        }\n      ],\n      \"temperature_08h_20h\": [\n        {\n          \"date\": \"1989-11-14\",\n          \"max\": 9550.549670193443,\n          \"min\": 2805.246069150472,\n          \"avg\": 6784.227991192123\n        },\n        {\n          \"date\": \"2006-07-17\",\n          \"max\": 2171.3893427472085,\n          \"min\": 8486.161381430213,\n          \"avg\": 9688.739727699174\n        }\n      ],\n      \"temperature_20h_32h\": [\n        {\n          \"date\": \"2014-12-25\",\n          \"max\": 8203.625697819276,\n          \"min\": 5513.025561039366,\n          \"avg\": 7252.512777849267\n        },\n        {\n          \"date\": \"1979-08-29\",\n          \"max\": 2398.1673088455423,\n          \"min\": 8265.168464157074,\n          \"avg\": 9373.32430702314\n        }\n      ],\n      \"humidity\": [\n        {\n          \"date\": \"1987-12-13\",\n          \"max\": 7453.2889132094415,\n          \"min\": 3447.333472701931,\n          \"avg\": 5652.119371395143\n        },\n        {\n          \"date\": \"1982-03-06\",\n          \"max\": 9570.797867613064,\n          \"min\": 4547.403884256919,\n          \"avg\": 8038.655203281482\n        }\n      ],\n      \"cloudrate\": [\n        {\n          \"date\": \"1961-12-02\",\n          \"max\": 9070.459335778864,\n          \"min\": 4878.519354486725,\n          \"avg\": 8167.89106540178\n        },\n        {\n          \"date\": \"2024-04-28\",\n          \"max\": 9882.590238519635,\n          \"min\": 3579.4473609218912,\n          \"avg\": 5180.405782084665\n        }\n      ],\n      \"pressure\": [\n        {\n          \"date\": \"1963-10-09\",\n          \"max\": 694.9393736806442,\n          \"min\": 2103.297452724273,\n          \"avg\": 2199.008992042949\n        },\n        {\n          \"date\": \"1979-06-26\",\n          \"max\": 2834.943796398367,\n          \"min\": 5622.02116888323,\n          \"avg\": 9084.276102340365\n        }\n      ],\n      \"visibility\": [\n        {\n          \"date\": \"1948-02-29\",\n          \"max\": 7574.1908909014755,\n          \"min\": 66.30445664841389,\n          \"avg\": 6008.102509349479\n        },\n        {\n          \"date\": \"1957-08-12\",\n          \"max\": 5105.485346658321,\n          \"min\": 993.9695233537504,\n          \"avg\": 4076.2628312354154\n        }\n      ],\n      \"dswrf\": [\n        {\n          \"date\": \"1973-01-02\",\n          \"max\": 3654.516965737916,\n          \"min\": 8228.463729703684,\n          \"avg\": 3709.865316637171\n        },\n        {\n          \"date\": \"1993-07-15\",\n          \"max\": 6057.4411278404505,\n          \"min\": 9824.46753263511,\n          \"avg\": 7069.933484868776\n        }\n      ],\n      \"wind\": [\n        {\n          \"date\": \"1975-10-02\",\n          \"max\": {\n            \"speed\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"direction\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"min\": {\n            \"speed\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"direction\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"avg\": {\n            \"speed\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"direction\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"date\": \"1963-07-21\",\n          \"max\": {\n            \"speed\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"direction\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"min\": {\n            \"speed\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"direction\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"avg\": {\n            \"speed\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"direction\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ],\n      \"wind_08h_20h\": [\n        {\n          \"date\": \"1948-12-30\",\n          \"max\": {\n            \"speed\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"direction\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"min\": {\n            \"speed\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"direction\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"avg\": {\n            \"speed\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"direction\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"date\": \"1974-08-26\",\n          \"max\": {\n            \"speed\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"direction\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"min\": {\n            \"speed\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"direction\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"avg\": {\n            \"speed\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"direction\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ],\n      \"wind_20h_32h\": [\n        {\n          \"date\": \"1960-02-29\",\n          \"max\": {\n            \"speed\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"direction\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"min\": {\n            \"speed\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"direction\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"avg\": {\n            \"speed\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"direction\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"date\": \"1972-04-20\",\n          \"max\": {\n            \"speed\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"direction\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"min\": {\n            \"speed\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"direction\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"avg\": {\n            \"speed\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"direction\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ],\n      \"skycon\": [\n        {\n          \"date\": \"1954-05-26\",\n          \"value\": \"PARTLY_CLOUDY_DAY\"\n        },\n        {\n          \"date\": \"2008-12-14\",\n          \"value\": \"PARTLY_CLOUDY_DAY\"\n        }\n      ],\n      \"skycon_08h_20h\": [\n        {\n          \"date\": \"1961-06-19\",\n          \"value\": \"PARTLY_CLOUDY_DAY\"\n        },\n        {\n          \"date\": \"1975-11-08\",\n          \"value\": \"PARTLY_CLOUDY_DAY\"\n        }\n      ],\n      \"skycon_20h_32h\": [\n        {\n          \"date\": \"1951-01-31\",\n          \"value\": \"PARTLY_CLOUDY_DAY\"\n        },\n        {\n          \"date\": \"2013-08-10\",\n          \"value\": \"PARTLY_CLOUDY_DAY\"\n        }\n      ],\n      \"life_index\": {\n        \"ultraviolet\": [\n          {\n            \"date\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"index\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"desc\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"date\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"index\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"desc\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"carWashing\": [\n          {\n            \"date\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"index\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"desc\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"date\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"index\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"desc\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"dressing\": [\n          {\n            \"date\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"index\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"desc\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"date\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"index\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"desc\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"comfort\": [\n          {\n            \"date\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"index\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"desc\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"date\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"index\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"desc\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"coldRisk\": [\n          {\n            \"date\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"index\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"desc\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"date\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"index\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"desc\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      \"air_quality\": {\n        \"aqi\": [\n          {\n            \"date\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"max\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"min\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"avg\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"date\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"max\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"min\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"avg\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"pm25\": [\n          {\n            \"date\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"max\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"min\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"avg\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"date\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"max\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"min\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"avg\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      }\n    },\n    \"primary\": 4425\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "476656e0-243d-4a94-8485-c44046652f3c",
+              "name": "Malformed request (invalid coordinates, parameter out of range)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":token",
+                    ":lnglat",
+                    "daily"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lang",
+                      "value": "en_US"
+                    },
+                    {
+                      "key": "unit",
+                      "value": "metric:v2"
+                    },
+                    {
+                      "key": "dailysteps",
+                      "value": "7"
+                    },
+                    {
+                      "key": "begin",
+                      "value": "1748563200"
+                    },
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "token",
+                      "description": "(Required) Caiyun Weather API token issued by the Open Platform (platform.caiyunapp.com). Embedded in the path rather than a header."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lnglat",
+                      "description": "(Required) Longitude,latitude tuple as `lng,lat` (note the order — longitude first). Use WGS84 decimal degrees."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"error\": \"Invalid token\",\n  \"api_status\": \"deactive\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5eeee1e4-b98c-4088-9d6e-b433cf7c2665",
+              "name": "Invalid or missing API token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":token",
+                    ":lnglat",
+                    "daily"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lang",
+                      "value": "en_US"
+                    },
+                    {
+                      "key": "unit",
+                      "value": "metric:v2"
+                    },
+                    {
+                      "key": "dailysteps",
+                      "value": "7"
+                    },
+                    {
+                      "key": "begin",
+                      "value": "1748563200"
+                    },
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "token",
+                      "description": "(Required) Caiyun Weather API token issued by the Open Platform (platform.caiyunapp.com). Embedded in the path rather than a header."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lnglat",
+                      "description": "(Required) Longitude,latitude tuple as `lng,lat` (note the order — longitude first). Use WGS84 decimal degrees."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"error\": \"Invalid token\",\n  \"api_status\": \"deactive\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "39126205-51c3-4b11-bda2-a23faf29f590",
+              "name": "Per-token quota exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":token",
+                    ":lnglat",
+                    "daily"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lang",
+                      "value": "en_US"
+                    },
+                    {
+                      "key": "unit",
+                      "value": "metric:v2"
+                    },
+                    {
+                      "key": "dailysteps",
+                      "value": "7"
+                    },
+                    {
+                      "key": "begin",
+                      "value": "1748563200"
+                    },
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "token",
+                      "description": "(Required) Caiyun Weather API token issued by the Open Platform (platform.caiyunapp.com). Embedded in the path rather than a header."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lnglat",
+                      "description": "(Required) Longitude,latitude tuple as `lng,lat` (note the order — longitude first). Use WGS84 decimal degrees."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"error\": \"Invalid token\",\n  \"api_status\": \"deactive\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "7861de2f-5beb-4f0f-838a-fa3ad3ec63b1",
+      "name": "Weather",
+      "description": {
+        "content": "Combined weather envelope returning realtime, minutely, hourly, daily, and alerts in one call.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "93a58e2c-6ee7-4699-a64c-ce9cbd9e0a3a",
+          "name": "Caiyun Weather Get Combined Weather Envelope",
+          "request": {
+            "name": "Caiyun Weather Get Combined Weather Envelope",
+            "description": {
+              "content": "Returns a combined response containing realtime, minutely, hourly, and daily forecast blocks in a single call, optionally with severe- weather alerts. The granu parameter narrows the response to a single granularity (realtime, minutely, hourly, daily) when only part of the envelope is needed.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":token",
+                ":lnglat",
+                "weather"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "lang",
+                  "value": "en_US",
+                  "description": "Response language for description fields."
+                },
+                {
+                  "disabled": false,
+                  "key": "unit",
+                  "value": "metric",
+                  "description": "Unit system for numeric values (temperature, wind, precipitation, pressure)."
+                },
+                {
+                  "disabled": false,
+                  "key": "dailysteps",
+                  "value": "5",
+                  "description": "Number of daily forecast days to return. Free tier caps at 3."
+                },
+                {
+                  "disabled": false,
+                  "key": "hourlysteps",
+                  "value": "48",
+                  "description": "Number of hourly forecast steps to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "alert",
+                  "value": "false",
+                  "description": "Include severe-weather alerts in the combined weather response."
+                },
+                {
+                  "disabled": false,
+                  "key": "begin",
+                  "value": "<integer>",
+                  "description": "Anchor the forecast or historical series at a specific Unix epoch second instead of \"now\". Used to fetch past 24h (historical) or shift the start of the forecast window."
+                },
+                {
+                  "disabled": false,
+                  "key": "granu",
+                  "value": "<string>",
+                  "description": "Restrict the combined /weather response to a single granularity instead of returning the full envelope."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "token",
+                  "description": "(Required) Caiyun Weather API token issued by the Open Platform (platform.caiyunapp.com). Embedded in the path rather than a header."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "lnglat",
+                  "description": "(Required) Longitude,latitude tuple as `lng,lat` (note the order — longitude first). Use WGS84 decimal degrees."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "97dae4dc-0358-43cb-8cf5-18963d62d315",
+              "name": "Combined weather payload",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":token",
+                    ":lnglat",
+                    "weather"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lang",
+                      "value": "en_US"
+                    },
+                    {
+                      "key": "unit",
+                      "value": "metric:v2"
+                    },
+                    {
+                      "key": "dailysteps",
+                      "value": "7"
+                    },
+                    {
+                      "key": "hourlysteps",
+                      "value": "72"
+                    },
+                    {
+                      "key": "alert",
+                      "value": "true"
+                    },
+                    {
+                      "key": "begin",
+                      "value": "1748563200"
+                    },
+                    {
+                      "key": "granu",
+                      "value": "hourly"
+                    },
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "token",
+                      "description": "(Required) Caiyun Weather API token issued by the Open Platform (platform.caiyunapp.com). Embedded in the path rather than a header."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lnglat",
+                      "description": "(Required) Longitude,latitude tuple as `lng,lat` (note the order — longitude first). Use WGS84 decimal degrees."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"api_status\": \"active\",\n  \"api_version\": \"v2.6\",\n  \"result\": {\n    \"primary\": 0,\n    \"forecast_keypoint\": \"clear weather, overcast after 20 o'clock\",\n    \"realtime\": {\n      \"status\": \"ok\",\n      \"temperature\": 22.4,\n      \"humidity\": 0.58,\n      \"cloudrate\": 0.32,\n      \"skycon\": \"PARTLY_CLOUDY_DAY\",\n      \"wind\": {\n        \"speed\": 12.4,\n        \"direction\": 215\n      },\n      \"visibility\": 14.2,\n      \"dswrf\": 412,\n      \"pressure\": 100240,\n      \"apparent_temperature\": 21.8,\n      \"precipitation\": {\n        \"local\": {\n          \"status\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"datasource\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"intensity\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"nearest\": {\n          \"status\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"distance\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"intensity\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"air_quality\": {\n        \"aqi\": {\n          \"chn\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"usa\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"description\": {\n          \"chn\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"usa\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"pm25\": 32,\n        \"pm10\": 48,\n        \"o3\": 96,\n        \"so2\": 4,\n        \"no2\": 21,\n        \"co\": 0.6\n      },\n      \"life_index\": {\n        \"ultraviolet\": {\n          \"index\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"desc\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"comfort\": {\n          \"index\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"desc\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    },\n    \"minutely\": {\n      \"status\": \"ok\",\n      \"description\": \"clear weather over the next 2 hours\",\n      \"datasource\": \"radar\",\n      \"precipitation_2h\": [\n        6955.530326379722,\n        1173.8194384214805,\n        8221.888085674405,\n        6241.244600156173,\n        4917.226465865665,\n        3262.7369275126716,\n        4574.021865239365,\n        7388.640927577174,\n        9498.852498835024,\n        7940.3913368162985,\n        5087.176530446051,\n        6673.380618284669,\n        6287.239768187404,\n        7901.109242553193,\n        1914.173632956475,\n        4889.5173345181,\n        701.5255587490554,\n        8085.98700620716,\n        293.095436368882,\n        9961.561506444516\n      ],\n      \"precipitation\": [\n        3696.3149858694856,\n        1943.4773999031074,\n        491.25681546616005,\n        7968.071805143017,\n        3473.67017318316,\n        6276.282733951941,\n        201.29020656624584,\n        2068.2564964118233,\n        1725.6126584907083,\n        628.1068795386158,\n        5613.698568079379,\n        4260.119050398046,\n        9845.975941897275,\n        3251.8207279706203,\n        703.6919094456962,\n        546.6562104571326,\n        9464.719878030814,\n        761.065417835497,\n        3065.1990920877392,\n        7673.424419831062\n      ],\n      \"probability\": [\n        1567.3454741575065,\n        7805.885105678426\n      ]\n    },\n    \"hourly\": {\n      \"status\": \"ok\",\n      \"description\": \"clear weather over the next 24 hours\",\n      \"precipitation\": [\n        {\n          \"datetime\": \"2000-09-23T14:01:36.487Z\",\n          \"value\": 147.40297829954673,\n          \"probability\": 7729.940826521879\n        },\n        {\n          \"datetime\": \"2005-01-11T13:23:31.053Z\",\n          \"value\": 8763.901143975398,\n          \"probability\": 532.4995310771108\n        }\n      ],\n      \"temperature\": [\n        {\n          \"datetime\": \"2026-05-30T15:00:00+08:00\",\n          \"value\": 23.1\n        },\n        {\n          \"datetime\": \"2026-05-30T15:00:00+08:00\",\n          \"value\": 23.1\n        }\n      ],\n      \"apparent_temperature\": [\n        {\n          \"datetime\": \"2026-05-30T15:00:00+08:00\",\n          \"value\": 23.1\n        },\n        {\n          \"datetime\": \"2026-05-30T15:00:00+08:00\",\n          \"value\": 23.1\n        }\n      ],\n      \"humidity\": [\n        {\n          \"datetime\": \"2026-05-30T15:00:00+08:00\",\n          \"value\": 23.1\n        },\n        {\n          \"datetime\": \"2026-05-30T15:00:00+08:00\",\n          \"value\": 23.1\n        }\n      ],\n      \"cloudrate\": [\n        {\n          \"datetime\": \"2026-05-30T15:00:00+08:00\",\n          \"value\": 23.1\n        },\n        {\n          \"datetime\": \"2026-05-30T15:00:00+08:00\",\n          \"value\": 23.1\n        }\n      ],\n      \"skycon\": [\n        {\n          \"datetime\": \"1975-05-31T07:08:02.751Z\",\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"datetime\": \"1964-12-29T10:33:26.500Z\",\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"pressure\": [\n        {\n          \"datetime\": \"2026-05-30T15:00:00+08:00\",\n          \"value\": 23.1\n        },\n        {\n          \"datetime\": \"2026-05-30T15:00:00+08:00\",\n          \"value\": 23.1\n        }\n      ],\n      \"visibility\": [\n        {\n          \"datetime\": \"2026-05-30T15:00:00+08:00\",\n          \"value\": 23.1\n        },\n        {\n          \"datetime\": \"2026-05-30T15:00:00+08:00\",\n          \"value\": 23.1\n        }\n      ],\n      \"dswrf\": [\n        {\n          \"datetime\": \"2026-05-30T15:00:00+08:00\",\n          \"value\": 23.1\n        },\n        {\n          \"datetime\": \"2026-05-30T15:00:00+08:00\",\n          \"value\": 23.1\n        }\n      ],\n      \"wind\": [\n        {\n          \"datetime\": \"2007-04-01T16:54:56.098Z\",\n          \"speed\": 3113.2613428636414,\n          \"direction\": 5982.982926038626\n        },\n        {\n          \"datetime\": \"2005-09-18T17:00:06.587Z\",\n          \"speed\": 7874.420023633976,\n          \"direction\": 8529.750378324326\n        }\n      ],\n      \"air_quality\": {\n        \"aqi\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"pm25\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      }\n    },\n    \"daily\": {\n      \"status\": \"ok\",\n      \"astro\": [\n        {\n          \"date\": \"1966-10-10\",\n          \"sunrise\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"sunset\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"date\": \"1992-08-30\",\n          \"sunrise\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"sunset\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"precipitation\": [\n        {\n          \"date\": \"1987-06-17\",\n          \"max\": 2036.5366987501343,\n          \"min\": 3493.968826501156,\n          \"avg\": 6512.084613647871,\n          \"probability\": 4108.5417195620485\n        },\n        {\n          \"date\": \"1979-10-25\",\n          \"max\": 5525.930154817118,\n          \"min\": 5892.697356210483,\n          \"avg\": 4219.200035002673,\n          \"probability\": 3723.947943312097\n        }\n      ],\n      \"precipitation_08h_20h\": [\n        {\n          \"date\": \"1970-02-10\",\n          \"max\": 105.96802278610595,\n          \"min\": 6499.768407461171,\n          \"avg\": 8150.742453399596,\n          \"probability\": 2474.184847330195\n        },\n        {\n          \"date\": \"1971-08-06\",\n          \"max\": 582.6374840596249,\n          \"min\": 267.7686416712521,\n          \"avg\": 9676.791692847668,\n          \"probability\": 8470.430605045958\n        }\n      ],\n      \"precipitation_20h_32h\": [\n        {\n          \"date\": \"1973-04-18\",\n          \"max\": 1020.3711955933293,\n          \"min\": 4385.903622534646,\n          \"avg\": 675.1177691407406,\n          \"probability\": 9176.25672112725\n        },\n        {\n          \"date\": \"1951-06-21\",\n          \"max\": 3906.9438358624784,\n          \"min\": 5762.60149901924,\n          \"avg\": 2029.8567090775643,\n          \"probability\": 4396.822401704075\n        }\n      ],\n      \"temperature\": [\n        {\n          \"date\": \"2005-12-14\",\n          \"max\": 5874.364707103441,\n          \"min\": 2727.876634177342,\n          \"avg\": 5962.264936641675\n        },\n        {\n          \"date\": \"1994-08-31\",\n          \"max\": 6019.307743532177,\n          \"min\": 3279.771756712113,\n          \"avg\": 6174.609967643038\n        }\n      ],\n      \"temperature_08h_20h\": [\n        {\n          \"date\": \"1980-07-15\",\n          \"max\": 9010.613513747947,\n          \"min\": 2458.052059340038,\n          \"avg\": 5872.638939519495\n        },\n        {\n          \"date\": \"1986-12-25\",\n          \"max\": 6747.066687445673,\n          \"min\": 5733.1308180196975,\n          \"avg\": 8840.358103797515\n        }\n      ],\n      \"temperature_20h_32h\": [\n        {\n          \"date\": \"1976-03-27\",\n          \"max\": 8692.42163035596,\n          \"min\": 4684.896830126427,\n          \"avg\": 8768.269837562342\n        },\n        {\n          \"date\": \"1963-10-22\",\n          \"max\": 332.45450054486093,\n          \"min\": 531.8278889381878,\n          \"avg\": 1992.1564117055934\n        }\n      ],\n      \"humidity\": [\n        {\n          \"date\": \"1946-11-22\",\n          \"max\": 1887.926677765902,\n          \"min\": 1654.6200127159393,\n          \"avg\": 2884.265177821925\n        },\n        {\n          \"date\": \"1989-03-09\",\n          \"max\": 3566.2485335621186,\n          \"min\": 6745.857913719765,\n          \"avg\": 4421.812896282657\n        }\n      ],\n      \"cloudrate\": [\n        {\n          \"date\": \"1966-07-27\",\n          \"max\": 4347.061642381021,\n          \"min\": 4005.5382616546176,\n          \"avg\": 3025.815884687446\n        },\n        {\n          \"date\": \"1964-12-17\",\n          \"max\": 4506.357863318602,\n          \"min\": 9243.031275412284,\n          \"avg\": 4687.245866534127\n        }\n      ],\n      \"pressure\": [\n        {\n          \"date\": \"2002-04-16\",\n          \"max\": 7616.425464389722,\n          \"min\": 8398.590908758708,\n          \"avg\": 4331.317888318962\n        },\n        {\n          \"date\": \"1963-04-07\",\n          \"max\": 6609.110045215728,\n          \"min\": 6647.152103166491,\n          \"avg\": 35.62012842581841\n        }\n      ],\n      \"visibility\": [\n        {\n          \"date\": \"1954-07-17\",\n          \"max\": 9484.524522694024,\n          \"min\": 9822.707412085749,\n          \"avg\": 1710.2187153683524\n        },\n        {\n          \"date\": \"1989-03-14\",\n          \"max\": 5028.94734158537,\n          \"min\": 8674.828847371964,\n          \"avg\": 6482.728625649571\n        }\n      ],\n      \"dswrf\": [\n        {\n          \"date\": \"1978-10-06\",\n          \"max\": 9068.570526094127,\n          \"min\": 1225.3088604632355,\n          \"avg\": 8759.733262721105\n        },\n        {\n          \"date\": \"1951-10-09\",\n          \"max\": 3150.6782942494137,\n          \"min\": 4395.59706009104,\n          \"avg\": 9391.927496339575\n        }\n      ],\n      \"wind\": [\n        {\n          \"date\": \"1968-05-26\",\n          \"max\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"min\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"avg\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"date\": \"1953-04-24\",\n          \"max\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"min\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"avg\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"wind_08h_20h\": [\n        {\n          \"date\": \"2007-01-18\",\n          \"max\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"min\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"avg\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"date\": \"2025-04-05\",\n          \"max\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"min\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"avg\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"wind_20h_32h\": [\n        {\n          \"date\": \"1968-08-24\",\n          \"max\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"min\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"avg\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"date\": \"1954-08-26\",\n          \"max\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"min\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"avg\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"skycon\": [\n        {\n          \"date\": \"1955-11-11\",\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"date\": \"1989-04-05\",\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"skycon_08h_20h\": [\n        {\n          \"date\": \"2024-10-05\",\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"date\": \"1981-01-10\",\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"skycon_20h_32h\": [\n        {\n          \"date\": \"2011-02-11\",\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"date\": \"1948-01-07\",\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"life_index\": {\n        \"ultraviolet\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"carWashing\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"dressing\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"comfort\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"coldRisk\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      },\n      \"air_quality\": {\n        \"aqi\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"pm25\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      }\n    },\n    \"alert\": {\n      \"status\": \"ok\",\n      \"content\": [\n        {\n          \"code\": \"0902\",\n          \"description\": \"string\",\n          \"title\": \"string\",\n          \"status\": \"active\",\n          \"province\": \"Beijing\",\n          \"pubtimestamp\": 8208.614258444906,\n          \"city\": \"string\",\n          \"adcode\": \"string\",\n          \"regionId\": \"string\",\n          \"latlon\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"county\": \"string\",\n          \"alertId\": \"string\",\n          \"request_status\": \"string\",\n          \"source\": \"string\",\n          \"location\": \"string\"\n        },\n        {\n          \"code\": \"0902\",\n          \"description\": \"string\",\n          \"title\": \"string\",\n          \"status\": \"active\",\n          \"province\": \"Beijing\",\n          \"pubtimestamp\": 3943.224797621235,\n          \"city\": \"string\",\n          \"adcode\": \"string\",\n          \"regionId\": \"string\",\n          \"latlon\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"county\": \"string\",\n          \"alertId\": \"string\",\n          \"request_status\": \"string\",\n          \"source\": \"string\",\n          \"location\": \"string\"\n        }\n      ],\n      \"adcodes\": [\n        {\n          \"adcode\": 110108,\n          \"name\": \"Haidian\"\n        },\n        {\n          \"adcode\": 110108,\n          \"name\": \"Haidian\"\n        }\n      ]\n    }\n  },\n  \"status\": \"ok\",\n  \"lang\": \"en_US\",\n  \"unit\": \"metric:v2\",\n  \"tzshift\": 28800,\n  \"timezone\": \"Asia/Shanghai\",\n  \"server_time\": 1748563200,\n  \"location\": [\n    2732.299226606607,\n    4998.951567748784\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4d2a4b71-fe14-4bbe-8bad-38a5da02666d",
+              "name": "Malformed request (invalid coordinates, parameter out of range)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":token",
+                    ":lnglat",
+                    "weather"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lang",
+                      "value": "en_US"
+                    },
+                    {
+                      "key": "unit",
+                      "value": "metric:v2"
+                    },
+                    {
+                      "key": "dailysteps",
+                      "value": "7"
+                    },
+                    {
+                      "key": "hourlysteps",
+                      "value": "72"
+                    },
+                    {
+                      "key": "alert",
+                      "value": "true"
+                    },
+                    {
+                      "key": "begin",
+                      "value": "1748563200"
+                    },
+                    {
+                      "key": "granu",
+                      "value": "hourly"
+                    },
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "token",
+                      "description": "(Required) Caiyun Weather API token issued by the Open Platform (platform.caiyunapp.com). Embedded in the path rather than a header."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lnglat",
+                      "description": "(Required) Longitude,latitude tuple as `lng,lat` (note the order — longitude first). Use WGS84 decimal degrees."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"error\": \"Invalid token\",\n  \"api_status\": \"deactive\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e2ade389-c8d8-489d-bb97-2c7010a73aac",
+              "name": "Invalid or missing API token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":token",
+                    ":lnglat",
+                    "weather"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lang",
+                      "value": "en_US"
+                    },
+                    {
+                      "key": "unit",
+                      "value": "metric:v2"
+                    },
+                    {
+                      "key": "dailysteps",
+                      "value": "7"
+                    },
+                    {
+                      "key": "hourlysteps",
+                      "value": "72"
+                    },
+                    {
+                      "key": "alert",
+                      "value": "true"
+                    },
+                    {
+                      "key": "begin",
+                      "value": "1748563200"
+                    },
+                    {
+                      "key": "granu",
+                      "value": "hourly"
+                    },
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "token",
+                      "description": "(Required) Caiyun Weather API token issued by the Open Platform (platform.caiyunapp.com). Embedded in the path rather than a header."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lnglat",
+                      "description": "(Required) Longitude,latitude tuple as `lng,lat` (note the order — longitude first). Use WGS84 decimal degrees."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"error\": \"Invalid token\",\n  \"api_status\": \"deactive\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a89b5017-1120-4cf8-a440-c46109c427c7",
+              "name": "Per-token quota exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":token",
+                    ":lnglat",
+                    "weather"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lang",
+                      "value": "en_US"
+                    },
+                    {
+                      "key": "unit",
+                      "value": "metric:v2"
+                    },
+                    {
+                      "key": "dailysteps",
+                      "value": "7"
+                    },
+                    {
+                      "key": "hourlysteps",
+                      "value": "72"
+                    },
+                    {
+                      "key": "alert",
+                      "value": "true"
+                    },
+                    {
+                      "key": "begin",
+                      "value": "1748563200"
+                    },
+                    {
+                      "key": "granu",
+                      "value": "hourly"
+                    },
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "token",
+                      "description": "(Required) Caiyun Weather API token issued by the Open Platform (platform.caiyunapp.com). Embedded in the path rather than a header."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lnglat",
+                      "description": "(Required) Longitude,latitude tuple as `lng,lat` (note the order — longitude first). Use WGS84 decimal degrees."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"error\": \"Invalid token\",\n  \"api_status\": \"deactive\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "4dfa4630-f771-42ac-8765-e02888f6e6ce",
+      "name": "Air Quality",
+      "description": {
+        "content": "Real-time pollutant readings and AQI values under CHN and USA standards.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "da51d109-8f6d-4aef-b49c-f172b464ff41",
+          "name": "Caiyun Weather Get Realtime Air Quality",
+          "request": {
+            "name": "Caiyun Weather Get Realtime Air Quality",
+            "description": {
+              "content": "Returns real-time air quality readings — PM2.5, PM10, O3, SO2, NO2, CO concentrations plus AQI values and category descriptions under both Chinese (HJ 633-2012) and US EPA standards.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":token",
+                ":lnglat",
+                "air-quality"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "lang",
+                  "value": "en_US",
+                  "description": "Response language for description fields."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "token",
+                  "description": "(Required) Caiyun Weather API token issued by the Open Platform (platform.caiyunapp.com). Embedded in the path rather than a header."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "lnglat",
+                  "description": "(Required) Longitude,latitude tuple as `lng,lat` (note the order — longitude first). Use WGS84 decimal degrees."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d6ce8936-65a7-4197-a84b-e67524037125",
+              "name": "Realtime air quality payload",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":token",
+                    ":lnglat",
+                    "air-quality"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lang",
+                      "value": "en_US"
+                    },
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "token",
+                      "description": "(Required) Caiyun Weather API token issued by the Open Platform (platform.caiyunapp.com). Embedded in the path rather than a header."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lnglat",
+                      "description": "(Required) Longitude,latitude tuple as `lng,lat` (note the order — longitude first). Use WGS84 decimal degrees."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"ok\",\n  \"api_version\": \"v2.6\",\n  \"api_status\": \"active\",\n  \"lang\": \"en_US\",\n  \"unit\": \"metric:v2\",\n  \"tzshift\": 28800,\n  \"timezone\": \"Asia/Shanghai\",\n  \"server_time\": 1748563200,\n  \"location\": [\n    3728.323946108666,\n    8498.078171016565\n  ],\n  \"result\": {\n    \"realtime\": {\n      \"air_quality\": {\n        \"aqi\": {\n          \"chn\": 78,\n          \"usa\": 95\n        },\n        \"description\": {\n          \"chn\": \"Good\",\n          \"usa\": \"Moderate\"\n        },\n        \"pm25\": 32,\n        \"pm10\": 48,\n        \"o3\": 96,\n        \"so2\": 4,\n        \"no2\": 21,\n        \"co\": 0.6\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6194edcc-d903-4b56-96fa-ce0b46391475",
+              "name": "Malformed request (invalid coordinates, parameter out of range)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":token",
+                    ":lnglat",
+                    "air-quality"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lang",
+                      "value": "en_US"
+                    },
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "token",
+                      "description": "(Required) Caiyun Weather API token issued by the Open Platform (platform.caiyunapp.com). Embedded in the path rather than a header."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lnglat",
+                      "description": "(Required) Longitude,latitude tuple as `lng,lat` (note the order — longitude first). Use WGS84 decimal degrees."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"error\": \"Invalid token\",\n  \"api_status\": \"deactive\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1f1e4857-852b-4ee2-b977-97860e4288ea",
+              "name": "Invalid or missing API token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":token",
+                    ":lnglat",
+                    "air-quality"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lang",
+                      "value": "en_US"
+                    },
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "token",
+                      "description": "(Required) Caiyun Weather API token issued by the Open Platform (platform.caiyunapp.com). Embedded in the path rather than a header."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lnglat",
+                      "description": "(Required) Longitude,latitude tuple as `lng,lat` (note the order — longitude first). Use WGS84 decimal degrees."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"error\": \"Invalid token\",\n  \"api_status\": \"deactive\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "795d66a9-2c5a-4117-a989-85c6fb56a763",
+              "name": "Per-token quota exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":token",
+                    ":lnglat",
+                    "air-quality"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lang",
+                      "value": "en_US"
+                    },
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "token",
+                      "description": "(Required) Caiyun Weather API token issued by the Open Platform (platform.caiyunapp.com). Embedded in the path rather than a header."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lnglat",
+                      "description": "(Required) Longitude,latitude tuple as `lng,lat` (note the order — longitude first). Use WGS84 decimal degrees."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"error\": \"Invalid token\",\n  \"api_status\": \"deactive\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "571b7402-ca7f-49b6-979d-fcb5713a4f65",
+      "name": "Alerts",
+      "description": {
+        "content": "Severe-weather alerts published by the China Meteorological Administration.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e6794781-4b94-4d32-afb2-39ee4c111c43",
+          "name": "Caiyun Weather Get Severe Weather Alerts",
+          "request": {
+            "name": "Caiyun Weather Get Severe Weather Alerts",
+            "description": {
+              "content": "Returns the active severe-weather alerts published by the China Meteorological Administration for the requested location, including title, code, status, description, region (province/city/county), adcode, publication timestamp, and originating source.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":token",
+                ":lnglat",
+                "alert"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "lang",
+                  "value": "en_US",
+                  "description": "Response language for description fields."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "token",
+                  "description": "(Required) Caiyun Weather API token issued by the Open Platform (platform.caiyunapp.com). Embedded in the path rather than a header."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "lnglat",
+                  "description": "(Required) Longitude,latitude tuple as `lng,lat` (note the order — longitude first). Use WGS84 decimal degrees."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f0e6c18a-d1fb-413c-b469-cf793d3ae6cd",
+              "name": "Severe-weather alert payload",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":token",
+                    ":lnglat",
+                    "alert"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lang",
+                      "value": "en_US"
+                    },
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "token",
+                      "description": "(Required) Caiyun Weather API token issued by the Open Platform (platform.caiyunapp.com). Embedded in the path rather than a header."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lnglat",
+                      "description": "(Required) Longitude,latitude tuple as `lng,lat` (note the order — longitude first). Use WGS84 decimal degrees."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"ok\",\n  \"api_version\": \"v2.6\",\n  \"api_status\": \"active\",\n  \"lang\": \"en_US\",\n  \"unit\": \"metric:v2\",\n  \"tzshift\": 28800,\n  \"timezone\": \"Asia/Shanghai\",\n  \"server_time\": 1748563200,\n  \"location\": [\n    55.904936163699844,\n    5528.784082471075\n  ],\n  \"result\": {\n    \"alert\": {\n      \"status\": \"ok\",\n      \"content\": [\n        {\n          \"code\": \"0902\",\n          \"description\": \"string\",\n          \"title\": \"string\",\n          \"status\": \"active\",\n          \"province\": \"Beijing\",\n          \"pubtimestamp\": 7692.001110864581,\n          \"city\": \"string\",\n          \"adcode\": \"string\",\n          \"regionId\": \"string\",\n          \"latlon\": [\n            125.57799424031013,\n            4732.587040772721\n          ],\n          \"county\": \"string\",\n          \"alertId\": \"string\",\n          \"request_status\": \"string\",\n          \"source\": \"string\",\n          \"location\": \"string\"\n        },\n        {\n          \"code\": \"0902\",\n          \"description\": \"string\",\n          \"title\": \"string\",\n          \"status\": \"active\",\n          \"province\": \"Beijing\",\n          \"pubtimestamp\": 8243.57531079177,\n          \"city\": \"string\",\n          \"adcode\": \"string\",\n          \"regionId\": \"string\",\n          \"latlon\": [\n            1579.458330141903,\n            2913.853736583146\n          ],\n          \"county\": \"string\",\n          \"alertId\": \"string\",\n          \"request_status\": \"string\",\n          \"source\": \"string\",\n          \"location\": \"string\"\n        }\n      ],\n      \"adcodes\": [\n        {\n          \"adcode\": 110108,\n          \"name\": \"Haidian\"\n        },\n        {\n          \"adcode\": 110108,\n          \"name\": \"Haidian\"\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3ce11591-781d-4999-811f-3801ed229458",
+              "name": "Malformed request (invalid coordinates, parameter out of range)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":token",
+                    ":lnglat",
+                    "alert"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lang",
+                      "value": "en_US"
+                    },
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "token",
+                      "description": "(Required) Caiyun Weather API token issued by the Open Platform (platform.caiyunapp.com). Embedded in the path rather than a header."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lnglat",
+                      "description": "(Required) Longitude,latitude tuple as `lng,lat` (note the order — longitude first). Use WGS84 decimal degrees."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"error\": \"Invalid token\",\n  \"api_status\": \"deactive\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b800b22f-a7d5-4ee6-a935-57f3083b441e",
+              "name": "Invalid or missing API token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":token",
+                    ":lnglat",
+                    "alert"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lang",
+                      "value": "en_US"
+                    },
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "token",
+                      "description": "(Required) Caiyun Weather API token issued by the Open Platform (platform.caiyunapp.com). Embedded in the path rather than a header."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lnglat",
+                      "description": "(Required) Longitude,latitude tuple as `lng,lat` (note the order — longitude first). Use WGS84 decimal degrees."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"error\": \"Invalid token\",\n  \"api_status\": \"deactive\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c4784f32-6444-4bbd-99a2-9940d8b55949",
+              "name": "Per-token quota exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":token",
+                    ":lnglat",
+                    "alert"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lang",
+                      "value": "en_US"
+                    },
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "token",
+                      "description": "(Required) Caiyun Weather API token issued by the Open Platform (platform.caiyunapp.com). Embedded in the path rather than a header."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lnglat",
+                      "description": "(Required) Longitude,latitude tuple as `lng,lat` (note the order — longitude first). Use WGS84 decimal degrees."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"error\": \"Invalid token\",\n  \"api_status\": \"deactive\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "6d71be4d-fb85-40ed-97f0-1960505b347f",
+      "name": "Precipitation Map",
+      "description": {
+        "content": "Radar + nowcast precipitation map raster for live overlays.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2f09fd47-2fcb-4944-a880-924ca9712de3",
+          "name": "Caiyun Weather Get Precipitation Map Tile",
+          "request": {
+            "name": "Caiyun Weather Get Precipitation Map Tile",
+            "description": {
+              "content": "Returns a 256x256 PNG raster tile representing radar + nowcast precipitation intensity colored by the standard dBZ palette. Suitable for overlaying on Web Mercator base maps (Mapbox, MapLibre, OpenLayers, Leaflet) to render live precipitation animations.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "precipitation",
+                ":z",
+                ":x",
+                "{{y}}.png"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "timestamp",
+                  "value": "<integer>",
+                  "description": "Optional Unix epoch second for the nowcast frame. Omit to receive the most recent observation; provide a future timestamp within the nowcast horizon to render a forecast frame."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "z",
+                  "description": "(Required) Web Mercator zoom level (0-9 typical)."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "x",
+                  "description": "(Required) Web Mercator tile column."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "image/png"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "170be837-583a-44ed-819c-240cba336c26",
+              "name": "PNG raster tile",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "precipitation",
+                    ":z",
+                    ":x",
+                    "{{y}}.png"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "timestamp",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "z",
+                      "description": "(Required) Web Mercator zoom level (0-9 typical)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "x",
+                      "description": "(Required) Web Mercator tile column."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "image/png"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "image/png"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "dc420e21-bc89-481a-9142-8d0c5d792705",
+              "name": "Invalid or missing API token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "precipitation",
+                    ":z",
+                    ":x",
+                    "{{y}}.png"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "timestamp",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "z",
+                      "description": "(Required) Web Mercator zoom level (0-9 typical)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "x",
+                      "description": "(Required) Web Mercator tile column."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"error\": \"Invalid token\",\n  \"api_status\": \"deactive\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4c2caf09-bb95-4e20-9e4b-c4fb054b65ed",
+              "name": "Tile not available for the requested coordinates or timestamp",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "precipitation",
+                    ":z",
+                    ":x",
+                    "{{y}}.png"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "timestamp",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "z",
+                      "description": "(Required) Web Mercator zoom level (0-9 typical)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "x",
+                      "description": "(Required) Web Mercator tile column."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.caiyunapp.com/v2.6",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) Web Mercator tile row.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<integer>",
+      "key": "y"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "token"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "82d9e947-77b9-42d1-8746-a5e95de76a7e",
+    "name": "Caiyun Weather API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Caiyun Weather API v2.6 from ColorfulClouds Tech (彩云科技). Hyperlocal weather, minute-level precipitation nowcasting, hourly forecast up to 360 hours, daily forecast up to 15 days, real-time air quality with CHN + USA AQI standards, severe-weather alerts, life indices, and a precipitation map raster. All operations share a single base URL pattern with the API token embedded in the path and lng,lat as a path tuple.\n\nContact Support:\n Name: ColorfulClouds Tech (彩云科技)\n Email: hi@caiyunapp.com",
+      "type": "text/plain"
+    }
+  }
+}
