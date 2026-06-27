@@ -43,11 +43,11 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.caiyunapp.com/weather-api/
-      - type: SignUp
+      - type: Signup
         url: https://platform.caiyunapp.com/
       - type: OpenAPI
         url: openapi/colorfulclouds-caiyun-weather-openapi.yml
-      - type: SDK
+      - type: SDKs
         title: Python SDK
         url: https://pypi.org/project/cy-weather-api/
       - type: CodeExamples
