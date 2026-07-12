@@ -1,0 +1,19 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/colorfulclouds-caiyun-weather-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - query
+schemes:
+- name: pathToken
+  type: apiKey
+  in: query
+  parameter: token
+  description: Caiyun Weather API token. Note that the token is conventionally embedded in the
+    path between the API version and the lng,lat segment rather than sent as a header or query
+    parameter. This security scheme is recorded for tooling completeness; clients should construct
+    the URL with the token in the path as documented.
+  sources:
+  - openapi/colorfulclouds-caiyun-weather-openapi.yml
