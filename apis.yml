@@ -54,6 +54,8 @@ apis:
         title: Python SDK Source
         url: https://github.com/caiyunapp/caiyun-weather-api-python-sdk
 common:
+  - type: AgenticAccess
+    url: agentic-access/colorfulclouds-agentic-access.yml
   - type: DomainSecurity
     url: security/colorfulclouds-domain-security.yml
   - type: Authentication

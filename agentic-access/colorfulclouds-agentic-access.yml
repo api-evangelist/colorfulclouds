@@ -1,0 +1,94 @@
+generated: '2026-07-15'
+method: generated
+source: openapi/colorfulclouds-caiyun-weather-openapi.yml
+description: Recommended x-agentic-access execution contracts, classified heuristically from
+  the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
+  audience per deployment. See research/curity/agentic-governance/.
+summary:
+  operations: 8
+  by_action_class:
+    connected: 8
+  by_consequence:
+    read: 8
+  human_in_the_loop_required: 0
+operations:
+- path: /{token}/{lnglat}/realtime
+  method: get
+  operationId: getRealtimeWeather
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /{token}/{lnglat}/minutely
+  method: get
+  operationId: getMinutelyPrecipitation
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /{token}/{lnglat}/hourly
+  method: get
+  operationId: getHourlyForecast
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /{token}/{lnglat}/daily
+  method: get
+  operationId: getDailyForecast
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /{token}/{lnglat}/weather
+  method: get
+  operationId: getWeatherCombined
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /{token}/{lnglat}/air-quality
+  method: get
+  operationId: getRealtimeAirQuality
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /{token}/{lnglat}/alert
+  method: get
+  operationId: getWeatherAlerts
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /precipitation/{z}/{x}/{y}.png
+  method: get
+  operationId: getPrecipitationMapTile
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
