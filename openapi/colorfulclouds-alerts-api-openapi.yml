@@ -1,0 +1,265 @@
+openapi: 3.0.3
+info:
+  title: Caiyun Weather Air Quality Alerts API
+  version: '2.6'
+  description: Caiyun Weather API v2.6 from ColorfulClouds Tech (彩云科技). Hyperlocal weather, minute-level precipitation nowcasting, hourly forecast up to 360 hours, daily forecast up to 15 days, real-time air quality with CHN + USA AQI standards, severe-weather alerts, life indices, and a precipitation map raster. All operations share a single base URL pattern with the API token embedded in the path and lng,lat as a path tuple.
+  contact:
+    name: ColorfulClouds Tech (彩云科技)
+    url: https://docs.caiyunapp.com/weather-api/
+    email: hi@caiyunapp.com
+  license:
+    name: Commercial — Caiyun Weather API Terms
+    url: https://platform.caiyunapp.com/
+  x-generated-from: documentation+sdk
+  x-source-urls:
+  - https://docs.caiyunapp.com/weather-api/
+  - https://github.com/caiyunapp/mcp-caiyun-weather
+  - https://github.com/caiyunapp/caiyun-weather-api-python-sdk
+  x-last-validated: '2026-05-30'
+servers:
+- url: https://api.caiyunapp.com/v2.6
+  description: Caiyun Weather API v2.6 production endpoint
+security:
+- pathToken: []
+tags:
+- name: Alerts
+  description: Severe-weather alerts published by the China Meteorological Administration.
+paths:
+  /{token}/{lnglat}/alert:
+    parameters:
+    - $ref: '#/components/parameters/Token'
+    - $ref: '#/components/parameters/LngLat'
+    get:
+      operationId: getWeatherAlerts
+      summary: Caiyun Weather Get Severe Weather Alerts
+      description: Returns the active severe-weather alerts published by the China Meteorological Administration for the requested location, including title, code, status, description, region (province/city/county), adcode, publication timestamp, and originating source.
+      tags:
+      - Alerts
+      parameters:
+      - $ref: '#/components/parameters/Lang'
+      responses:
+        '200':
+          description: Severe-weather alert payload
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlertResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    AlertResponse:
+      title: AlertResponse
+      allOf:
+      - $ref: '#/components/schemas/EnvelopeBase'
+      - type: object
+        properties:
+          result:
+            type: object
+            properties:
+              alert:
+                $ref: '#/components/schemas/Alert'
+            required:
+            - alert
+    ErrorResponse:
+      title: ErrorResponse
+      type: object
+      description: Error envelope returned for invalid requests, auth failures, and rate-limit violations.
+      properties:
+        status:
+          type: string
+          example: failed
+        error:
+          type: string
+          example: Invalid token
+        api_status:
+          type: string
+          example: deactive
+      required:
+      - status
+    AlertAdcode:
+      title: AlertAdcode
+      type: object
+      properties:
+        adcode:
+          type: integer
+          example: 110108
+        name:
+          type: string
+          example: Haidian
+      required:
+      - adcode
+      - name
+    EnvelopeBase:
+      title: EnvelopeBase
+      type: object
+      description: Common envelope fields returned by every Caiyun Weather endpoint.
+      properties:
+        status:
+          type: string
+          example: ok
+        api_version:
+          type: string
+          example: v2.6
+        api_status:
+          type: string
+          example: active
+        lang:
+          type: string
+          example: en_US
+        unit:
+          type: string
+          example: metric:v2
+        tzshift:
+          type: integer
+          description: Time zone shift in seconds from UTC.
+          example: 28800
+        timezone:
+          type: string
+          example: Asia/Shanghai
+        server_time:
+          type: integer
+          description: Server time as Unix epoch seconds.
+          example: 1748563200
+        location:
+          type: array
+          items:
+            type: number
+            format: float
+          minItems: 2
+          maxItems: 2
+          description: Resolved (lat,lng) the response was generated for.
+      required:
+      - status
+      - api_version
+      - api_status
+    AlertContentItem:
+      title: AlertContentItem
+      type: object
+      properties:
+        province:
+          type: string
+          example: Beijing
+        status:
+          type: string
+          example: active
+        code:
+          type: string
+          description: Alert code per China Meteorological Administration scheme.
+          example: 0902
+        description:
+          type: string
+        pubtimestamp:
+          type: number
+          format: double
+          description: Publication time as Unix epoch seconds.
+        city:
+          type: string
+        adcode:
+          type: string
+        regionId:
+          type: string
+        latlon:
+          type: array
+          items:
+            type: number
+            format: float
+          minItems: 2
+          maxItems: 2
+        county:
+          type: string
+        alertId:
+          type: string
+        request_status:
+          type: string
+        source:
+          type: string
+        title:
+          type: string
+        location:
+          type: string
+      required:
+      - code
+      - description
+      - title
+      - status
+    Alert:
+      title: Alert
+      type: object
+      properties:
+        status:
+          type: string
+          example: ok
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/AlertContentItem'
+        adcodes:
+          type: array
+          items:
+            $ref: '#/components/schemas/AlertAdcode'
+  parameters:
+    Lang:
+      name: lang
+      in: query
+      required: false
+      description: Response language for description fields.
+      schema:
+        type: string
+        enum:
+        - zh_CN
+        - zh_TW
+        - ja
+        - en_GB
+        - en_US
+        default: en_US
+      example: en_US
+    LngLat:
+      name: lnglat
+      in: path
+      required: true
+      description: Longitude,latitude tuple as `lng,lat` (note the order — longitude first). Use WGS84 decimal degrees.
+      schema:
+        type: string
+        pattern: ^-?\d+(\.\d+)?,-?\d+(\.\d+)?$
+      example: 116.4074,39.9042
+    Token:
+      name: token
+      in: path
+      required: true
+      description: Caiyun Weather API token issued by the Open Platform (platform.caiyunapp.com). Embedded in the path rather than a header.
+      schema:
+        type: string
+      example: TAkhjf8d1nlSlspN
+  responses:
+    RateLimited:
+      description: Per-token quota exceeded
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Malformed request (invalid coordinates, parameter out of range)
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Invalid or missing API token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    pathToken:
+      type: apiKey
+      in: query
+      name: token
+      description: Caiyun Weather API token. Note that the token is conventionally embedded in the path between the API version and the lng,lat segment rather than sent as a header or query parameter. This security scheme is recorded for tooling completeness; clients should construct the URL with the token in the path as documented.

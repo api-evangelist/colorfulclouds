@@ -1,0 +1,110 @@
+openapi: 3.0.3
+info:
+  title: Caiyun Weather Air Quality Precipitation Map API
+  version: '2.6'
+  description: Caiyun Weather API v2.6 from ColorfulClouds Tech (彩云科技). Hyperlocal weather, minute-level precipitation nowcasting, hourly forecast up to 360 hours, daily forecast up to 15 days, real-time air quality with CHN + USA AQI standards, severe-weather alerts, life indices, and a precipitation map raster. All operations share a single base URL pattern with the API token embedded in the path and lng,lat as a path tuple.
+  contact:
+    name: ColorfulClouds Tech (彩云科技)
+    url: https://docs.caiyunapp.com/weather-api/
+    email: hi@caiyunapp.com
+  license:
+    name: Commercial — Caiyun Weather API Terms
+    url: https://platform.caiyunapp.com/
+  x-generated-from: documentation+sdk
+  x-source-urls:
+  - https://docs.caiyunapp.com/weather-api/
+  - https://github.com/caiyunapp/mcp-caiyun-weather
+  - https://github.com/caiyunapp/caiyun-weather-api-python-sdk
+  x-last-validated: '2026-05-30'
+servers:
+- url: https://api.caiyunapp.com/v2.6
+  description: Caiyun Weather API v2.6 production endpoint
+security:
+- pathToken: []
+tags:
+- name: Precipitation Map
+  description: Radar + nowcast precipitation map raster for live overlays.
+paths:
+  /precipitation/{z}/{x}/{y}.png:
+    parameters:
+    - name: z
+      in: path
+      required: true
+      description: Web Mercator zoom level (0-9 typical).
+      schema:
+        type: integer
+        minimum: 0
+        maximum: 18
+    - name: x
+      in: path
+      required: true
+      description: Web Mercator tile column.
+      schema:
+        type: integer
+        minimum: 0
+    - name: y
+      in: path
+      required: true
+      description: Web Mercator tile row.
+      schema:
+        type: integer
+        minimum: 0
+    get:
+      operationId: getPrecipitationMapTile
+      summary: Caiyun Weather Get Precipitation Map Tile
+      description: Returns a 256x256 PNG raster tile representing radar + nowcast precipitation intensity colored by the standard dBZ palette. Suitable for overlaying on Web Mercator base maps (Mapbox, MapLibre, OpenLayers, Leaflet) to render live precipitation animations.
+      tags:
+      - Precipitation Map
+      parameters:
+      - name: timestamp
+        in: query
+        description: Optional Unix epoch second for the nowcast frame. Omit to receive the most recent observation; provide a future timestamp within the nowcast horizon to render a forecast frame.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: PNG raster tile
+          content:
+            image/png:
+              schema:
+                type: string
+                format: binary
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          description: Tile not available for the requested coordinates or timestamp
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    ErrorResponse:
+      title: ErrorResponse
+      type: object
+      description: Error envelope returned for invalid requests, auth failures, and rate-limit violations.
+      properties:
+        status:
+          type: string
+          example: failed
+        error:
+          type: string
+          example: Invalid token
+        api_status:
+          type: string
+          example: deactive
+      required:
+      - status
+  responses:
+    Unauthorized:
+      description: Invalid or missing API token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    pathToken:
+      type: apiKey
+      in: query
+      name: token
+      description: Caiyun Weather API token. Note that the token is conventionally embedded in the path between the API version and the lng,lat segment rather than sent as a header or query parameter. This security scheme is recorded for tooling completeness; clients should construct the URL with the token in the path as documented.
