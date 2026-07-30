@@ -7,6 +7,19 @@ description: >-
   powers consumer apps (Amap, Sina Weather) and enterprise weather integrations across China and globally, billed via
   tiered token plans on the Open Platform.
 url: https://docs.caiyunapp.com/weather-api/
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 image: https://caiyunapp.com/static/img/logo.png
 humanURL: https://caiyunapp.com/
 specificationVersion: '0.20'
@@ -25,34 +38,115 @@ tags:
   - Geospatial
   - China
 apis:
-  - name: Caiyun Weather API
-    description: >-
-      Caiyun Weather API v2.6 — hyperlocal weather, minute-level precipitation, hourly/daily forecasts, air quality,
-      life indices, severe-weather alerts, and a precipitation map raster. Single base URL with token in path and
-      lng,lat in path, returning a unified JSON envelope with status, location, timezone, and a result block that
-      contains realtime/minutely/hourly/daily/ alert sub-objects depending on the endpoint or granu parameter.
-    humanURL: https://docs.caiyunapp.com/weather-api/
-    baseURL: https://api.caiyunapp.com/v2.6
-    image: https://caiyunapp.com/static/img/logo.png
-    tags:
-      - Weather
-      - Forecasting
-      - Air Quality
-      - Precipitation
-      - Alerts
-    properties:
-      - type: Documentation
-        url: https://docs.caiyunapp.com/weather-api/
-      - type: Signup
-        url: https://platform.caiyunapp.com/
-      - type: OpenAPI
-        url: openapi/colorfulclouds-caiyun-weather-openapi.yml
-      - type: SDKs
-        title: Python SDK
-        url: https://pypi.org/project/cy-weather-api/
-      - type: CodeExamples
-        title: Python SDK Source
-        url: https://github.com/caiyunapp/caiyun-weather-api-python-sdk
+- aid: colorfulclouds:colorfulclouds-air-quality-api
+  name: ColorfulClouds Air Quality API
+  description: Real-time pollutant readings and AQI values under CHN and USA standards.
+  humanURL: https://docs.caiyunapp.com/weather-api/
+  baseURL: https://api.caiyunapp.com/v2.6
+  tags:
+  - Air Quality
+  properties:
+  - type: OpenAPI
+    url: openapi/colorfulclouds-air-quality-api-openapi.yml
+  - type: Documentation
+    url: https://docs.caiyunapp.com/weather-api/
+  - type: Signup
+    url: https://platform.caiyunapp.com/
+  - type: SDKs
+    url: https://pypi.org/project/cy-weather-api/
+  - type: CodeExamples
+    url: https://github.com/caiyunapp/caiyun-weather-api-python-sdk
+- aid: colorfulclouds:colorfulclouds-alerts-api
+  name: ColorfulClouds Alerts API
+  description: Severe-weather alerts published by the China Meteorological Administration.
+  humanURL: https://docs.caiyunapp.com/weather-api/
+  baseURL: https://api.caiyunapp.com/v2.6
+  tags:
+  - Alerts
+  properties:
+  - type: OpenAPI
+    url: openapi/colorfulclouds-alerts-api-openapi.yml
+  - type: Documentation
+    url: https://docs.caiyunapp.com/weather-api/
+  - type: Signup
+    url: https://platform.caiyunapp.com/
+  - type: SDKs
+    url: https://pypi.org/project/cy-weather-api/
+  - type: CodeExamples
+    url: https://github.com/caiyunapp/caiyun-weather-api-python-sdk
+- aid: colorfulclouds:colorfulclouds-forecast-api
+  name: ColorfulClouds Forecast API
+  description: Minute-level, hourly, and daily forecast endpoints.
+  humanURL: https://docs.caiyunapp.com/weather-api/
+  baseURL: https://api.caiyunapp.com/v2.6
+  tags:
+  - Forecast
+  properties:
+  - type: OpenAPI
+    url: openapi/colorfulclouds-forecast-api-openapi.yml
+  - type: Documentation
+    url: https://docs.caiyunapp.com/weather-api/
+  - type: Signup
+    url: https://platform.caiyunapp.com/
+  - type: SDKs
+    url: https://pypi.org/project/cy-weather-api/
+  - type: CodeExamples
+    url: https://github.com/caiyunapp/caiyun-weather-api-python-sdk
+- aid: colorfulclouds:colorfulclouds-precipitation-map-api
+  name: ColorfulClouds Precipitation Map API
+  description: Radar + nowcast precipitation map raster for live overlays.
+  humanURL: https://docs.caiyunapp.com/weather-api/
+  baseURL: https://api.caiyunapp.com/v2.6
+  tags:
+  - Precipitation Map
+  properties:
+  - type: OpenAPI
+    url: openapi/colorfulclouds-precipitation-map-api-openapi.yml
+  - type: Documentation
+    url: https://docs.caiyunapp.com/weather-api/
+  - type: Signup
+    url: https://platform.caiyunapp.com/
+  - type: SDKs
+    url: https://pypi.org/project/cy-weather-api/
+  - type: CodeExamples
+    url: https://github.com/caiyunapp/caiyun-weather-api-python-sdk
+- aid: colorfulclouds:colorfulclouds-realtime-api
+  name: ColorfulClouds Realtime API
+  description: Real-time weather conditions at the requested location.
+  humanURL: https://docs.caiyunapp.com/weather-api/
+  baseURL: https://api.caiyunapp.com/v2.6
+  tags:
+  - Realtime
+  properties:
+  - type: OpenAPI
+    url: openapi/colorfulclouds-realtime-api-openapi.yml
+  - type: Documentation
+    url: https://docs.caiyunapp.com/weather-api/
+  - type: Signup
+    url: https://platform.caiyunapp.com/
+  - type: SDKs
+    url: https://pypi.org/project/cy-weather-api/
+  - type: CodeExamples
+    url: https://github.com/caiyunapp/caiyun-weather-api-python-sdk
+- aid: colorfulclouds:colorfulclouds-weather-api
+  name: ColorfulClouds Weather API
+  description: >-
+    Combined weather envelope returning realtime, minutely, hourly, daily, and alerts in one call.
+  humanURL: https://docs.caiyunapp.com/weather-api/
+  baseURL: https://api.caiyunapp.com/v2.6
+  tags:
+  - Weather
+  properties:
+  - type: OpenAPI
+    url: openapi/colorfulclouds-weather-api-openapi.yml
+  - type: Documentation
+    url: https://docs.caiyunapp.com/weather-api/
+  - type: Signup
+    url: https://platform.caiyunapp.com/
+  - type: SDKs
+    url: https://pypi.org/project/cy-weather-api/
+  - type: CodeExamples
+    url: https://github.com/caiyunapp/caiyun-weather-api-python-sdk
 common:
   - type: AgenticAccess
     url: agentic-access/colorfulclouds-agentic-access.yml
