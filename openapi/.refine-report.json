@@ -1,0 +1,24 @@
+{
+  "provider": "colorfulclouds",
+  "sources": [
+    "colorfulclouds-air-quality-api-openapi.yml",
+    "colorfulclouds-alerts-api-openapi.yml",
+    "colorfulclouds-forecast-api-openapi.yml",
+    "colorfulclouds-precipitation-map-api-openapi.yml",
+    "colorfulclouds-realtime-api-openapi.yml",
+    "colorfulclouds-weather-api-openapi.yml"
+  ],
+  "outputs": [
+    "colorfulclouds-air-quality-api-openapi.yml",
+    "colorfulclouds-alerts-api-openapi.yml",
+    "colorfulclouds-forecast-api-openapi.yml",
+    "colorfulclouds-precipitation-map-api-openapi.yml",
+    "colorfulclouds-realtime-api-openapi.yml",
+    "colorfulclouds-weather-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
