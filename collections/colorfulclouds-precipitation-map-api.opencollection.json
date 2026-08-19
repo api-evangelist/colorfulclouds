@@ -1,0 +1,63 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Caiyun Weather Air Quality Precipitation Map API",
+    "version": "2.6"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "token",
+      "value": "{{token}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Precipitation Map",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Caiyun Weather Get Precipitation Map Tile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.caiyunapp.com/v2.6/precipitation/:z/:x/:y.png",
+            "params": [
+              {
+                "name": "z",
+                "value": "",
+                "type": "path",
+                "description": "Web Mercator zoom level (0-9 typical)."
+              },
+              {
+                "name": "x",
+                "value": "",
+                "type": "path",
+                "description": "Web Mercator tile column."
+              },
+              {
+                "name": "y",
+                "value": "",
+                "type": "path",
+                "description": "Web Mercator tile row."
+              },
+              {
+                "name": "timestamp",
+                "value": "",
+                "type": "query",
+                "description": "Optional Unix epoch second for the nowcast frame. Omit to receive the most recent observation; provide a future timestamp within the nowcast horizon to render a forecast frame."
+              }
+            ]
+          },
+          "docs": "Returns a 256x256 PNG raster tile representing radar + nowcast precipitation intensity colored by the standard dBZ palette. Suitable for overlaying on Web Mercator base maps (Mapbox, MapLibre, OpenLayers, Leaflet) to render live precipitation animations."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

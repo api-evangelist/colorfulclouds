@@ -1,0 +1,57 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Caiyun Weather Air Quality Alerts API",
+    "version": "2.6"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "token",
+      "value": "{{token}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Alerts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Caiyun Weather Get Severe Weather Alerts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.caiyunapp.com/v2.6/:token/:lnglat/alert",
+            "params": [
+              {
+                "name": "token",
+                "value": "TAkhjf8d1nlSlspN",
+                "type": "path",
+                "description": "Caiyun Weather API token issued by the Open Platform (platform.caiyunapp.com). Embedded in the path rather than a header."
+              },
+              {
+                "name": "lnglat",
+                "value": "116.4074,39.9042",
+                "type": "path",
+                "description": "Longitude,latitude tuple as `lng,lat` (note the order — longitude first). Use WGS84 decimal degrees."
+              },
+              {
+                "name": "lang",
+                "value": "en_US",
+                "type": "query",
+                "description": "Response language for description fields."
+              }
+            ]
+          },
+          "docs": "Returns the active severe-weather alerts published by the China Meteorological Administration for the requested location, including title, code, status, description, region (province/city/county), adcode, publication timestamp, and originating source."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,63 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Caiyun Weather Air Quality Realtime API",
+    "version": "2.6"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "token",
+      "value": "{{token}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Realtime",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Caiyun Weather Get Realtime Weather",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.caiyunapp.com/v2.6/:token/:lnglat/realtime",
+            "params": [
+              {
+                "name": "token",
+                "value": "TAkhjf8d1nlSlspN",
+                "type": "path",
+                "description": "Caiyun Weather API token issued by the Open Platform (platform.caiyunapp.com). Embedded in the path rather than a header."
+              },
+              {
+                "name": "lnglat",
+                "value": "116.4074,39.9042",
+                "type": "path",
+                "description": "Longitude,latitude tuple as `lng,lat` (note the order — longitude first). Use WGS84 decimal degrees."
+              },
+              {
+                "name": "lang",
+                "value": "en_US",
+                "type": "query",
+                "description": "Response language for description fields."
+              },
+              {
+                "name": "unit",
+                "value": "metric:v2",
+                "type": "query",
+                "description": "Unit system for numeric values (temperature, wind, precipitation, pressure)."
+              }
+            ]
+          },
+          "docs": "Returns the current weather conditions at the requested location — temperature, humidity, wind, cloud cover, sky condition (skycon), visibility, downward shortwave radiation, pressure, apparent temperature, precipitation, air quality, and life indices."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

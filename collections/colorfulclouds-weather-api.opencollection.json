@@ -1,0 +1,93 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Caiyun Air Quality Weather API",
+    "version": "2.6"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "token",
+      "value": "{{token}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Weather",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Caiyun Weather Get Combined Weather Envelope",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.caiyunapp.com/v2.6/:token/:lnglat/weather",
+            "params": [
+              {
+                "name": "token",
+                "value": "TAkhjf8d1nlSlspN",
+                "type": "path",
+                "description": "Caiyun Weather API token issued by the Open Platform (platform.caiyunapp.com). Embedded in the path rather than a header."
+              },
+              {
+                "name": "lnglat",
+                "value": "116.4074,39.9042",
+                "type": "path",
+                "description": "Longitude,latitude tuple as `lng,lat` (note the order — longitude first). Use WGS84 decimal degrees."
+              },
+              {
+                "name": "lang",
+                "value": "en_US",
+                "type": "query",
+                "description": "Response language for description fields."
+              },
+              {
+                "name": "unit",
+                "value": "metric:v2",
+                "type": "query",
+                "description": "Unit system for numeric values (temperature, wind, precipitation, pressure)."
+              },
+              {
+                "name": "dailysteps",
+                "value": "7",
+                "type": "query",
+                "description": "Number of daily forecast days to return. Free tier caps at 3."
+              },
+              {
+                "name": "hourlysteps",
+                "value": "72",
+                "type": "query",
+                "description": "Number of hourly forecast steps to return."
+              },
+              {
+                "name": "alert",
+                "value": "true",
+                "type": "query",
+                "description": "Include severe-weather alerts in the combined weather response."
+              },
+              {
+                "name": "begin",
+                "value": "1748563200",
+                "type": "query",
+                "description": "Anchor the forecast or historical series at a specific Unix epoch second instead of \"now\". Used to fetch past 24h (historical) or shift the start of the forecast window."
+              },
+              {
+                "name": "granu",
+                "value": "hourly",
+                "type": "query",
+                "description": "Restrict the combined /weather response to a single granularity instead of returning the full envelope."
+              }
+            ]
+          },
+          "docs": "Returns a combined response containing realtime, minutely, hourly, and daily forecast blocks in a single call, optionally with severe- weather alerts. The granu parameter narrows the response to a single granularity (realtime, minutely, hourly, daily) when only part of the envelope is needed."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
