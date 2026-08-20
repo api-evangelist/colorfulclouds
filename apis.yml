@@ -116,6 +116,8 @@ apis:
   humanURL: https://docs.caiyunapp.com/weather-api/
   baseURL: https://api.caiyunapp.com/v2.6
   tags:
+  - Real-Time
+  tags_raw:
   - Realtime
   properties:
   - type: OpenAPI
