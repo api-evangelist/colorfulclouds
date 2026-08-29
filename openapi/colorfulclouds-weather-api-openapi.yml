@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Caiyun Air Quality Weather API
   version: '2.6'
@@ -61,19 +61,128 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    AlertAdcode:
-      title: AlertAdcode
+    Precipitation:
+      title: Precipitation
       type: object
       properties:
-        adcode:
-          type: integer
-          example: 110108
-        name:
-          type: string
-          example: Haidian
+        local:
+          $ref: '#/components/schemas/PrecipitationLocal'
+        nearest:
+          $ref: '#/components/schemas/PrecipitationNearest'
       required:
-      - adcode
-      - name
+      - local
+    DailyWindProperty:
+      title: DailyWindProperty
+      type: object
+      properties:
+        speed:
+          type: number
+          format: float
+        direction:
+          type: number
+          format: float
+      required:
+      - speed
+      - direction
+    PrecipitationLocal:
+      title: PrecipitationLocal
+      type: object
+      description: Realtime local precipitation reading at the requested point.
+      properties:
+        status:
+          type: string
+          description: Local precipitation reading status (ok / error).
+          example: ok
+        datasource:
+          type: string
+          description: Origin of the precipitation reading (radar, satellite, observation).
+          example: radar
+        intensity:
+          type: number
+          format: float
+          description: Precipitation intensity in mm/hr at the point.
+          example: 0.0
+      required:
+      - status
+      - datasource
+      - intensity
+    HourlyAQIItem:
+      title: HourlyAQIItem
+      type: object
+      properties:
+        datetime:
+          type: string
+          format: date-time
+        value:
+          $ref: '#/components/schemas/AQIValueDual'
+      required:
+      - datetime
+      - value
+    DailyAirQuality:
+      title: DailyAirQuality
+      type: object
+      properties:
+        aqi:
+          type: array
+          items:
+            $ref: '#/components/schemas/DailyAQIItem'
+        pm25:
+          type: array
+          items:
+            $ref: '#/components/schemas/DailyMinMaxAvgItem'
+    DailyLifeIndex:
+      title: DailyLifeIndex
+      type: object
+      properties:
+        ultraviolet:
+          type: array
+          items:
+            $ref: '#/components/schemas/DailyLifeIndexEntry'
+        carWashing:
+          type: array
+          items:
+            $ref: '#/components/schemas/DailyLifeIndexEntry'
+        dressing:
+          type: array
+          items:
+            $ref: '#/components/schemas/DailyLifeIndexEntry'
+        comfort:
+          type: array
+          items:
+            $ref: '#/components/schemas/DailyLifeIndexEntry'
+        coldRisk:
+          type: array
+          items:
+            $ref: '#/components/schemas/DailyLifeIndexEntry'
+    AQIValueDual:
+      title: AQIValueDual
+      type: object
+      description: AQI numeric value under both Chinese and US standards.
+      properties:
+        chn:
+          type: number
+          format: float
+          example: 78.0
+        usa:
+          type: number
+          format: float
+          example: 95.0
+      required:
+      - chn
+      - usa
+    HourlyPM25Item:
+      title: HourlyPM25Item
+      type: object
+      properties:
+        datetime:
+          type: string
+          format: date-time
+        value:
+          type: number
+          format: float
+      required:
+      - datetime
+      - value
     DailyPrecipitationItem:
       title: DailyPrecipitationItem
       type: object
@@ -99,172 +208,6 @@ components:
       - min
       - avg
       - probability
-    HourlyPM25Item:
-      title: HourlyPM25Item
-      type: object
-      properties:
-        datetime:
-          type: string
-          format: date-time
-        value:
-          type: number
-          format: float
-      required:
-      - datetime
-      - value
-    HourlyAirQuality:
-      title: HourlyAirQuality
-      type: object
-      properties:
-        aqi:
-          type: array
-          items:
-            $ref: '#/components/schemas/HourlyAQIItem'
-        pm25:
-          type: array
-          items:
-            $ref: '#/components/schemas/HourlyPM25Item'
-    AirQualityRealtime:
-      title: AirQualityRealtime
-      type: object
-      description: Realtime pollutant concentrations and AQI.
-      properties:
-        aqi:
-          $ref: '#/components/schemas/AQIValueDual'
-        description:
-          $ref: '#/components/schemas/AQIDescDual'
-        pm25:
-          type: number
-          format: float
-          description: PM2.5 concentration in µg/m³.
-          example: 32.0
-        pm10:
-          type: number
-          format: float
-          example: 48.0
-        o3:
-          type: number
-          format: float
-          example: 96.0
-        so2:
-          type: number
-          format: float
-          example: 4.0
-        no2:
-          type: number
-          format: float
-          example: 21.0
-        co:
-          type: number
-          format: float
-          description: CO concentration in mg/m³.
-          example: 0.6
-      required:
-      - aqi
-      - description
-    Result:
-      title: Result
-      type: object
-      description: Unified result envelope for the combined /weather endpoint.
-      properties:
-        primary:
-          type: integer
-          description: Primary block index in the envelope.
-          example: 0
-        forecast_keypoint:
-          type: string
-          example: clear weather, overcast after 20 o'clock
-        realtime:
-          $ref: '#/components/schemas/Realtime'
-        minutely:
-          $ref: '#/components/schemas/Minutely'
-        hourly:
-          $ref: '#/components/schemas/Hourly'
-        daily:
-          $ref: '#/components/schemas/Daily'
-        alert:
-          $ref: '#/components/schemas/Alert'
-    PrecipitationNearest:
-      title: PrecipitationNearest
-      type: object
-      description: Nearest precipitation echo to the requested point.
-      properties:
-        status:
-          type: string
-          example: ok
-        distance:
-          type: number
-          format: float
-          description: Distance to the nearest precipitation echo in km.
-          example: 8.7
-        intensity:
-          type: number
-          format: float
-          example: 0.4
-    DailyWindItem:
-      title: DailyWindItem
-      type: object
-      properties:
-        date:
-          type: string
-          format: date
-        max:
-          $ref: '#/components/schemas/DailyWindProperty'
-        min:
-          $ref: '#/components/schemas/DailyWindProperty'
-        avg:
-          $ref: '#/components/schemas/DailyWindProperty'
-      required:
-      - date
-      - max
-      - min
-      - avg
-    HourlyPrecipitationItem:
-      title: HourlyPrecipitationItem
-      type: object
-      properties:
-        datetime:
-          type: string
-          format: date-time
-        value:
-          type: number
-          format: float
-          description: Precipitation intensity in mm/hr.
-        probability:
-          type: number
-          format: float
-          description: Per-hour precipitation probability (0-100).
-      required:
-      - datetime
-      - value
-      - probability
-    LifeIndexItem:
-      title: LifeIndexItem
-      type: object
-      properties:
-        index:
-          oneOf:
-          - type: number
-          - type: string
-          description: Index numeric value (0-5) or string code.
-          example: 3
-        desc:
-          type: string
-          description: Localized description of the index level.
-          example: Moderate
-      required:
-      - index
-      - desc
-    Precipitation:
-      title: Precipitation
-      type: object
-      properties:
-        local:
-          $ref: '#/components/schemas/PrecipitationLocal'
-        nearest:
-          $ref: '#/components/schemas/PrecipitationNearest'
-      required:
-      - local
     DailyMinMaxAvgItem:
       title: DailyMinMaxAvgItem
       type: object
@@ -286,36 +229,77 @@ components:
       - max
       - min
       - avg
-    Wind:
-      title: Wind
+    DailyAstroItem:
+      title: DailyAstroItem
       type: object
-      description: Wind speed and direction.
       properties:
-        speed:
-          type: number
-          format: float
-          description: Wind speed in the active unit system (km/h for metric:v2).
-          example: 12.4
-        direction:
-          type: number
-          format: float
-          description: Wind direction in degrees from north, clockwise.
-          example: 215.0
-    Alert:
-      title: Alert
+        date:
+          type: string
+          format: date
+        sunrise:
+          $ref: '#/components/schemas/DailyAstroTime'
+        sunset:
+          $ref: '#/components/schemas/DailyAstroTime'
+      required:
+      - date
+      - sunrise
+      - sunset
+    EnvelopeBase:
+      title: EnvelopeBase
       type: object
+      description: Common envelope fields returned by every Caiyun Weather endpoint.
       properties:
         status:
           type: string
           example: ok
-        content:
+        api_version:
+          type: string
+          example: v2.6
+        api_status:
+          type: string
+          example: active
+        lang:
+          type: string
+          example: en_US
+        unit:
+          type: string
+          example: metric:v2
+        tzshift:
+          type: integer
+          description: Time zone shift in seconds from UTC.
+          example: 28800
+        timezone:
+          type: string
+          example: Asia/Shanghai
+        server_time:
+          type: integer
+          description: Server time as Unix epoch seconds.
+          example: 1748563200
+        location:
           type: array
           items:
-            $ref: '#/components/schemas/AlertContentItem'
-        adcodes:
-          type: array
-          items:
-            $ref: '#/components/schemas/AlertAdcode'
+            type: number
+            format: float
+          minItems: 2
+          maxItems: 2
+          description: Resolved (lat,lng) the response was generated for.
+      required:
+      - status
+      - api_version
+      - api_status
+    AlertAdcode:
+      title: AlertAdcode
+      type: object
+      properties:
+        adcode:
+          type: integer
+          example: 110108
+        name:
+          type: string
+          example: Haidian
+      required:
+      - adcode
+      - name
     Realtime:
       title: Realtime
       type: object
@@ -374,6 +358,248 @@ components:
       - cloudrate
       - skycon
       - wind
+    HourlyAirQuality:
+      title: HourlyAirQuality
+      type: object
+      properties:
+        aqi:
+          type: array
+          items:
+            $ref: '#/components/schemas/HourlyAQIItem'
+        pm25:
+          type: array
+          items:
+            $ref: '#/components/schemas/HourlyPM25Item'
+    HourlySkyconItem:
+      title: HourlySkyconItem
+      type: object
+      properties:
+        datetime:
+          type: string
+          format: date-time
+        value:
+          $ref: '#/components/schemas/SkyCon'
+      required:
+      - datetime
+      - value
+    WeatherResponse:
+      title: WeatherResponse
+      allOf:
+      - $ref: '#/components/schemas/EnvelopeBase'
+      - type: object
+        properties:
+          result:
+            $ref: '#/components/schemas/Result'
+        required:
+        - result
+    Minutely:
+      title: Minutely
+      type: object
+      description: Minute-level precipitation nowcast block (next 120 minutes).
+      properties:
+        status:
+          type: string
+          example: ok
+        datasource:
+          type: string
+          example: radar
+        precipitation_2h:
+          type: array
+          items:
+            type: number
+            format: float
+          minItems: 120
+          maxItems: 120
+          description: 120 minutes of precipitation intensity in mm/hr.
+        precipitation:
+          type: array
+          items:
+            type: number
+            format: float
+          minItems: 60
+          maxItems: 60
+          description: 60 minutes of precipitation intensity in mm/hr.
+        probability:
+          type: array
+          items:
+            type: number
+            format: float
+          description: Per-segment precipitation probability (0-1).
+        description:
+          type: string
+          description: Natural-language summary of the precipitation pattern.
+          example: clear weather over the next 2 hours
+      required:
+      - status
+      - description
+    HourlyPrecipitationItem:
+      title: HourlyPrecipitationItem
+      type: object
+      properties:
+        datetime:
+          type: string
+          format: date-time
+        value:
+          type: number
+          format: float
+          description: Precipitation intensity in mm/hr.
+        probability:
+          type: number
+          format: float
+          description: Per-hour precipitation probability (0-100).
+      required:
+      - datetime
+      - value
+      - probability
+    HourlyWindItem:
+      title: HourlyWindItem
+      type: object
+      properties:
+        datetime:
+          type: string
+          format: date-time
+        speed:
+          type: number
+          format: float
+        direction:
+          type: number
+          format: float
+      required:
+      - datetime
+      - speed
+      - direction
+    Result:
+      title: Result
+      type: object
+      description: Unified result envelope for the combined /weather endpoint.
+      properties:
+        primary:
+          type: integer
+          description: Primary block index in the envelope.
+          example: 0
+        forecast_keypoint:
+          type: string
+          example: clear weather, overcast after 20 o'clock
+        realtime:
+          $ref: '#/components/schemas/Realtime'
+        minutely:
+          $ref: '#/components/schemas/Minutely'
+        hourly:
+          $ref: '#/components/schemas/Hourly'
+        daily:
+          $ref: '#/components/schemas/Daily'
+        alert:
+          $ref: '#/components/schemas/Alert'
+    AirQualityRealtime:
+      title: AirQualityRealtime
+      type: object
+      description: Realtime pollutant concentrations and AQI.
+      properties:
+        aqi:
+          $ref: '#/components/schemas/AQIValueDual'
+        description:
+          $ref: '#/components/schemas/AQIDescDual'
+        pm25:
+          type: number
+          format: float
+          description: PM2.5 concentration in µg/m³.
+          example: 32.0
+        pm10:
+          type: number
+          format: float
+          example: 48.0
+        o3:
+          type: number
+          format: float
+          example: 96.0
+        so2:
+          type: number
+          format: float
+          example: 4.0
+        no2:
+          type: number
+          format: float
+          example: 21.0
+        co:
+          type: number
+          format: float
+          description: CO concentration in mg/m³.
+          example: 0.6
+      required:
+      - aqi
+      - description
+    Hourly:
+      title: Hourly
+      type: object
+      description: Hourly forecast series block.
+      properties:
+        status:
+          type: string
+          example: ok
+        description:
+          type: string
+          example: clear weather over the next 24 hours
+        precipitation:
+          type: array
+          items:
+            $ref: '#/components/schemas/HourlyPrecipitationItem'
+        temperature:
+          type: array
+          items:
+            $ref: '#/components/schemas/DateTimeValuePair'
+        apparent_temperature:
+          type: array
+          items:
+            $ref: '#/components/schemas/DateTimeValuePair'
+        humidity:
+          type: array
+          items:
+            $ref: '#/components/schemas/DateTimeValuePair'
+        cloudrate:
+          type: array
+          items:
+            $ref: '#/components/schemas/DateTimeValuePair'
+        skycon:
+          type: array
+          items:
+            $ref: '#/components/schemas/HourlySkyconItem'
+        pressure:
+          type: array
+          items:
+            $ref: '#/components/schemas/DateTimeValuePair'
+        visibility:
+          type: array
+          items:
+            $ref: '#/components/schemas/DateTimeValuePair'
+        dswrf:
+          type: array
+          items:
+            $ref: '#/components/schemas/DateTimeValuePair'
+        wind:
+          type: array
+          items:
+            $ref: '#/components/schemas/HourlyWindItem'
+        air_quality:
+          $ref: '#/components/schemas/HourlyAirQuality'
+      required:
+      - status
+      - description
+    ErrorResponse:
+      title: ErrorResponse
+      type: object
+      description: Error envelope returned for invalid requests, auth failures, and rate-limit violations.
+      properties:
+        status:
+          type: string
+          example: failed
+        error:
+          type: string
+          example: Invalid token
+        api_status:
+          type: string
+          example: deactive
+      required:
+      - status
     SkyCon:
       title: SkyCon
       type: string
@@ -414,21 +640,79 @@ components:
       required:
       - chn
       - usa
-    DailyAstroItem:
-      title: DailyAstroItem
+    LifeIndexItem:
+      title: LifeIndexItem
+      type: object
+      properties:
+        index:
+          oneOf:
+          - type: number
+          - type: string
+          description: Index numeric value (0-5) or string code.
+          example: 3
+        desc:
+          type: string
+          description: Localized description of the index level.
+          example: Moderate
+      required:
+      - index
+      - desc
+    Wind:
+      title: Wind
+      type: object
+      description: Wind speed and direction.
+      properties:
+        speed:
+          type: number
+          format: float
+          description: Wind speed in the active unit system (km/h for metric:v2).
+          example: 12.4
+        direction:
+          type: number
+          format: float
+          description: Wind direction in degrees from north, clockwise.
+          example: 215.0
+    DailyWindItem:
+      title: DailyWindItem
       type: object
       properties:
         date:
           type: string
           format: date
-        sunrise:
-          $ref: '#/components/schemas/DailyAstroTime'
-        sunset:
-          $ref: '#/components/schemas/DailyAstroTime'
+        max:
+          $ref: '#/components/schemas/DailyWindProperty'
+        min:
+          $ref: '#/components/schemas/DailyWindProperty'
+        avg:
+          $ref: '#/components/schemas/DailyWindProperty'
       required:
       - date
-      - sunrise
-      - sunset
+      - max
+      - min
+      - avg
+    DailySkyconItem:
+      title: DailySkyconItem
+      type: object
+      properties:
+        date:
+          type: string
+          format: date
+        value:
+          $ref: '#/components/schemas/SkyCon'
+      required:
+      - date
+      - value
+    RealtimeLifeIndex:
+      title: RealtimeLifeIndex
+      type: object
+      properties:
+        ultraviolet:
+          $ref: '#/components/schemas/LifeIndexItem'
+        comfort:
+          $ref: '#/components/schemas/LifeIndexItem'
+      required:
+      - ultraviolet
+      - comfort
     DailyAstroTime:
       title: DailyAstroTime
       type: object
@@ -438,6 +722,71 @@ components:
           example: 05:48
       required:
       - time
+    AlertContentItem:
+      title: AlertContentItem
+      type: object
+      properties:
+        province:
+          type: string
+          example: Beijing
+        status:
+          type: string
+          example: active
+        code:
+          type: string
+          description: Alert code per China Meteorological Administration scheme.
+          example: 0902
+        description:
+          type: string
+        pubtimestamp:
+          type: number
+          format: double
+          description: Publication time as Unix epoch seconds.
+        city:
+          type: string
+        adcode:
+          type: string
+        regionId:
+          type: string
+        latlon:
+          type: array
+          items:
+            type: number
+            format: float
+          minItems: 2
+          maxItems: 2
+        county:
+          type: string
+        alertId:
+          type: string
+        request_status:
+          type: string
+        source:
+          type: string
+        title:
+          type: string
+        location:
+          type: string
+      required:
+      - code
+      - description
+      - title
+      - status
+    Alert:
+      title: Alert
+      type: object
+      properties:
+        status:
+          type: string
+          example: ok
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/AlertContentItem'
+        adcodes:
+          type: array
+          items:
+            $ref: '#/components/schemas/AlertAdcode'
     DailyAQIItem:
       title: DailyAQIItem
       type: object
@@ -456,88 +805,23 @@ components:
       - max
       - min
       - avg
-    HourlyWindItem:
-      title: HourlyWindItem
+    PrecipitationNearest:
+      title: PrecipitationNearest
       type: object
-      properties:
-        datetime:
-          type: string
-          format: date-time
-        speed:
-          type: number
-          format: float
-        direction:
-          type: number
-          format: float
-      required:
-      - datetime
-      - speed
-      - direction
-    WeatherResponse:
-      title: WeatherResponse
-      allOf:
-      - $ref: '#/components/schemas/EnvelopeBase'
-      - type: object
-        properties:
-          result:
-            $ref: '#/components/schemas/Result'
-        required:
-        - result
-    EnvelopeBase:
-      title: EnvelopeBase
-      type: object
-      description: Common envelope fields returned by every Caiyun Weather endpoint.
+      description: Nearest precipitation echo to the requested point.
       properties:
         status:
           type: string
           example: ok
-        api_version:
-          type: string
-          example: v2.6
-        api_status:
-          type: string
-          example: active
-        lang:
-          type: string
-          example: en_US
-        unit:
-          type: string
-          example: metric:v2
-        tzshift:
-          type: integer
-          description: Time zone shift in seconds from UTC.
-          example: 28800
-        timezone:
-          type: string
-          example: Asia/Shanghai
-        server_time:
-          type: integer
-          description: Server time as Unix epoch seconds.
-          example: 1748563200
-        location:
-          type: array
-          items:
-            type: number
-            format: float
-          minItems: 2
-          maxItems: 2
-          description: Resolved (lat,lng) the response was generated for.
-      required:
-      - status
-      - api_version
-      - api_status
-    DailyAirQuality:
-      title: DailyAirQuality
-      type: object
-      properties:
-        aqi:
-          type: array
-          items:
-            $ref: '#/components/schemas/DailyAQIItem'
-        pm25:
-          type: array
-          items:
-            $ref: '#/components/schemas/DailyMinMaxAvgItem'
+        distance:
+          type: number
+          format: float
+          description: Distance to the nearest precipitation echo in km.
+          example: 8.7
+        intensity:
+          type: number
+          format: float
+          example: 0.4
     DailyLifeIndexEntry:
       title: DailyLifeIndexEntry
       type: object
@@ -555,17 +839,6 @@ components:
       - date
       - index
       - desc
-    RealtimeLifeIndex:
-      title: RealtimeLifeIndex
-      type: object
-      properties:
-        ultraviolet:
-          $ref: '#/components/schemas/LifeIndexItem'
-        comfort:
-          $ref: '#/components/schemas/LifeIndexItem'
-      required:
-      - ultraviolet
-      - comfort
     Daily:
       title: Daily
       type: object
@@ -652,18 +925,6 @@ components:
           $ref: '#/components/schemas/DailyAirQuality'
       required:
       - status
-    DailySkyconItem:
-      title: DailySkyconItem
-      type: object
-      properties:
-        date:
-          type: string
-          format: date
-        value:
-          $ref: '#/components/schemas/SkyCon'
-      required:
-      - date
-      - value
     DateTimeValuePair:
       title: DateTimeValuePair
       type: object
@@ -679,279 +940,33 @@ components:
       required:
       - datetime
       - value
-    Hourly:
-      title: Hourly
-      type: object
-      description: Hourly forecast series block.
-      properties:
-        status:
-          type: string
-          example: ok
-        description:
-          type: string
-          example: clear weather over the next 24 hours
-        precipitation:
-          type: array
-          items:
-            $ref: '#/components/schemas/HourlyPrecipitationItem'
-        temperature:
-          type: array
-          items:
-            $ref: '#/components/schemas/DateTimeValuePair'
-        apparent_temperature:
-          type: array
-          items:
-            $ref: '#/components/schemas/DateTimeValuePair'
-        humidity:
-          type: array
-          items:
-            $ref: '#/components/schemas/DateTimeValuePair'
-        cloudrate:
-          type: array
-          items:
-            $ref: '#/components/schemas/DateTimeValuePair'
-        skycon:
-          type: array
-          items:
-            $ref: '#/components/schemas/HourlySkyconItem'
-        pressure:
-          type: array
-          items:
-            $ref: '#/components/schemas/DateTimeValuePair'
-        visibility:
-          type: array
-          items:
-            $ref: '#/components/schemas/DateTimeValuePair'
-        dswrf:
-          type: array
-          items:
-            $ref: '#/components/schemas/DateTimeValuePair'
-        wind:
-          type: array
-          items:
-            $ref: '#/components/schemas/HourlyWindItem'
-        air_quality:
-          $ref: '#/components/schemas/HourlyAirQuality'
-      required:
-      - status
-      - description
-    DailyWindProperty:
-      title: DailyWindProperty
-      type: object
-      properties:
-        speed:
-          type: number
-          format: float
-        direction:
-          type: number
-          format: float
-      required:
-      - speed
-      - direction
-    HourlySkyconItem:
-      title: HourlySkyconItem
-      type: object
-      properties:
-        datetime:
-          type: string
-          format: date-time
-        value:
-          $ref: '#/components/schemas/SkyCon'
-      required:
-      - datetime
-      - value
-    ErrorResponse:
-      title: ErrorResponse
-      type: object
-      description: Error envelope returned for invalid requests, auth failures, and rate-limit violations.
-      properties:
-        status:
-          type: string
-          example: failed
-        error:
-          type: string
-          example: Invalid token
-        api_status:
-          type: string
-          example: deactive
-      required:
-      - status
-    PrecipitationLocal:
-      title: PrecipitationLocal
-      type: object
-      description: Realtime local precipitation reading at the requested point.
-      properties:
-        status:
-          type: string
-          description: Local precipitation reading status (ok / error).
-          example: ok
-        datasource:
-          type: string
-          description: Origin of the precipitation reading (radar, satellite, observation).
-          example: radar
-        intensity:
-          type: number
-          format: float
-          description: Precipitation intensity in mm/hr at the point.
-          example: 0.0
-      required:
-      - status
-      - datasource
-      - intensity
-    AlertContentItem:
-      title: AlertContentItem
-      type: object
-      properties:
-        province:
-          type: string
-          example: Beijing
-        status:
-          type: string
-          example: active
-        code:
-          type: string
-          description: Alert code per China Meteorological Administration scheme.
-          example: 0902
-        description:
-          type: string
-        pubtimestamp:
-          type: number
-          format: double
-          description: Publication time as Unix epoch seconds.
-        city:
-          type: string
-        adcode:
-          type: string
-        regionId:
-          type: string
-        latlon:
-          type: array
-          items:
-            type: number
-            format: float
-          minItems: 2
-          maxItems: 2
-        county:
-          type: string
-        alertId:
-          type: string
-        request_status:
-          type: string
-        source:
-          type: string
-        title:
-          type: string
-        location:
-          type: string
-      required:
-      - code
-      - description
-      - title
-      - status
-    Minutely:
-      title: Minutely
-      type: object
-      description: Minute-level precipitation nowcast block (next 120 minutes).
-      properties:
-        status:
-          type: string
-          example: ok
-        datasource:
-          type: string
-          example: radar
-        precipitation_2h:
-          type: array
-          items:
-            type: number
-            format: float
-          minItems: 120
-          maxItems: 120
-          description: 120 minutes of precipitation intensity in mm/hr.
-        precipitation:
-          type: array
-          items:
-            type: number
-            format: float
-          minItems: 60
-          maxItems: 60
-          description: 60 minutes of precipitation intensity in mm/hr.
-        probability:
-          type: array
-          items:
-            type: number
-            format: float
-          description: Per-segment precipitation probability (0-1).
-        description:
-          type: string
-          description: Natural-language summary of the precipitation pattern.
-          example: clear weather over the next 2 hours
-      required:
-      - status
-      - description
-    DailyLifeIndex:
-      title: DailyLifeIndex
-      type: object
-      properties:
-        ultraviolet:
-          type: array
-          items:
-            $ref: '#/components/schemas/DailyLifeIndexEntry'
-        carWashing:
-          type: array
-          items:
-            $ref: '#/components/schemas/DailyLifeIndexEntry'
-        dressing:
-          type: array
-          items:
-            $ref: '#/components/schemas/DailyLifeIndexEntry'
-        comfort:
-          type: array
-          items:
-            $ref: '#/components/schemas/DailyLifeIndexEntry'
-        coldRisk:
-          type: array
-          items:
-            $ref: '#/components/schemas/DailyLifeIndexEntry'
-    HourlyAQIItem:
-      title: HourlyAQIItem
-      type: object
-      properties:
-        datetime:
-          type: string
-          format: date-time
-        value:
-          $ref: '#/components/schemas/AQIValueDual'
-      required:
-      - datetime
-      - value
-    AQIValueDual:
-      title: AQIValueDual
-      type: object
-      description: AQI numeric value under both Chinese and US standards.
-      properties:
-        chn:
-          type: number
-          format: float
-          example: 78.0
-        usa:
-          type: number
-          format: float
-          example: 95.0
-      required:
-      - chn
-      - usa
   parameters:
-    HourlySteps:
-      name: hourlysteps
+    LngLat:
+      name: lnglat
+      in: path
+      required: true
+      description: Longitude,latitude tuple as `lng,lat` (note the order — longitude first). Use WGS84 decimal degrees.
+      schema:
+        type: string
+        pattern: ^-?\d+(\.\d+)?,-?\d+(\.\d+)?$
+      example: 116.4074,39.9042
+    Alert:
+      name: alert
       in: query
       required: false
-      description: Number of hourly forecast steps to return.
+      description: Include severe-weather alerts in the combined weather response.
       schema:
-        type: integer
-        minimum: 1
-        maximum: 360
-        default: 48
-      example: 72
+        type: boolean
+        default: false
+      example: true
+    Token:
+      name: token
+      in: path
+      required: true
+      description: Caiyun Weather API token issued by the Open Platform (platform.caiyunapp.com). Embedded in the path rather than a header.
+      schema:
+        type: string
+      example: TAkhjf8d1nlSlspN
     Unit:
       name: unit
       in: query
@@ -978,23 +993,31 @@ components:
         maximum: 15
         default: 5
       example: 7
-    Alert:
-      name: alert
+    Granu:
+      name: granu
       in: query
       required: false
-      description: Include severe-weather alerts in the combined weather response.
-      schema:
-        type: boolean
-        default: false
-      example: true
-    Token:
-      name: token
-      in: path
-      required: true
-      description: Caiyun Weather API token issued by the Open Platform (platform.caiyunapp.com). Embedded in the path rather than a header.
+      description: Restrict the combined /weather response to a single granularity instead of returning the full envelope.
       schema:
         type: string
-      example: TAkhjf8d1nlSlspN
+        enum:
+        - realtime
+        - minutely
+        - hourly
+        - daily
+        - weather
+      example: hourly
+    HourlySteps:
+      name: hourlysteps
+      in: query
+      required: false
+      description: Number of hourly forecast steps to return.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 360
+        default: 48
+      example: 72
     Lang:
       name: lang
       in: query
@@ -1010,29 +1033,6 @@ components:
         - en_US
         default: en_US
       example: en_US
-    LngLat:
-      name: lnglat
-      in: path
-      required: true
-      description: Longitude,latitude tuple as `lng,lat` (note the order — longitude first). Use WGS84 decimal degrees.
-      schema:
-        type: string
-        pattern: ^-?\d+(\.\d+)?,-?\d+(\.\d+)?$
-      example: 116.4074,39.9042
-    Granu:
-      name: granu
-      in: query
-      required: false
-      description: Restrict the combined /weather response to a single granularity instead of returning the full envelope.
-      schema:
-        type: string
-        enum:
-        - realtime
-        - minutely
-        - hourly
-        - daily
-        - weather
-      example: hourly
     Begin:
       name: begin
       in: query

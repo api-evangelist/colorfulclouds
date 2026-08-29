@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Caiyun Weather Air Quality Alerts API
   version: '2.6'
@@ -55,19 +55,19 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    AlertResponse:
-      title: AlertResponse
-      allOf:
-      - $ref: '#/components/schemas/EnvelopeBase'
-      - type: object
-        properties:
-          result:
-            type: object
-            properties:
-              alert:
-                $ref: '#/components/schemas/Alert'
-            required:
-            - alert
+    AlertAdcode:
+      title: AlertAdcode
+      type: object
+      properties:
+        adcode:
+          type: integer
+          example: 110108
+        name:
+          type: string
+          example: Haidian
+      required:
+      - adcode
+      - name
     ErrorResponse:
       title: ErrorResponse
       type: object
@@ -84,62 +84,19 @@ components:
           example: deactive
       required:
       - status
-    AlertAdcode:
-      title: AlertAdcode
-      type: object
-      properties:
-        adcode:
-          type: integer
-          example: 110108
-        name:
-          type: string
-          example: Haidian
-      required:
-      - adcode
-      - name
-    EnvelopeBase:
-      title: EnvelopeBase
-      type: object
-      description: Common envelope fields returned by every Caiyun Weather endpoint.
-      properties:
-        status:
-          type: string
-          example: ok
-        api_version:
-          type: string
-          example: v2.6
-        api_status:
-          type: string
-          example: active
-        lang:
-          type: string
-          example: en_US
-        unit:
-          type: string
-          example: metric:v2
-        tzshift:
-          type: integer
-          description: Time zone shift in seconds from UTC.
-          example: 28800
-        timezone:
-          type: string
-          example: Asia/Shanghai
-        server_time:
-          type: integer
-          description: Server time as Unix epoch seconds.
-          example: 1748563200
-        location:
-          type: array
-          items:
-            type: number
-            format: float
-          minItems: 2
-          maxItems: 2
-          description: Resolved (lat,lng) the response was generated for.
-      required:
-      - status
-      - api_version
-      - api_status
+    AlertResponse:
+      title: AlertResponse
+      allOf:
+      - $ref: '#/components/schemas/EnvelopeBase'
+      - type: object
+        properties:
+          result:
+            type: object
+            properties:
+              alert:
+                $ref: '#/components/schemas/Alert'
+            required:
+            - alert
     AlertContentItem:
       title: AlertContentItem
       type: object
@@ -190,6 +147,49 @@ components:
       - description
       - title
       - status
+    EnvelopeBase:
+      title: EnvelopeBase
+      type: object
+      description: Common envelope fields returned by every Caiyun Weather endpoint.
+      properties:
+        status:
+          type: string
+          example: ok
+        api_version:
+          type: string
+          example: v2.6
+        api_status:
+          type: string
+          example: active
+        lang:
+          type: string
+          example: en_US
+        unit:
+          type: string
+          example: metric:v2
+        tzshift:
+          type: integer
+          description: Time zone shift in seconds from UTC.
+          example: 28800
+        timezone:
+          type: string
+          example: Asia/Shanghai
+        server_time:
+          type: integer
+          description: Server time as Unix epoch seconds.
+          example: 1748563200
+        location:
+          type: array
+          items:
+            type: number
+            format: float
+          minItems: 2
+          maxItems: 2
+          description: Resolved (lat,lng) the response was generated for.
+      required:
+      - status
+      - api_version
+      - api_status
     Alert:
       title: Alert
       type: object
@@ -205,7 +205,43 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AlertAdcode'
+  responses:
+    Unauthorized:
+      description: Invalid or missing API token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    RateLimited:
+      description: Per-token quota exceeded
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Malformed request (invalid coordinates, parameter out of range)
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   parameters:
+    Token:
+      name: token
+      in: path
+      required: true
+      description: Caiyun Weather API token issued by the Open Platform (platform.caiyunapp.com). Embedded in the path rather than a header.
+      schema:
+        type: string
+      example: TAkhjf8d1nlSlspN
+    LngLat:
+      name: lnglat
+      in: path
+      required: true
+      description: Longitude,latitude tuple as `lng,lat` (note the order — longitude first). Use WGS84 decimal degrees.
+      schema:
+        type: string
+        pattern: ^-?\d+(\.\d+)?,-?\d+(\.\d+)?$
+      example: 116.4074,39.9042
     Lang:
       name: lang
       in: query
@@ -221,42 +257,6 @@ components:
         - en_US
         default: en_US
       example: en_US
-    LngLat:
-      name: lnglat
-      in: path
-      required: true
-      description: Longitude,latitude tuple as `lng,lat` (note the order — longitude first). Use WGS84 decimal degrees.
-      schema:
-        type: string
-        pattern: ^-?\d+(\.\d+)?,-?\d+(\.\d+)?$
-      example: 116.4074,39.9042
-    Token:
-      name: token
-      in: path
-      required: true
-      description: Caiyun Weather API token issued by the Open Platform (platform.caiyunapp.com). Embedded in the path rather than a header.
-      schema:
-        type: string
-      example: TAkhjf8d1nlSlspN
-  responses:
-    RateLimited:
-      description: Per-token quota exceeded
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Malformed request (invalid coordinates, parameter out of range)
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Invalid or missing API token
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     pathToken:
       type: apiKey

@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Caiyun Weather Air Quality API
   version: '2.6'
@@ -54,40 +54,109 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    Lang:
-      name: lang
-      in: query
-      required: false
-      description: Response language for description fields.
-      schema:
-        type: string
-        enum:
-        - zh_CN
-        - zh_TW
-        - ja
-        - en_GB
-        - en_US
-        default: en_US
-      example: en_US
-    LngLat:
-      name: lnglat
-      in: path
-      required: true
-      description: Longitude,latitude tuple as `lng,lat` (note the order — longitude first). Use WGS84 decimal degrees.
-      schema:
-        type: string
-        pattern: ^-?\d+(\.\d+)?,-?\d+(\.\d+)?$
-      example: 116.4074,39.9042
-    Token:
-      name: token
-      in: path
-      required: true
-      description: Caiyun Weather API token issued by the Open Platform (platform.caiyunapp.com). Embedded in the path rather than a header.
-      schema:
-        type: string
-      example: TAkhjf8d1nlSlspN
   schemas:
+    ErrorResponse:
+      title: ErrorResponse
+      type: object
+      description: Error envelope returned for invalid requests, auth failures, and rate-limit violations.
+      properties:
+        status:
+          type: string
+          example: failed
+        error:
+          type: string
+          example: Invalid token
+        api_status:
+          type: string
+          example: deactive
+      required:
+      - status
+    AQIDescDual:
+      title: AQIDescDual
+      type: object
+      description: AQI category description under both standards.
+      properties:
+        chn:
+          type: string
+          example: Good
+        usa:
+          type: string
+          example: Moderate
+      required:
+      - chn
+      - usa
+    AQIValueDual:
+      title: AQIValueDual
+      type: object
+      description: AQI numeric value under both Chinese and US standards.
+      properties:
+        chn:
+          type: number
+          format: float
+          example: 78.0
+        usa:
+          type: number
+          format: float
+          example: 95.0
+      required:
+      - chn
+      - usa
+    AirQualityRealtimeResponse:
+      title: AirQualityRealtimeResponse
+      allOf:
+      - $ref: '#/components/schemas/EnvelopeBase'
+      - type: object
+        properties:
+          result:
+            type: object
+            properties:
+              realtime:
+                type: object
+                properties:
+                  air_quality:
+                    $ref: '#/components/schemas/AirQualityRealtime'
+                required:
+                - air_quality
+            required:
+            - realtime
+    AirQualityRealtime:
+      title: AirQualityRealtime
+      type: object
+      description: Realtime pollutant concentrations and AQI.
+      properties:
+        aqi:
+          $ref: '#/components/schemas/AQIValueDual'
+        description:
+          $ref: '#/components/schemas/AQIDescDual'
+        pm25:
+          type: number
+          format: float
+          description: PM2.5 concentration in µg/m³.
+          example: 32.0
+        pm10:
+          type: number
+          format: float
+          example: 48.0
+        o3:
+          type: number
+          format: float
+          example: 96.0
+        so2:
+          type: number
+          format: float
+          example: 4.0
+        no2:
+          type: number
+          format: float
+          example: 21.0
+        co:
+          type: number
+          format: float
+          description: CO concentration in mg/m³.
+          example: 0.6
+      required:
+      - aqi
+      - description
     EnvelopeBase:
       title: EnvelopeBase
       type: object
@@ -131,111 +200,9 @@ components:
       - status
       - api_version
       - api_status
-    ErrorResponse:
-      title: ErrorResponse
-      type: object
-      description: Error envelope returned for invalid requests, auth failures, and rate-limit violations.
-      properties:
-        status:
-          type: string
-          example: failed
-        error:
-          type: string
-          example: Invalid token
-        api_status:
-          type: string
-          example: deactive
-      required:
-      - status
-    AirQualityRealtime:
-      title: AirQualityRealtime
-      type: object
-      description: Realtime pollutant concentrations and AQI.
-      properties:
-        aqi:
-          $ref: '#/components/schemas/AQIValueDual'
-        description:
-          $ref: '#/components/schemas/AQIDescDual'
-        pm25:
-          type: number
-          format: float
-          description: PM2.5 concentration in µg/m³.
-          example: 32.0
-        pm10:
-          type: number
-          format: float
-          example: 48.0
-        o3:
-          type: number
-          format: float
-          example: 96.0
-        so2:
-          type: number
-          format: float
-          example: 4.0
-        no2:
-          type: number
-          format: float
-          example: 21.0
-        co:
-          type: number
-          format: float
-          description: CO concentration in mg/m³.
-          example: 0.6
-      required:
-      - aqi
-      - description
-    AirQualityRealtimeResponse:
-      title: AirQualityRealtimeResponse
-      allOf:
-      - $ref: '#/components/schemas/EnvelopeBase'
-      - type: object
-        properties:
-          result:
-            type: object
-            properties:
-              realtime:
-                type: object
-                properties:
-                  air_quality:
-                    $ref: '#/components/schemas/AirQualityRealtime'
-                required:
-                - air_quality
-            required:
-            - realtime
-    AQIDescDual:
-      title: AQIDescDual
-      type: object
-      description: AQI category description under both standards.
-      properties:
-        chn:
-          type: string
-          example: Good
-        usa:
-          type: string
-          example: Moderate
-      required:
-      - chn
-      - usa
-    AQIValueDual:
-      title: AQIValueDual
-      type: object
-      description: AQI numeric value under both Chinese and US standards.
-      properties:
-        chn:
-          type: number
-          format: float
-          example: 78.0
-        usa:
-          type: number
-          format: float
-          example: 95.0
-      required:
-      - chn
-      - usa
   responses:
-    RateLimited:
-      description: Per-token quota exceeded
+    Unauthorized:
+      description: Invalid or missing API token
       content:
         application/json:
           schema:
@@ -246,12 +213,45 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Invalid or missing API token
+    RateLimited:
+      description: Per-token quota exceeded
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    Token:
+      name: token
+      in: path
+      required: true
+      description: Caiyun Weather API token issued by the Open Platform (platform.caiyunapp.com). Embedded in the path rather than a header.
+      schema:
+        type: string
+      example: TAkhjf8d1nlSlspN
+    LngLat:
+      name: lnglat
+      in: path
+      required: true
+      description: Longitude,latitude tuple as `lng,lat` (note the order — longitude first). Use WGS84 decimal degrees.
+      schema:
+        type: string
+        pattern: ^-?\d+(\.\d+)?,-?\d+(\.\d+)?$
+      example: 116.4074,39.9042
+    Lang:
+      name: lang
+      in: query
+      required: false
+      description: Response language for description fields.
+      schema:
+        type: string
+        enum:
+        - zh_CN
+        - zh_TW
+        - ja
+        - en_GB
+        - en_US
+        default: en_US
+      example: en_US
   securitySchemes:
     pathToken:
       type: apiKey

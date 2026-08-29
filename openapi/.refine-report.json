@@ -19,6 +19,14 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
+  "notes": [
+    "colorfulclouds-air-quality-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "colorfulclouds-alerts-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "colorfulclouds-forecast-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "colorfulclouds-precipitation-map-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "colorfulclouds-realtime-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "colorfulclouds-weather-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
   "skipped": []
 }

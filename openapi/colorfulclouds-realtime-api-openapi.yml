@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Caiyun Weather Air Quality Realtime API
   version: '2.6'
@@ -55,115 +55,7 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    RateLimited:
-      description: Per-token quota exceeded
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Malformed request (invalid coordinates, parameter out of range)
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Invalid or missing API token
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   schemas:
-    AirQualityRealtime:
-      title: AirQualityRealtime
-      type: object
-      description: Realtime pollutant concentrations and AQI.
-      properties:
-        aqi:
-          $ref: '#/components/schemas/AQIValueDual'
-        description:
-          $ref: '#/components/schemas/AQIDescDual'
-        pm25:
-          type: number
-          format: float
-          description: PM2.5 concentration in µg/m³.
-          example: 32.0
-        pm10:
-          type: number
-          format: float
-          example: 48.0
-        o3:
-          type: number
-          format: float
-          example: 96.0
-        so2:
-          type: number
-          format: float
-          example: 4.0
-        no2:
-          type: number
-          format: float
-          example: 21.0
-        co:
-          type: number
-          format: float
-          description: CO concentration in mg/m³.
-          example: 0.6
-      required:
-      - aqi
-      - description
-    RealtimeResponse:
-      title: RealtimeResponse
-      allOf:
-      - $ref: '#/components/schemas/EnvelopeBase'
-      - type: object
-        properties:
-          result:
-            type: object
-            properties:
-              realtime:
-                $ref: '#/components/schemas/Realtime'
-              primary:
-                type: integer
-            required:
-            - realtime
-        required:
-        - result
-    PrecipitationNearest:
-      title: PrecipitationNearest
-      type: object
-      description: Nearest precipitation echo to the requested point.
-      properties:
-        status:
-          type: string
-          example: ok
-        distance:
-          type: number
-          format: float
-          description: Distance to the nearest precipitation echo in km.
-          example: 8.7
-        intensity:
-          type: number
-          format: float
-          example: 0.4
-    LifeIndexItem:
-      title: LifeIndexItem
-      type: object
-      properties:
-        index:
-          oneOf:
-          - type: number
-          - type: string
-          description: Index numeric value (0-5) or string code.
-          example: 3
-        desc:
-          type: string
-          description: Localized description of the index level.
-          example: Moderate
-      required:
-      - index
-      - desc
     Precipitation:
       title: Precipitation
       type: object
@@ -174,21 +66,87 @@ components:
           $ref: '#/components/schemas/PrecipitationNearest'
       required:
       - local
-    Wind:
-      title: Wind
+    PrecipitationLocal:
+      title: PrecipitationLocal
       type: object
-      description: Wind speed and direction.
+      description: Realtime local precipitation reading at the requested point.
       properties:
-        speed:
+        status:
+          type: string
+          description: Local precipitation reading status (ok / error).
+          example: ok
+        datasource:
+          type: string
+          description: Origin of the precipitation reading (radar, satellite, observation).
+          example: radar
+        intensity:
           type: number
           format: float
-          description: Wind speed in the active unit system (km/h for metric:v2).
-          example: 12.4
-        direction:
+          description: Precipitation intensity in mm/hr at the point.
+          example: 0.0
+      required:
+      - status
+      - datasource
+      - intensity
+    AQIValueDual:
+      title: AQIValueDual
+      type: object
+      description: AQI numeric value under both Chinese and US standards.
+      properties:
+        chn:
           type: number
           format: float
-          description: Wind direction in degrees from north, clockwise.
-          example: 215.0
+          example: 78.0
+        usa:
+          type: number
+          format: float
+          example: 95.0
+      required:
+      - chn
+      - usa
+    EnvelopeBase:
+      title: EnvelopeBase
+      type: object
+      description: Common envelope fields returned by every Caiyun Weather endpoint.
+      properties:
+        status:
+          type: string
+          example: ok
+        api_version:
+          type: string
+          example: v2.6
+        api_status:
+          type: string
+          example: active
+        lang:
+          type: string
+          example: en_US
+        unit:
+          type: string
+          example: metric:v2
+        tzshift:
+          type: integer
+          description: Time zone shift in seconds from UTC.
+          example: 28800
+        timezone:
+          type: string
+          example: Asia/Shanghai
+        server_time:
+          type: integer
+          description: Server time as Unix epoch seconds.
+          example: 1748563200
+        location:
+          type: array
+          items:
+            type: number
+            format: float
+          minItems: 2
+          maxItems: 2
+          description: Resolved (lat,lng) the response was generated for.
+      required:
+      - status
+      - api_version
+      - api_status
     Realtime:
       title: Realtime
       type: object
@@ -247,6 +205,108 @@ components:
       - cloudrate
       - skycon
       - wind
+    AirQualityRealtime:
+      title: AirQualityRealtime
+      type: object
+      description: Realtime pollutant concentrations and AQI.
+      properties:
+        aqi:
+          $ref: '#/components/schemas/AQIValueDual'
+        description:
+          $ref: '#/components/schemas/AQIDescDual'
+        pm25:
+          type: number
+          format: float
+          description: PM2.5 concentration in µg/m³.
+          example: 32.0
+        pm10:
+          type: number
+          format: float
+          example: 48.0
+        o3:
+          type: number
+          format: float
+          example: 96.0
+        so2:
+          type: number
+          format: float
+          example: 4.0
+        no2:
+          type: number
+          format: float
+          example: 21.0
+        co:
+          type: number
+          format: float
+          description: CO concentration in mg/m³.
+          example: 0.6
+      required:
+      - aqi
+      - description
+    RealtimeResponse:
+      title: RealtimeResponse
+      allOf:
+      - $ref: '#/components/schemas/EnvelopeBase'
+      - type: object
+        properties:
+          result:
+            type: object
+            properties:
+              realtime:
+                $ref: '#/components/schemas/Realtime'
+              primary:
+                type: integer
+            required:
+            - realtime
+        required:
+        - result
+    ErrorResponse:
+      title: ErrorResponse
+      type: object
+      description: Error envelope returned for invalid requests, auth failures, and rate-limit violations.
+      properties:
+        status:
+          type: string
+          example: failed
+        error:
+          type: string
+          example: Invalid token
+        api_status:
+          type: string
+          example: deactive
+      required:
+      - status
+    AQIDescDual:
+      title: AQIDescDual
+      type: object
+      description: AQI category description under both standards.
+      properties:
+        chn:
+          type: string
+          example: Good
+        usa:
+          type: string
+          example: Moderate
+      required:
+      - chn
+      - usa
+    LifeIndexItem:
+      title: LifeIndexItem
+      type: object
+      properties:
+        index:
+          oneOf:
+          - type: number
+          - type: string
+          description: Index numeric value (0-5) or string code.
+          example: 3
+        desc:
+          type: string
+          description: Localized description of the index level.
+          example: Moderate
+      required:
+      - index
+      - desc
     SkyCon:
       title: SkyCon
       type: string
@@ -273,63 +333,21 @@ components:
       - SAND
       - WIND
       example: PARTLY_CLOUDY_DAY
-    AQIDescDual:
-      title: AQIDescDual
+    Wind:
+      title: Wind
       type: object
-      description: AQI category description under both standards.
+      description: Wind speed and direction.
       properties:
-        chn:
-          type: string
-          example: Good
-        usa:
-          type: string
-          example: Moderate
-      required:
-      - chn
-      - usa
-    EnvelopeBase:
-      title: EnvelopeBase
-      type: object
-      description: Common envelope fields returned by every Caiyun Weather endpoint.
-      properties:
-        status:
-          type: string
-          example: ok
-        api_version:
-          type: string
-          example: v2.6
-        api_status:
-          type: string
-          example: active
-        lang:
-          type: string
-          example: en_US
-        unit:
-          type: string
-          example: metric:v2
-        tzshift:
-          type: integer
-          description: Time zone shift in seconds from UTC.
-          example: 28800
-        timezone:
-          type: string
-          example: Asia/Shanghai
-        server_time:
-          type: integer
-          description: Server time as Unix epoch seconds.
-          example: 1748563200
-        location:
-          type: array
-          items:
-            type: number
-            format: float
-          minItems: 2
-          maxItems: 2
-          description: Resolved (lat,lng) the response was generated for.
-      required:
-      - status
-      - api_version
-      - api_status
+        speed:
+          type: number
+          format: float
+          description: Wind speed in the active unit system (km/h for metric:v2).
+          example: 12.4
+        direction:
+          type: number
+          format: float
+          description: Wind direction in degrees from north, clockwise.
+          example: 215.0
     RealtimeLifeIndex:
       title: RealtimeLifeIndex
       type: object
@@ -341,61 +359,41 @@ components:
       required:
       - ultraviolet
       - comfort
-    ErrorResponse:
-      title: ErrorResponse
+    PrecipitationNearest:
+      title: PrecipitationNearest
       type: object
-      description: Error envelope returned for invalid requests, auth failures, and rate-limit violations.
+      description: Nearest precipitation echo to the requested point.
       properties:
         status:
           type: string
-          example: failed
-        error:
-          type: string
-          example: Invalid token
-        api_status:
-          type: string
-          example: deactive
-      required:
-      - status
-    PrecipitationLocal:
-      title: PrecipitationLocal
-      type: object
-      description: Realtime local precipitation reading at the requested point.
-      properties:
-        status:
-          type: string
-          description: Local precipitation reading status (ok / error).
           example: ok
-        datasource:
-          type: string
-          description: Origin of the precipitation reading (radar, satellite, observation).
-          example: radar
+        distance:
+          type: number
+          format: float
+          description: Distance to the nearest precipitation echo in km.
+          example: 8.7
         intensity:
           type: number
           format: float
-          description: Precipitation intensity in mm/hr at the point.
-          example: 0.0
-      required:
-      - status
-      - datasource
-      - intensity
-    AQIValueDual:
-      title: AQIValueDual
-      type: object
-      description: AQI numeric value under both Chinese and US standards.
-      properties:
-        chn:
-          type: number
-          format: float
-          example: 78.0
-        usa:
-          type: number
-          format: float
-          example: 95.0
-      required:
-      - chn
-      - usa
+          example: 0.4
   parameters:
+    LngLat:
+      name: lnglat
+      in: path
+      required: true
+      description: Longitude,latitude tuple as `lng,lat` (note the order — longitude first). Use WGS84 decimal degrees.
+      schema:
+        type: string
+        pattern: ^-?\d+(\.\d+)?,-?\d+(\.\d+)?$
+      example: 116.4074,39.9042
+    Token:
+      name: token
+      in: path
+      required: true
+      description: Caiyun Weather API token issued by the Open Platform (platform.caiyunapp.com). Embedded in the path rather than a header.
+      schema:
+        type: string
+      example: TAkhjf8d1nlSlspN
     Unit:
       name: unit
       in: query
@@ -411,14 +409,6 @@ components:
         - SI
         default: metric
       example: metric:v2
-    Token:
-      name: token
-      in: path
-      required: true
-      description: Caiyun Weather API token issued by the Open Platform (platform.caiyunapp.com). Embedded in the path rather than a header.
-      schema:
-        type: string
-      example: TAkhjf8d1nlSlspN
     Lang:
       name: lang
       in: query
@@ -434,15 +424,25 @@ components:
         - en_US
         default: en_US
       example: en_US
-    LngLat:
-      name: lnglat
-      in: path
-      required: true
-      description: Longitude,latitude tuple as `lng,lat` (note the order — longitude first). Use WGS84 decimal degrees.
-      schema:
-        type: string
-        pattern: ^-?\d+(\.\d+)?,-?\d+(\.\d+)?$
-      example: 116.4074,39.9042
+  responses:
+    RateLimited:
+      description: Per-token quota exceeded
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Malformed request (invalid coordinates, parameter out of range)
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Invalid or missing API token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     pathToken:
       type: apiKey
