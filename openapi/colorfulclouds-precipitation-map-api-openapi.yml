@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Caiyun Weather Air Quality Precipitation Map API
+  title: Caiyun Weather Precipitation Map API
   version: '2.6'
   description: Caiyun Weather API v2.6 from ColorfulClouds Tech (彩云科技). Hyperlocal weather, minute-level precipitation nowcasting, hourly forecast up to 360 hours, daily forecast up to 15 days, real-time air quality with CHN + USA AQI standards, severe-weather alerts, life indices, and a precipitation map raster. All operations share a single base URL pattern with the API token embedded in the path and lng,lat as a path tuple.
   contact:

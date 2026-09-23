@@ -1,12 +1,7 @@
 {
   "provider": "colorfulclouds",
   "sources": [
-    "colorfulclouds-air-quality-api-openapi.yml",
-    "colorfulclouds-alerts-api-openapi.yml",
-    "colorfulclouds-forecast-api-openapi.yml",
-    "colorfulclouds-precipitation-map-api-openapi.yml",
-    "colorfulclouds-realtime-api-openapi.yml",
-    "colorfulclouds-weather-api-openapi.yml"
+    "_ae-authored/colorfulclouds-caiyun-weather-openapi.yml"
   ],
   "outputs": [
     "colorfulclouds-air-quality-api-openapi.yml",
@@ -20,13 +15,16 @@
   "errors": [],
   "warnings": [],
   "notes": [
-    "colorfulclouds-air-quality-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "colorfulclouds-alerts-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "colorfulclouds-forecast-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "colorfulclouds-precipitation-map-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "colorfulclouds-realtime-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "colorfulclouds-weather-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "sourced from openapi/_original/ (0 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "colorfulclouds-caiyun-weather-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
     "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "colorfulclouds-air-quality-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "colorfulclouds-alerts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "colorfulclouds-forecast-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "colorfulclouds-precipitation-map-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "colorfulclouds-realtime-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "colorfulclouds-weather-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

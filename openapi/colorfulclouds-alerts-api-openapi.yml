@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Caiyun Weather Air Quality Alerts API
+  title: Caiyun Weather Alerts API
   version: '2.6'
   description: Caiyun Weather API v2.6 from ColorfulClouds Tech (彩云科技). Hyperlocal weather, minute-level precipitation nowcasting, hourly forecast up to 360 hours, daily forecast up to 15 days, real-time air quality with CHN + USA AQI standards, severe-weather alerts, life indices, and a precipitation map raster. All operations share a single base URL pattern with the API token embedded in the path and lng,lat as a path tuple.
   contact:
@@ -54,6 +54,58 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  parameters:
+    Token:
+      name: token
+      in: path
+      required: true
+      description: Caiyun Weather API token issued by the Open Platform (platform.caiyunapp.com). Embedded in the path rather than a header.
+      schema:
+        type: string
+      example: TAkhjf8d1nlSlspN
+    Lang:
+      name: lang
+      in: query
+      required: false
+      description: Response language for description fields.
+      schema:
+        type: string
+        enum:
+        - zh_CN
+        - zh_TW
+        - ja
+        - en_GB
+        - en_US
+        default: en_US
+      example: en_US
+    LngLat:
+      name: lnglat
+      in: path
+      required: true
+      description: Longitude,latitude tuple as `lng,lat` (note the order — longitude first). Use WGS84 decimal degrees.
+      schema:
+        type: string
+        pattern: ^-?\d+(\.\d+)?,-?\d+(\.\d+)?$
+      example: 116.4074,39.9042
+  responses:
+    BadRequest:
+      description: Malformed request (invalid coordinates, parameter out of range)
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Invalid or missing API token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    RateLimited:
+      description: Per-token quota exceeded
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
     AlertAdcode:
       title: AlertAdcode
@@ -68,35 +120,6 @@ components:
       required:
       - adcode
       - name
-    ErrorResponse:
-      title: ErrorResponse
-      type: object
-      description: Error envelope returned for invalid requests, auth failures, and rate-limit violations.
-      properties:
-        status:
-          type: string
-          example: failed
-        error:
-          type: string
-          example: Invalid token
-        api_status:
-          type: string
-          example: deactive
-      required:
-      - status
-    AlertResponse:
-      title: AlertResponse
-      allOf:
-      - $ref: '#/components/schemas/EnvelopeBase'
-      - type: object
-        properties:
-          result:
-            type: object
-            properties:
-              alert:
-                $ref: '#/components/schemas/Alert'
-            required:
-            - alert
     AlertContentItem:
       title: AlertContentItem
       type: object
@@ -147,6 +170,21 @@ components:
       - description
       - title
       - status
+    Alert:
+      title: Alert
+      type: object
+      properties:
+        status:
+          type: string
+          example: ok
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/AlertContentItem'
+        adcodes:
+          type: array
+          items:
+            $ref: '#/components/schemas/AlertAdcode'
     EnvelopeBase:
       title: EnvelopeBase
       type: object
@@ -190,73 +228,35 @@ components:
       - status
       - api_version
       - api_status
-    Alert:
-      title: Alert
+    AlertResponse:
+      title: AlertResponse
+      allOf:
+      - $ref: '#/components/schemas/EnvelopeBase'
+      - type: object
+        properties:
+          result:
+            type: object
+            properties:
+              alert:
+                $ref: '#/components/schemas/Alert'
+            required:
+            - alert
+    ErrorResponse:
+      title: ErrorResponse
       type: object
+      description: Error envelope returned for invalid requests, auth failures, and rate-limit violations.
       properties:
         status:
           type: string
-          example: ok
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/AlertContentItem'
-        adcodes:
-          type: array
-          items:
-            $ref: '#/components/schemas/AlertAdcode'
-  responses:
-    Unauthorized:
-      description: Invalid or missing API token
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    RateLimited:
-      description: Per-token quota exceeded
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Malformed request (invalid coordinates, parameter out of range)
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-  parameters:
-    Token:
-      name: token
-      in: path
-      required: true
-      description: Caiyun Weather API token issued by the Open Platform (platform.caiyunapp.com). Embedded in the path rather than a header.
-      schema:
-        type: string
-      example: TAkhjf8d1nlSlspN
-    LngLat:
-      name: lnglat
-      in: path
-      required: true
-      description: Longitude,latitude tuple as `lng,lat` (note the order — longitude first). Use WGS84 decimal degrees.
-      schema:
-        type: string
-        pattern: ^-?\d+(\.\d+)?,-?\d+(\.\d+)?$
-      example: 116.4074,39.9042
-    Lang:
-      name: lang
-      in: query
-      required: false
-      description: Response language for description fields.
-      schema:
-        type: string
-        enum:
-        - zh_CN
-        - zh_TW
-        - ja
-        - en_GB
-        - en_US
-        default: en_US
-      example: en_US
+          example: failed
+        error:
+          type: string
+          example: Invalid token
+        api_status:
+          type: string
+          example: deactive
+      required:
+      - status
   securitySchemes:
     pathToken:
       type: apiKey
