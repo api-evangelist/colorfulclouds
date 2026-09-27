@@ -41,6 +41,9 @@ x-source: public-apis/public-apis
 x-category: Weather
 x-type: company
 x-tier: 2
+x-docs-platform: vitepress
+x-docs-platform-confidence: medium
+x-docs-platform-checked: 2026-09-24
 tags:
   - Weather
   - Forecasting
