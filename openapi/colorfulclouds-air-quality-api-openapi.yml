@@ -55,6 +55,92 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    AirQualityRealtime:
+      title: AirQualityRealtime
+      type: object
+      description: Realtime pollutant concentrations and AQI.
+      properties:
+        aqi:
+          $ref: '#/components/schemas/AQIValueDual'
+        description:
+          $ref: '#/components/schemas/AQIDescDual'
+        pm25:
+          type: number
+          format: float
+          description: PM2.5 concentration in µg/m³.
+          example: 32.0
+        pm10:
+          type: number
+          format: float
+          example: 48.0
+        o3:
+          type: number
+          format: float
+          example: 96.0
+        so2:
+          type: number
+          format: float
+          example: 4.0
+        no2:
+          type: number
+          format: float
+          example: 21.0
+        co:
+          type: number
+          format: float
+          description: CO concentration in mg/m³.
+          example: 0.6
+      required:
+      - aqi
+      - description
+    AirQualityRealtimeResponse:
+      title: AirQualityRealtimeResponse
+      allOf:
+      - $ref: '#/components/schemas/EnvelopeBase'
+      - type: object
+        properties:
+          result:
+            type: object
+            properties:
+              realtime:
+                type: object
+                properties:
+                  air_quality:
+                    $ref: '#/components/schemas/AirQualityRealtime'
+                required:
+                - air_quality
+            required:
+            - realtime
+    ErrorResponse:
+      title: ErrorResponse
+      type: object
+      description: Error envelope returned for invalid requests, auth failures, and rate-limit violations.
+      properties:
+        status:
+          type: string
+          example: failed
+        error:
+          type: string
+          example: Invalid token
+        api_status:
+          type: string
+          example: deactive
+      required:
+      - status
+    AQIDescDual:
+      title: AQIDescDual
+      type: object
+      description: AQI category description under both standards.
+      properties:
+        chn:
+          type: string
+          example: Good
+        usa:
+          type: string
+          example: Moderate
+      required:
+      - chn
+      - usa
     EnvelopeBase:
       title: EnvelopeBase
       type: object
@@ -98,40 +184,6 @@ components:
       - status
       - api_version
       - api_status
-    ErrorResponse:
-      title: ErrorResponse
-      type: object
-      description: Error envelope returned for invalid requests, auth failures, and rate-limit violations.
-      properties:
-        status:
-          type: string
-          example: failed
-        error:
-          type: string
-          example: Invalid token
-        api_status:
-          type: string
-          example: deactive
-      required:
-      - status
-    AirQualityRealtimeResponse:
-      title: AirQualityRealtimeResponse
-      allOf:
-      - $ref: '#/components/schemas/EnvelopeBase'
-      - type: object
-        properties:
-          result:
-            type: object
-            properties:
-              realtime:
-                type: object
-                properties:
-                  air_quality:
-                    $ref: '#/components/schemas/AirQualityRealtime'
-                required:
-                - air_quality
-            required:
-            - realtime
     AQIValueDual:
       title: AQIValueDual
       type: object
@@ -148,67 +200,9 @@ components:
       required:
       - chn
       - usa
-    AQIDescDual:
-      title: AQIDescDual
-      type: object
-      description: AQI category description under both standards.
-      properties:
-        chn:
-          type: string
-          example: Good
-        usa:
-          type: string
-          example: Moderate
-      required:
-      - chn
-      - usa
-    AirQualityRealtime:
-      title: AirQualityRealtime
-      type: object
-      description: Realtime pollutant concentrations and AQI.
-      properties:
-        aqi:
-          $ref: '#/components/schemas/AQIValueDual'
-        description:
-          $ref: '#/components/schemas/AQIDescDual'
-        pm25:
-          type: number
-          format: float
-          description: PM2.5 concentration in µg/m³.
-          example: 32.0
-        pm10:
-          type: number
-          format: float
-          example: 48.0
-        o3:
-          type: number
-          format: float
-          example: 96.0
-        so2:
-          type: number
-          format: float
-          example: 4.0
-        no2:
-          type: number
-          format: float
-          example: 21.0
-        co:
-          type: number
-          format: float
-          description: CO concentration in mg/m³.
-          example: 0.6
-      required:
-      - aqi
-      - description
   responses:
     BadRequest:
       description: Malformed request (invalid coordinates, parameter out of range)
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    RateLimited:
-      description: Per-token quota exceeded
       content:
         application/json:
           schema:
@@ -219,7 +213,30 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
+    RateLimited:
+      description: Per-token quota exceeded
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   parameters:
+    LngLat:
+      name: lnglat
+      in: path
+      required: true
+      description: Longitude,latitude tuple as `lng,lat` (note the order — longitude first). Use WGS84 decimal degrees.
+      schema:
+        type: string
+        pattern: ^-?\d+(\.\d+)?,-?\d+(\.\d+)?$
+      example: 116.4074,39.9042
+    Token:
+      name: token
+      in: path
+      required: true
+      description: Caiyun Weather API token issued by the Open Platform (platform.caiyunapp.com). Embedded in the path rather than a header.
+      schema:
+        type: string
+      example: TAkhjf8d1nlSlspN
     Lang:
       name: lang
       in: query
@@ -235,23 +252,6 @@ components:
         - en_US
         default: en_US
       example: en_US
-    Token:
-      name: token
-      in: path
-      required: true
-      description: Caiyun Weather API token issued by the Open Platform (platform.caiyunapp.com). Embedded in the path rather than a header.
-      schema:
-        type: string
-      example: TAkhjf8d1nlSlspN
-    LngLat:
-      name: lnglat
-      in: path
-      required: true
-      description: Longitude,latitude tuple as `lng,lat` (note the order — longitude first). Use WGS84 decimal degrees.
-      schema:
-        type: string
-        pattern: ^-?\d+(\.\d+)?,-?\d+(\.\d+)?$
-      example: 116.4074,39.9042
   securitySchemes:
     pathToken:
       type: apiKey
