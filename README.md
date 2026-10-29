@@ -1,4 +1,4 @@
-# ColorfulClouds (colorfulclouds)
+# ColorfulClouds
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,69 +66,237 @@
 
 ColorfulClouds Tech (彩云科技, Beijing-based) operates the Caiyun Weather API (api.caiyunapp.com), a hyperlocal weather + air quality forecasting service with minute-level precipitation, hourly forecasts up to 360 hours, daily forecasts up to 15 days, real-time AQI/pollutant readings, severe-weather alerts, and a precipitation map raster. The v2.6 platform powers consumer apps (Amap, Sina Weather) and enterprise weather integrations across China and globally, billed via tiered token plans on the Open Platform.
 
-**APIs.json:** [https://docs.caiyunapp.com/weather-api/](https://docs.caiyunapp.com/weather-api/)
+**Areas:** Weather · Forecasting · Air Quality · Precipitation · Hyperlocal · Geospatial · China
 
-## Tags
+## ColorfulClouds on APIs.io
 
-- Weather
-- Forecasting
-- Air Quality
-- Precipitation
-- Hyperlocal
-- Geospatial
-- China
+Everything profiled for ColorfulClouds is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/colorfulclouds/](https://apis.io/providers/colorfulclouds/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (6)
 
-- **Created:** 2026-05-28
-- **Modified:** 2026-05-30
+- [ColorfulClouds Air Quality API](https://apis.io/apis/colorfulclouds/colorfulclouds-air-quality-api/) — Real-time pollutant readings and AQI values under CHN and USA standards.
+- [ColorfulClouds Alerts API](https://apis.io/apis/colorfulclouds/colorfulclouds-alerts-api/) — Severe-weather alerts published by the China Meteorological Administration.
+- [ColorfulClouds Forecast API](https://apis.io/apis/colorfulclouds/colorfulclouds-forecast-api/) — Minute-level, hourly, and daily forecast endpoints.
+- [ColorfulClouds Precipitation Map API](https://apis.io/apis/colorfulclouds/colorfulclouds-precipitation-map-api/) — Radar + nowcast precipitation map raster for live overlays.
+- [ColorfulClouds Realtime API](https://apis.io/apis/colorfulclouds/colorfulclouds-realtime-api/) — Real-time weather conditions at the requested location.
+- [ColorfulClouds Weather API](https://apis.io/apis/colorfulclouds/colorfulclouds-weather-api/) — Combined weather envelope returning realtime, minutely, hourly, daily, and alerts in one call.
 
-## APIs
+### Published properties
 
-### Caiyun Weather API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Caiyun Weather API v2.6 — hyperlocal weather, minute-level precipitation, hourly/daily forecasts, air quality, life indices, severe-weather alerts, and a precipitation map raster. Single base URL with token in path and lng,lat in path, returning a unified JSON envelope with status, location, timezone, and a result block that contains realtime/minutely/hourly/daily/ alert sub-objects depending on the endpoint or granu parameter.
+#### Agentic access (1)
 
-- **Human URL:** [https://docs.caiyunapp.com/weather-api/](https://docs.caiyunapp.com/weather-api/)
-- **Base URL:** `https://api.caiyunapp.com/v2.6`
+Which operations an agent can call, which act, and which need a human in the loop.
 
-#### Tags
+- [Colorfulclouds Agentic Access](https://apis.io/agentic-access/colorfulclouds/colorfulclouds-agentic-access/)
 
-- Weather
-- Forecasting
-- Air Quality
-- Precipitation
-- Alerts
+#### JSON Schema (44)
 
-#### Properties
+The data models the API reads and writes.
 
-- [Documentation](https://docs.caiyunapp.com/weather-api/)
-- [Sign Up](https://platform.caiyunapp.com/)
-- [OpenAPI](openapi/colorfulclouds-caiyun-weather-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/colorfulclouds-caiyun-weather.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/colorfulclouds-caiyun-weather.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [SDK](https://pypi.org/project/cy-weather-api/)
-- [Code Examples](https://github.com/caiyunapp/caiyun-weather-api-python-sdk)
+- [AirQualityRealtime](https://apis.io/schemas/colorfulclouds/caiyun-weather-air-quality-realtime/)
+- [AirQualityRealtimeResponse](https://apis.io/schemas/colorfulclouds/caiyun-weather-air-quality-realtime-response/)
+- [Alert](https://apis.io/schemas/colorfulclouds/caiyun-weather-alert/)
+- [AlertAdcode](https://apis.io/schemas/colorfulclouds/caiyun-weather-alert-adcode/)
+- [AlertContentItem](https://apis.io/schemas/colorfulclouds/caiyun-weather-alert-content-item/)
+- [AlertResponse](https://apis.io/schemas/colorfulclouds/caiyun-weather-alert-response/)
+- [AQIDescDual](https://apis.io/schemas/colorfulclouds/caiyun-weather-aqi-desc-dual/)
+- [AQIValueDual](https://apis.io/schemas/colorfulclouds/caiyun-weather-aqi-value-dual/)
+- [Daily](https://apis.io/schemas/colorfulclouds/caiyun-weather-daily/)
+- [DailyAirQuality](https://apis.io/schemas/colorfulclouds/caiyun-weather-daily-air-quality/)
+- [DailyAQIItem](https://apis.io/schemas/colorfulclouds/caiyun-weather-daily-aqi-item/)
+- [DailyAstroItem](https://apis.io/schemas/colorfulclouds/caiyun-weather-daily-astro-item/)
+- [DailyAstroTime](https://apis.io/schemas/colorfulclouds/caiyun-weather-daily-astro-time/)
+- [DailyLifeIndex](https://apis.io/schemas/colorfulclouds/caiyun-weather-daily-life-index/)
+- [DailyLifeIndexEntry](https://apis.io/schemas/colorfulclouds/caiyun-weather-daily-life-index-entry/)
+- [DailyMinMaxAvgItem](https://apis.io/schemas/colorfulclouds/caiyun-weather-daily-min-max-avg-item/)
+- [DailyPrecipitationItem](https://apis.io/schemas/colorfulclouds/caiyun-weather-daily-precipitation-item/)
+- [DailyResponse](https://apis.io/schemas/colorfulclouds/caiyun-weather-daily-response/)
+- [DailySkyconItem](https://apis.io/schemas/colorfulclouds/caiyun-weather-daily-skycon-item/)
+- [DailyWindItem](https://apis.io/schemas/colorfulclouds/caiyun-weather-daily-wind-item/)
+- [DailyWindProperty](https://apis.io/schemas/colorfulclouds/caiyun-weather-daily-wind-property/)
+- [DateTimeValuePair](https://apis.io/schemas/colorfulclouds/caiyun-weather-date-time-value-pair/)
+- [EnvelopeBase](https://apis.io/schemas/colorfulclouds/caiyun-weather-envelope-base/)
+- [Hourly](https://apis.io/schemas/colorfulclouds/caiyun-weather-hourly/)
+- [HourlyAirQuality](https://apis.io/schemas/colorfulclouds/caiyun-weather-hourly-air-quality/)
+- …and 19 more published on APIs.io
 
-## Common Properties
+#### JSON Structure (44)
+
+Data models expressed in JSON Structure.
+
+- [Caiyun Weather Air Quality Realtime Response Structure](https://apis.io/json-structure/colorfulclouds/caiyun-weather-air-quality-realtime-response-structure/)
+- [Caiyun Weather Air Quality Realtime Structure](https://apis.io/json-structure/colorfulclouds/caiyun-weather-air-quality-realtime-structure/)
+- [Caiyun Weather Alert Adcode Structure](https://apis.io/json-structure/colorfulclouds/caiyun-weather-alert-adcode-structure/)
+- [Caiyun Weather Alert Content Item Structure](https://apis.io/json-structure/colorfulclouds/caiyun-weather-alert-content-item-structure/)
+- [Caiyun Weather Alert Response Structure](https://apis.io/json-structure/colorfulclouds/caiyun-weather-alert-response-structure/)
+- [Caiyun Weather Alert Structure](https://apis.io/json-structure/colorfulclouds/caiyun-weather-alert-structure/)
+- [Caiyun Weather Aqi Desc Dual Structure](https://apis.io/json-structure/colorfulclouds/caiyun-weather-aqi-desc-dual-structure/)
+- [Caiyun Weather Aqi Value Dual Structure](https://apis.io/json-structure/colorfulclouds/caiyun-weather-aqi-value-dual-structure/)
+- [Caiyun Weather Daily Air Quality Structure](https://apis.io/json-structure/colorfulclouds/caiyun-weather-daily-air-quality-structure/)
+- [Caiyun Weather Daily Aqi Item Structure](https://apis.io/json-structure/colorfulclouds/caiyun-weather-daily-aqi-item-structure/)
+- [Caiyun Weather Daily Astro Item Structure](https://apis.io/json-structure/colorfulclouds/caiyun-weather-daily-astro-item-structure/)
+- [Caiyun Weather Daily Astro Time Structure](https://apis.io/json-structure/colorfulclouds/caiyun-weather-daily-astro-time-structure/)
+- [Caiyun Weather Daily Life Index Entry Structure](https://apis.io/json-structure/colorfulclouds/caiyun-weather-daily-life-index-entry-structure/)
+- [Caiyun Weather Daily Life Index Structure](https://apis.io/json-structure/colorfulclouds/caiyun-weather-daily-life-index-structure/)
+- [Caiyun Weather Daily Min Max Avg Item Structure](https://apis.io/json-structure/colorfulclouds/caiyun-weather-daily-min-max-avg-item-structure/)
+- [Caiyun Weather Daily Precipitation Item Structure](https://apis.io/json-structure/colorfulclouds/caiyun-weather-daily-precipitation-item-structure/)
+- [Caiyun Weather Daily Response Structure](https://apis.io/json-structure/colorfulclouds/caiyun-weather-daily-response-structure/)
+- [Caiyun Weather Daily Skycon Item Structure](https://apis.io/json-structure/colorfulclouds/caiyun-weather-daily-skycon-item-structure/)
+- [Caiyun Weather Daily Structure](https://apis.io/json-structure/colorfulclouds/caiyun-weather-daily-structure/)
+- [Caiyun Weather Daily Wind Item Structure](https://apis.io/json-structure/colorfulclouds/caiyun-weather-daily-wind-item-structure/)
+- [Caiyun Weather Daily Wind Property Structure](https://apis.io/json-structure/colorfulclouds/caiyun-weather-daily-wind-property-structure/)
+- [Caiyun Weather Date Time Value Pair Structure](https://apis.io/json-structure/colorfulclouds/caiyun-weather-date-time-value-pair-structure/)
+- [Caiyun Weather Envelope Base Structure](https://apis.io/json-structure/colorfulclouds/caiyun-weather-envelope-base-structure/)
+- [Caiyun Weather Hourly Air Quality Structure](https://apis.io/json-structure/colorfulclouds/caiyun-weather-hourly-air-quality-structure/)
+- [Caiyun Weather Hourly Aqi Item Structure](https://apis.io/json-structure/colorfulclouds/caiyun-weather-hourly-aqi-item-structure/)
+- …and 19 more published on APIs.io
+
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Colorfulclouds Context](https://apis.io/jsonld/colorfulclouds/colorfulclouds-context/)
+
+#### Vocabulary (1)
+
+The provider's domain terms, defined.
+
+- [Colorfulclouds Vocabulary](https://apis.io/vocabularies/colorfulclouds/colorfulclouds-vocabulary/)
+
+#### Examples (43)
+
+Example requests and responses.
+
+- [Caiyun Weather Air Quality Realtime Example](https://apis.io/examples/colorfulclouds/caiyun-weather-air-quality-realtime-example/)
+- [Caiyun Weather Air Quality Realtime Response Example](https://apis.io/examples/colorfulclouds/caiyun-weather-air-quality-realtime-response-example/)
+- [Caiyun Weather Alert Adcode Example](https://apis.io/examples/colorfulclouds/caiyun-weather-alert-adcode-example/)
+- [Caiyun Weather Alert Content Item Example](https://apis.io/examples/colorfulclouds/caiyun-weather-alert-content-item-example/)
+- [Caiyun Weather Alert Example](https://apis.io/examples/colorfulclouds/caiyun-weather-alert-example/)
+- [Caiyun Weather Alert Response Example](https://apis.io/examples/colorfulclouds/caiyun-weather-alert-response-example/)
+- [Caiyun Weather Aqi Desc Dual Example](https://apis.io/examples/colorfulclouds/caiyun-weather-aqi-desc-dual-example/)
+- [Caiyun Weather Aqi Value Dual Example](https://apis.io/examples/colorfulclouds/caiyun-weather-aqi-value-dual-example/)
+- [Caiyun Weather Daily Air Quality Example](https://apis.io/examples/colorfulclouds/caiyun-weather-daily-air-quality-example/)
+- [Caiyun Weather Daily Aqi Item Example](https://apis.io/examples/colorfulclouds/caiyun-weather-daily-aqi-item-example/)
+- [Caiyun Weather Daily Astro Item Example](https://apis.io/examples/colorfulclouds/caiyun-weather-daily-astro-item-example/)
+- [Caiyun Weather Daily Astro Time Example](https://apis.io/examples/colorfulclouds/caiyun-weather-daily-astro-time-example/)
+- [Caiyun Weather Daily Example](https://apis.io/examples/colorfulclouds/caiyun-weather-daily-example/)
+- [Caiyun Weather Daily Life Index Entry Example](https://apis.io/examples/colorfulclouds/caiyun-weather-daily-life-index-entry-example/)
+- [Caiyun Weather Daily Life Index Example](https://apis.io/examples/colorfulclouds/caiyun-weather-daily-life-index-example/)
+- [Caiyun Weather Daily Min Max Avg Item Example](https://apis.io/examples/colorfulclouds/caiyun-weather-daily-min-max-avg-item-example/)
+- [Caiyun Weather Daily Precipitation Item Example](https://apis.io/examples/colorfulclouds/caiyun-weather-daily-precipitation-item-example/)
+- [Caiyun Weather Daily Response Example](https://apis.io/examples/colorfulclouds/caiyun-weather-daily-response-example/)
+- [Caiyun Weather Daily Skycon Item Example](https://apis.io/examples/colorfulclouds/caiyun-weather-daily-skycon-item-example/)
+- [Caiyun Weather Daily Wind Item Example](https://apis.io/examples/colorfulclouds/caiyun-weather-daily-wind-item-example/)
+- [Caiyun Weather Daily Wind Property Example](https://apis.io/examples/colorfulclouds/caiyun-weather-daily-wind-property-example/)
+- [Caiyun Weather Date Time Value Pair Example](https://apis.io/examples/colorfulclouds/caiyun-weather-date-time-value-pair-example/)
+- [Caiyun Weather Envelope Base Example](https://apis.io/examples/colorfulclouds/caiyun-weather-envelope-base-example/)
+- [Caiyun Weather Hourly Air Quality Example](https://apis.io/examples/colorfulclouds/caiyun-weather-hourly-air-quality-example/)
+- [Caiyun Weather Hourly Aqi Item Example](https://apis.io/examples/colorfulclouds/caiyun-weather-hourly-aqi-item-example/)
+- …and 18 more published on APIs.io
+
+#### Collections (7)
+
+Postman and Open Collection request collections.
+
+- [Caiyun Weather Air Quality API](https://apis.io/collections/colorfulclouds/open-colorfulclouds-air-quality-api/)
+- [Caiyun Weather Air Quality Alerts API](https://apis.io/collections/colorfulclouds/open-colorfulclouds-alerts-api/)
+- [Caiyun Weather API](https://apis.io/collections/colorfulclouds/open-colorfulclouds-caiyun-weather/)
+- [Caiyun Weather Air Quality Forecast API](https://apis.io/collections/colorfulclouds/open-colorfulclouds-forecast-api/)
+- [Caiyun Weather Air Quality Precipitation Map API](https://apis.io/collections/colorfulclouds/open-colorfulclouds-precipitation-map-api/)
+- [Caiyun Weather Air Quality Realtime API](https://apis.io/collections/colorfulclouds/open-colorfulclouds-realtime-api/)
+- [Caiyun Air Quality Weather API](https://apis.io/collections/colorfulclouds/open-colorfulclouds-weather-api/)
+
+#### Governance rules (2)
+
+Spectral rulesets for the provider's contracts.
+
+- [ColorfulClouds — jsonschema rules](https://apis.io/rules/colorfulclouds/colorfulclouds-jsonschema-spectral-rules/)
+- [ColorfulClouds API Rules](https://apis.io/rules/colorfulclouds/colorfulclouds-rules/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Colorfulclouds Authentication](https://apis.io/security/colorfulclouds/colorfulclouds-authentication/)
+- [Colorfulclouds Domain Security](https://apis.io/security/colorfulclouds/colorfulclouds-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Colorfulclouds Plans Pricing](https://apis.io/plans/colorfulclouds/colorfulclouds-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Colorfulclouds Rate Limits](https://apis.io/rate-limits/colorfulclouds/colorfulclouds-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Colorfulclouds Finops](https://apis.io/finops/colorfulclouds/colorfulclouds-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://caiyunapp.com/)
 - [Documentation](https://docs.caiyunapp.com/weather-api/)
-- [Developer Portal](https://platform.caiyunapp.com/)
-- [GitHub Organization](https://github.com/caiyunapp)
-- [Tools](https://github.com/caiyunapp/mcp-caiyun-weather)
-- [Tools](https://github.com/caiyunapp/skills)
-- [Tools](https://github.com/caiyunapp/aqi-hub)
-- [Tools](https://github.com/caiyunapp/cyeva)
-- [Plans](plans/colorfulclouds-plans-pricing.yml)
-- [Rate Limits](rate-limits/colorfulclouds-rate-limits.yml)
-- [Fin Ops](finops/colorfulclouds-finops.yml)
-- [Rules](rules/colorfulclouds-rules.yml)
-- [Vocabulary](vocabulary/colorfulclouds-vocabulary.yml)
-- [J S O N L D Context](json-ld/colorfulclouds-context.jsonld)
-- [Public APIs Listing](https://github.com/public-apis/public-apis)
+- [GitHub](https://github.com/caiyunapp)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 28.8** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 78.6 |
+| Contract quality | 24.6 |
+| Contract governance | 27.3 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 28.6 |
+| Access clarity | 21.1 |
+
+**Agent readiness 22.2** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | na |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | na |
+| Error Semantics | — |
+| OpenAPI Examples | documented (partial credit) |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | na |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 16.7** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/colorfulclouds/](https://apis.io/providers/colorfulclouds/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for ColorfulClouds: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/colorfulclouds/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
